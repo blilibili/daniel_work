@@ -17,8 +17,8 @@ wxa.launchPage(Index);
 </config>
 <template>
 <view class="page">
-    <view class="banner_header">
-        <image src="../img/timg.jpeg"></image>
+    <view class="slogn">
+        hello, this is wxa!
     </view>
 </view>
 </template>
@@ -28,11 +28,7 @@ wxa.launchPage(Index);
     height: 100%;
     display: flex;
     flex-direction: row;
-}
-.banner_header{
-    width: 100%;
-}
-.banner_header image{
-    width:100%;
+    align-items: center;
+    justify-content: center;
 }
 </style>
