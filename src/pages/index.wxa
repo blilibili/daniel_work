@@ -1,10 +1,33 @@
 <script>
-import {wxa, Page} from '@wxa/core';
+    /* eslint-disable linebreak-style */
+    import {wxa, Page} from '@wxa/core';
 
 @Page
 class Index {
+    constructor(){
+        this.data = {
+            insurance_product:'保诚',
+            multiArray:['保诚' , '产品2' , '产品3'],
+            showBg:true,
+            showPicker:true
+        }
+    }
     onLoad() {
         console.log('hello, this is wxa page');
+    }
+    bindPickerChange(event){
+        let index = event.detail.value;
+        this.setData({
+            insurance_product:this.data.multiArray[index],
+            showBg:false,
+            showPicker:false
+        });
+    }
+    showInsurancePro(){
+        this.setData({
+            showBg:true,
+            showPicker:true
+        })
     }
 }
 
@@ -17,8 +40,66 @@ wxa.launchPage(Index);
 </config>
 <template>
 <view class="page">
-    <view class="slogn">
-        hello, this is wxa!
+    <!--<view class="bg-wall"  style="display: {{ showBg ? 'block' : 'none'}} ">-->
+
+    <!--</view>-->
+    <view class="header">
+        <view class="banner-header">
+            <image src="../img/banner-one.jpg"></image>
+        </view>
+        <view class="index-header">
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{multiArray}}">
+                <view class="picker">
+                    <span style="margin-left: 40rpx;">{{insurance_product}}</span> <span><image style="width:30rpx;height: 30rpx" src="../img/more_info.png"></image></span>
+                </view>
+            </picker>
+        </view>
+    </view>
+
+    <view class="container-content">
+        <view class="productor-intro">
+            <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="../img/timg.jpeg"></image>
+            <view class="productor-intro-words">
+                <view class="productor-intro-words-header">特技协盛</view>
+                <view>一份终身寿险计划 ， 专为长线储蓄而设，配合您不同的财务目标</view>
+            </view>
+            <navigator url="/pages/form/form?pro=1" hover-class="navigator-hover">
+                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+            </navigator>
+        </view>
+
+        <view class="productor-intro">
+            <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="../img/timg.jpeg"></image>
+            <view class="productor-intro-words">
+                <view class="productor-intro-words-header">守护健康疾病加护保</view>
+                <view>113种病况享有终身一次性现金赔偿,并获得多次索偿保障</view>
+            </view>
+            <navigator url="/pages/form/form?pro=1" hover-class="navigator-hover">
+                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+            </navigator>
+        </view>
+
+        <view class="productor-intro">
+            <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="../img/timg.jpeg"></image>
+            <view class="productor-intro-words">
+                <view class="productor-intro-words-header">守护健康疾病加护保</view>
+                <view>113种病况享有终身一次性现金赔偿， 并获得多次索偿保障</view>
+            </view>
+            <navigator url="/pages/form/form?pro=1" hover-class="navigator-hover">
+                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+            </navigator>
+        </view>
+
+        <view class="productor-intro">
+            <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="../img/timg.jpeg"></image>
+            <view class="productor-intro-words">
+                <view class="productor-intro-words-header">守护健康疾病全护保</view>
+                <view>索偿早起严重疾病后 ， 依然享有百分百危保障</view>
+            </view>
+            <navigator url="/pages/form/form?pro=1" hover-class="navigator-hover">
+                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+            </navigator>
+        </view>
     </view>
 </view>
 </template>
@@ -26,9 +107,58 @@ wxa.launchPage(Index);
 .page {
     width: 100%;
     height: 100%;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    background-color: rgb(244,244,244);
+}
+.bg-wall{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background-color: rgba(0,0,0,0.6);
+}
+.header{
+    width: 100%;
+}
+.banner-header{
+    width: 100%;
+}
+.banner-header image {
+    width: 100%;
+}
+.index-header{
+    padding:15rpx;
+    margin-top:-5rpx;
+    background-color: white;
+}
+.container-content{
+    width: 100%;
+    padding: 30rpx;
+    background-color: white;
+    margin-top: 20rpx;
+}
+.productor-intro{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    margin-top: 25rpx;
+}
+.productor-intro-words{
+    width:340rpx;
+    margin-left:27rpx;
+    color: rgb(189 , 189 , 189);
+}
+.productor-intro-words-header{
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+}
+.productor-intro-words-add-image{
+    width:30px;
+    height:30px;
+    float:right;
+    position:relative;
+    top:38rpx;
+    left:22rpx;
 }
 </style>
