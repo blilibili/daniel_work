@@ -10,7 +10,8 @@ class Form {
                 sex:'男',
                 birth:'请选择您的生日',
                 calYears:'44岁',
-                giveMoneyYear:'20年'
+                giveMoneyYear:'20年',
+                proId:''
             },
             items: [
                 {name: '男', value: '1'},
@@ -30,8 +31,10 @@ class Form {
             insurance_years:['10年' , '20年' , '30年']
         }
     }
-    onLoad() {
-        console.log('hello, this is form page');
+    onLoad(option) {
+        this.setData({
+          proId:option.pro
+        })
     }
     radioChange(e){
         console.log(e.detail)
@@ -51,6 +54,19 @@ class Form {
             }
         })
     }
+  createInsurance(e){
+      let page = ''
+      if(this.data.proId == '1'){
+        page = 'firstPage';
+      }else if(this.data.proId == '2'){
+        page = 'secondPage';
+      }else if(this.data.proId == '3'){
+        page = 'thirdPage';
+      }
+    wx.navigateTo({
+      url:'/pages/result/' + page
+    })
+  }
 
 }
 
@@ -109,7 +125,7 @@ wxa.launchPage(Form);
                 <view class="form-sex">
                     <label style="position: relative;top: 7rpx;">货币</label>
                     <radio-group class="radio-group" bindchange="radioChange">
-                        <label style="margin-left: 150rpx;" class="radio" wx:key="*" wx:for="{{money}}">
+                        <label style="margin-left: 160rpx;" class="radio" wx:key="*" wx:for="{{money}}">
                             <radio color="#1011FF" value="{{item.name}}" checked="{{item.checked}}"/>{{item.name}}
                         </label>
                     </radio-group>
@@ -145,11 +161,7 @@ wxa.launchPage(Form);
             </form>
         </view>
 
-        <view style="padding: 20rpx 0 20rpx 10rpx;color: white;">
-            领取计划的年为保单周年
-        </view>
-
-        <view style="width: 95%;margin: 0 auto;color: white;padding-bottom: 40rpx;">
+        <view style="width: 95%;margin: 0 auto;color: white;">
             <button type="default" bindtap="createInsurance" type="primary" >创建计划书</button>
         </view>
     </view>
@@ -158,10 +170,11 @@ wxa.launchPage(Form);
 <style lang="scss">
 .form {
     width: 100%;
-    height: 1250rpx;
+    height: auto;
     font-family: "微软雅黑";
-    font-size: 12px;
+    font-size: 14px;
     background-color: rgb(42,38,63);
+    padding-bottom: 20rpx;
 }
 .bg-wall{
     width: 100%;

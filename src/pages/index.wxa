@@ -50,66 +50,58 @@ wxa.launchPage(Index);
         <view class="index-header">
             <picker bindchange="bindPickerChange" value="{{index}}" range="{{multiArray}}">
                 <view class="picker">
-                    <span style="margin-left: 40rpx;">{{insurance_product}}</span> <span><image style="width:30rpx;height: 30rpx" src="../img/more_info.png"></image></span>
+                    <span style="margin-left: 40rpx;">{{insurance_product}}</span> <span style="position: relative;top: 6rpx;"><image style="width:30rpx;height: 30rpx" src="../img/more_info.png"></image></span>
                 </view>
             </picker>
         </view>
     </view>
 
     <view class="container-content">
+        <navigator hover-class="none" url="/pages/form/form?pro=1" hover-class="navigator-hover">
         <view class="productor-intro">
             <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="../img/timg.jpeg"></image>
             <view class="productor-intro-words">
                 <view class="productor-intro-words-header">特技协盛</view>
                 <view>一份终身寿险计划 ， 专为长线储蓄而设，配合您不同的财务目标</view>
             </view>
-            <navigator url="/pages/form/form?pro=1" hover-class="navigator-hover">
-                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
-            </navigator>
+            <image src="../img/add.png" class="productor-intro-words-add-image"></image>
         </view>
+        </navigator>
 
+        <navigator hover-class="none" url="/pages/form/form?pro=2" hover-class="navigator-hover">
         <view class="productor-intro">
             <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="../img/timg.jpeg"></image>
             <view class="productor-intro-words">
                 <view class="productor-intro-words-header">守护健康疾病加护保</view>
                 <view>113种病况享有终身一次性现金赔偿,并获得多次索偿保障</view>
             </view>
-            <navigator url="/pages/form/form?pro=1" hover-class="navigator-hover">
-                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
-            </navigator>
+            <image src="../img/add.png" class="productor-intro-words-add-image"></image>
         </view>
+        </navigator>
 
+        <navigator url="/pages/form/form?pro=3" hover-class="navigator-hover">
         <view class="productor-intro">
             <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="../img/timg.jpeg"></image>
             <view class="productor-intro-words">
                 <view class="productor-intro-words-header">守护健康疾病加护保</view>
                 <view>113种病况享有终身一次性现金赔偿， 并获得多次索偿保障</view>
             </view>
-            <navigator url="/pages/form/form?pro=1" hover-class="navigator-hover">
-                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
-            </navigator>
+            <image src="../img/add.png" class="productor-intro-words-add-image"></image>
         </view>
+        </navigator>
 
-        <view class="productor-intro">
-            <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="../img/timg.jpeg"></image>
-            <view class="productor-intro-words">
-                <view class="productor-intro-words-header">守护健康疾病全护保</view>
-                <view>索偿早起严重疾病后 ， 依然享有百分百危保障</view>
-            </view>
-            <navigator url="/pages/form/form?pro=1" hover-class="navigator-hover">
-                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
-            </navigator>
-        </view>
     </view>
 </view>
 </template>
 <style lang="scss">
 .page {
     width: 100%;
-    height: 100%;
+    height: auto;
     font-family: "微软雅黑";
     font-size: 12px;
     background-color: rgb(244,244,244);
+    padding-bottom: 20rpx;
+    overflow-x: hidden;
 }
 .bg-wall{
     width: 100%;

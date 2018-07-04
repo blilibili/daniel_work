@@ -1,0 +1,319 @@
+<script>
+    /* eslint-disable linebreak-style */
+    import {wxa, Page} from '@wxa/core';
+
+@Page
+class Form {
+    constructor(){
+        this.data = {
+            condition: {
+              showPartOneTable:false,
+              showPartTwoTable:false,
+              showPartThreeTable:false
+            },
+              listData:[
+                {"code":"平安1","money":"text1","years":"type1" , "money_years":"40年交" , "first_years":"4283.00"},
+                {"code":"平安2","money":"text2","years":"type2" , "money_years":"40年交" , "first_years":"4283.00"},
+                {"code":"平安3","money":"text3","years":"type3" , "money_years":"40年交" , "first_years":"4283.00"},
+                {"code":"平安4","money":"text4","years":"type4" , "money_years":"40年交" , "first_years":"4283.00"},
+                {"code":"平安5","money":"text5","years":"type5" , "money_years":"40年交" , "first_years":"4283.00"},
+              ]
+        }
+    }
+    onLoad() {
+        console.log('hello, this is form page');
+    }
+    showPartOneTable(event){
+      //初始化所有操作
+      let type = event.currentTarget.dataset.type;
+      switch (type){
+          case '1':
+            this.setData({
+              condition:{
+                showPartOneTable:true
+              }
+            });
+            break;
+          case '2':
+            this.setData({
+              condition:{
+                showPartTwoTable:true
+              }
+            });
+            break;
+          case '3':
+              this.setData({
+                condition:{
+                  showPartThreeTable:true
+                }
+              });
+              break;
+          default:
+            console.log('发送错误, 请检查');
+            break;
+      }
+    }
+
+    hidePartOneTable(event){
+      //初始化所有操作
+      let type = event.currentTarget.dataset.type;
+      switch (type){
+        case '1':
+          this.setData({
+            condition:{
+              showPartOneTable:false
+            }
+          });
+          break;
+        case '2':
+          this.setData({
+            condition:{
+              showPartTwoTable:false
+            }
+          });
+          break;
+        case '3':
+          this.setData({
+            condition:{
+              showPartThreeTable:false
+            }
+          });
+          break;
+        default:
+          console.log('发送错误, 请检查');
+          break;
+      }
+    }
+
+}
+
+wxa.launchPage(Form);
+</script>
+<config>
+{
+    "navigationTextTitle": "结果页"
+}
+</config>
+<template>
+<view class="result">
+    <!--<view class="bg-wall"  style="display: {{ showBg ? 'block' : 'none'}} ">-->
+
+    <!--</view>-->
+    <view class="part1">
+        <view style="padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe;font-size: 16px;font-weight: bold;">
+            保障计划: 男30岁 third page
+        </view>
+        <view style="display: flex;flex-direction: row;justify-content: center;">
+            <view>
+                <view>交费期限</view>
+                <view><span>30</span> 年交</view>
+            </view>
+            <view style="margin-left:282rpx;">
+                <view>首年保费</view>
+                <view><span>9981.18</span> 元</view>
+            </view>
+        </view>
+
+        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 35rpx;">
+            <view>
+                <view>保障期限</view>
+                <view><span>终身</span></view>
+            </view>
+            <view style="margin-left:282rpx;">
+                <view>保险金额</view>
+                <view><span>310000</span> 元</view>
+            </view>
+        </view>
+
+        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
+            <view wx:if="{{!condition.showPartOneTable}}" data-type="1" bindtap="showPartOneTable">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
+            </view>
+        </view>
+
+        <view wx:if="{{condition.showPartOneTable}}">
+            <view class="table">
+                <view class="tr bg-w">
+                    <view class="th">投保险种</view>
+                    <view class="th">投保金额</view>
+                    <view class="th ">保障期限</view>
+                    <view class="th ">交费期限</view>
+                    <view class="th ">首年保费</view>
+                </view>
+                <block wx:for="{{listData}}" wx:key="{{code}}">
+                    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+                        <view class="td">{{item.code}}</view>
+                        <view class="td">{{item.money}}</view>
+                        <view class="td">{{item.years}}</view>
+                        <view class="td">{{item.money_years}}</view>
+                        <view class="td">{{item.first_years}}</view>
+                    </view>
+                    <view class="tr" wx:else>
+                        <view class="td">{{item.code}}</view>
+                        <view class="td">{{item.money}}</view>
+                        <view class="td">{{item.years}}</view>
+                        <view class="td">{{item.money_years}}</view>
+                        <view class="td">{{item.first_years}}</view>
+                    </view>
+                </block>
+            </view>
+            <view bindtap="hidePartOneTable" data-type="1" style="text-align: center;">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
+            </view>
+        </view>
+    </view>
+
+    <view class="part2">
+        <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
+            轻症不轻
+        </view>
+        <view style="margin-left: 30rpx;">
+            <view><span> • </span>20中轻症不分组 , 独立赔3次</view>
+            <view><span> • </span>第一次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>第二次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>第三次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>轻症最高保障 <span>198000</span>元</view>
+        </view>
+
+        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
+            <view wx:if="{{!condition.showPartTwoTable}}" data-type="2" bindtap="showPartOneTable">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
+            </view>
+        </view>
+
+        <view wx:if="{{condition.showPartTwoTable}}">
+            <view style="margin-left: 30rpx;color: #606266;">
+                轻症最高赔付包含前两次轻症之后增加的保障及24个月运动达标的增加的保障
+            </view>
+            <view bindtap="hidePartOneTable" data-type="2" style="text-align: center;">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
+            </view>
+        </view>
+
+    </view>
+
+    <view class="part3">
+        <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
+            重疾不重
+        </view>
+        <view style="margin-left: 30rpx;">
+            <view><span> • </span>80种重疾提前给付 <span>30万</span> 元</view>
+            <view><span> • </span>第一次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>第二次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>第三次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>70岁前重疾最高保障 <span>51万</span>元</view>
+        </view>
+
+        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
+            <view wx:if="{{!condition.showPartThreeTable}}" data-type="3" bindtap="showPartOneTable">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
+            </view>
+        </view>
+
+        <view wx:if="{{condition.showPartThreeTable}}">
+            <view style="margin-left: 30rpx;color: #606266;">
+                轻症最高赔付包含前两次轻症之后增加的保障及24个月运动达标的增加的保障
+            </view>
+            <view bindtap="hidePartOneTable" data-type="3" style="text-align: center;">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
+            </view>
+        </view>
+
+    </view>
+
+    <view class="part4">
+        <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
+            癌症无惧
+        </view>
+        <view style="margin-left: 30rpx;">
+            <view><span> • </span>第一次癌症保障 <span>30万</span>元</view>
+            <view><span> • </span>第二次癌症保障 <span>30万</span>元</view>
+            <view><span> • </span>第三次癌症保障 <span>30万</span>元</view>
+        </view>
+
+    </view>
+
+    <view class="part4">
+        <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
+            豁免无忧
+        </view>
+        <view style="margin-left: 30rpx;">
+            <view><span> • </span>第一次癌症保障 <span>30万</span>元</view>
+            <view><span> • </span>第二次癌症保障 <span>30万</span>元</view>
+            <view><span> • </span>第三次癌症保障 <span>30万</span>元</view>
+        </view>
+
+    </view>
+</view>
+</template>
+<style lang="scss">
+.result {
+    padding-top: 30rpx;
+    width: 100%;
+    height: auto;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    background-color: rgb(42,38,63);
+    padding-bottom: 30rpx;
+}
+.bg-wall{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background-color: rgba(0,0,0,0.6);
+}
+.part1 , .part2 , .part3 , .part4{
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 4px;
+    background-color: white;
+}
+.part4{
+    margin-top: 20rpx;
+    padding-bottom: 20rpx;
+}
+
+.part2 , .part3{
+    margin-top: 20rpx;
+}
+.part1 span , .part2 span , .part3 span , .part4 span{
+    color:#67C23A;
+    font-size: 16px
+}
+
+.table {
+    border: 0px solid darkgray;
+}
+.tr {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 62rpx;
+    align-items: center;
+}
+.td {
+    width:40%;
+    text-align:center;
+    height:49rpx;
+    border-bottom:1px solid lightgray;
+    padding-top:11rpx;
+
+}
+.bg-w{
+    background: snow;
+}
+.bg-g{
+    background: #E6F3F9;
+}
+.th {
+    width: 40%;
+    justify-content: center;
+    background: #fefefe;
+    color: black;
+    display: flex;
+    height: 62rpx;
+    align-items: center;
+    border:1px solid lightgray;
+}
+</style>
