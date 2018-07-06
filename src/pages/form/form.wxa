@@ -6,16 +6,25 @@
 class Form {
     constructor(){
         this.data = {
+            title:'',
             submitData:{
-                sex:'男',
-                birth:'请选择您的生日',
-                calYears:'44岁',
-                giveMoneyYear:'20年',
-                proId:''
+                sex:'0',
+                birth:'',
+                calYears:'',
+                giveMoneyYear:'20',
+                living:'0',
+                smoke:'0',
+                proId:'',
+            },
+            insurance_item:{
+                insurance_credit:0,
+                insurance_money:0,
+                change_insurance_credit:0,
+                change_insurance_money:0
             },
             items: [
-                {name: '男', value: '1'},
-                {name: '女', value: '0', checked: 'true'},
+                {name: '男', value: '0', checked: 'true'},
+                {name: '女', value: '1'},
             ],
             money:[
                 {name:'美元' , value:'1' , checked:'true'}
@@ -25,47 +34,240 @@ class Form {
                 {name:'吸烟' , value:'1'}
             ],
             living:[
-                {name:'中国内地' , value:'0' , checked:'true'},
-                {name:'其他地区' , value:'1'}
+                {name:'香港' , value:'0' , checked:'true'},
+                {name:'大陆' , value:'1'}
             ],
-            insurance_years:['10年' , '20年' , '30年']
+            insurance_years:['10' , '15' , '20' , '25'],
+            current_time:this.forMatTime(Date.parse(new Date().getTime()) , 'day')
         }
     }
+    forMatTime(inputTime , methods){
+      let date = new Date(inputTime);
+      let y = date.getFullYear();
+      let m = date.getMonth() + 1;
+      m = m < 10 ? ('0' + m) : m;
+      let d = date.getDate();
+      d = d < 10 ? ('0' + d) : d;
+      let h = date.getHours();
+      h = h < 10 ? ('0' + h) : h;
+      let minute = date.getMinutes();
+      let second = date.getSeconds();
+      minute = minute < 10 ? ('0' + minute) : minute;
+      second = second < 10 ? ('0' + second) : second;
+      switch (methods){
+        case 'day':
+          return y + '-' + m + '-' + d;
+          break;
+        case 'seconds':
+          return y + '-' + m + '-' + d + ' ' + h + ':' +minute + ':' + second;
+          break;
+        default:
+          return '参数错误请检查';
+          break;
+      }
+    }
     onLoad(option) {
+      console.log(this.data);
+        let title = '';
+        switch (option.pro){
+          case 'EGS':
+            title = '特级携升2';
+            break;
+          case 'CIE':
+            title = '守护健康危疾加护保';
+            break;
+          case 'CIM':
+            title = '守护健康危疾加倍保';
+            break;
+          case 'CIR':
+            title = '守护健康危疾全护保';
+            break;
+          default:
+            console.log('url没有相应的数据请检查');
+            break;
+        }
         this.setData({
-          proId:option.pro
+          proId:option.pro,
+          title:title
         })
     }
-    radioChange(e){
-        console.log(e.detail)
-    }
-    bindDateChange(e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
+    radioSexChange(e){
         this.setData({
-            submitData:{
-                birth:e.detail.value
-            }
+          ['submitData.sex']:e.detail.value
         })
+    }
+    radioSmokeChange(e){
+      this.setData({
+        ['submitData.smoke']:e.detail.value
+      })
+    }
+    radioLivingChange(e){
+      this.setData({
+        ['submitData.living']:e.detail.value
+      })
+    }
+    bindAgeChange(e) {
+        let ageArr = e.detail.value.split('-');
+        let currentArr = this.forMatTime(new Date() , 'day').split('-');
+
+        let age = e.detail.value , ageYear = ageArr[0] , ageMonth = ageArr[1] , ageDay = ageArr[2];
+        let nominalAge = 0;
+      if(currentArr[1] - ageArr[1] <= 3){
+        nominalAge = currentArr[0] - ageArr[0]
+      }else{
+        nominalAge = currentArr[0] - ageArr[0] + 1
+      }
+
+      if(nominalAge == 0){
+        wx.showToast({
+          title:'请选择正确的生日日期',
+          icon:'none',
+          mask:'true'
+        })
+      }else{
+        let tmp = [];
+        if(nominalAge <= 50){
+          tmp = ['10' , '15' , '20' , '25']
+        }else if(nominalAge <= 55){
+          tmp = ['10' , '15' , '20']
+        }else if(nominalAge <= 60){
+          tmp = ['10' , '15']
+        }else if(nominalAge <= 65){
+          tmp = ['10']
+        }
+        this.setData({
+          ['submitData.birth']:e.detail.value,
+          ['submitData.calYears']:nominalAge,
+          ['submitData.giveMoneyYear']:tmp[0],
+          insurance_years:tmp
+        })
+      }
     }
     bindInsuranceYearsChange(e){
-        this.setData({
-            submitData:{
-                giveMoneyYear:this.data.insurance_years[e.detail.value]
-            }
-        })
+      this.setData({
+        ['submitData.giveMoneyYear']:this.data.insurance_years[e.detail.value]
+      })
     }
   createInsurance(e){
-      let page = ''
-      if(this.data.proId == '1'){
-        page = 'firstPage';
-      }else if(this.data.proId == '2'){
-        page = 'secondPage';
-      }else if(this.data.proId == '3'){
-        page = 'thirdPage';
-      }
-    wx.navigateTo({
-      url:'/pages/result/' + page
+    wx.showLoading({
+      title:'正在加载跳转...请稍后',
+      mask:true
     })
+      let page = '';
+      if(this.data.proId == 'EGS'){
+        page = 'firstPage';
+      }else if(this.data.proId == 'CIE'){
+        page = 'secondPage';
+      }else if(this.data.proId == 'CIM'){
+        page = 'thirdPage';
+      }else if(this.data.proId == 'CIR'){
+        page = 'fourthPage';
+      }
+
+      this.data.submitData.be = this.data.insurance_item.insurance_credit;
+      this.data.submitData.bf = this.data.insurance_item.insurance_money;
+      let host = this.app.globalData.httpUrl;
+      let port = this.app.globalData.port;
+      wx.request({
+        url:host + ':' + port + '/makeplain',
+        data:this.data.submitData,
+        method:'POST',
+        success:(res) => {
+          this.app.globalData.submitData = this.data.submitData;
+          this.app.globalData.tableData = res.data;
+          wx.navigateTo({
+            url:'/pages/result/' + page
+          })
+         }
+      })
+  }
+
+
+    //http请求获取保额费用
+  requestGetInsuranceMoney(event){
+      if(this.data.submitData.calYears == ''){
+        wx.showToast({
+          title:'请先选择您的出生日期',
+          icon:'none',
+          mask:'true'
+        })
+      }else{
+        wx.showLoading({
+          title:'正在加载汇率...请稍后',
+          mask:true
+        })
+        let host = this.app.globalData.httpUrl;
+        let port = this.app.globalData.port;
+        this.data.submitData.be = event.detail.value;
+        this.data.insurance_item.insurance_credit = event.detail.value;
+        wx.request({
+          url:host + ':' + port + '/getbf',
+          data:this.data.submitData,
+          method:'POST',
+          success:(res) => {
+            this.setData({
+              ['insurance_item.insurance_money']:res.data.data.guranteed||0,
+              ['insurance_item.change_insurance_credit']:Math.round(res.data.data.changeBe) || 0,
+              ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0,
+            });
+            wx.hideLoading();
+          }
+        })
+      }
+
+  }
+
+  //绑定虚岁
+  setCalYears(event){
+    let nominalAge = event.detail.value;
+    this.data.submitData.calYears = nominalAge;
+    let tmp = [];
+    if(nominalAge <= 50){
+      tmp = ['10' , '15' , '20' , '25']
+    }else if(nominalAge <= 55){
+      tmp = ['10' , '15' , '20']
+    }else if(nominalAge <= 60){
+      tmp = ['10' , '15']
+    }else if(nominalAge <= 65){
+      tmp = ['10']
+    }
+    this.setData({
+      ['submitData.giveMoneyYear']:tmp[0],
+      insurance_years:tmp
+    })
+  }
+
+  requestGetInsuranceCredit(event){
+    if(this.data.submitData.calYears == ''){
+      wx.showToast({
+        title:'请先选择您的出生日期',
+        icon:'none',
+        mask:'true'
+      })
+    }else{
+      wx.showLoading({
+        title:'正在加载汇率...请稍后',
+        mask:true
+      })
+      let host = this.app.globalData.httpUrl;
+      let port = this.app.globalData.port;
+
+      this.data.submitData.bf = event.detail.value;
+      wx.request({
+        url:host + ':' + port + '/getbe',
+        data:this.data.submitData,
+        method:'POST',
+        success:(res) => {
+          this.setData({
+            ['insurance_item.insurance_money']:res.data.data.insurance_money || 0,
+            ['insurance_item.insurance_credit']:Math.round(res.data.data.be) ||0,
+            ['insurance_item.change_insurance_credit']:Math.round(res.data.data.changeBaoe) || 0,
+            ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0
+          });
+          wx.hideLoading();
+        }
+      })
+    }
   }
 
 }
@@ -88,32 +290,33 @@ wxa.launchPage(Form);
 
     <view class="container-content">
         <view class="form-header">
-            守护健康危疾加倍保
+            {{title}}
         </view>
         <view class="form-content">
             <form>
                 <view style="padding: 20rpx 0 20rpx 20rpx;">受保人信息</view>
                 <view class="form-sex">
                     <label style="position: relative;top: 7rpx;">性别</label>
-                    <radio-group class="radio-group" bindchange="radioChange">
+                    <radio-group class="radio-group" bindchange="radioSexChange">
                         <label style="margin-left: 150rpx;" class="radio" wx:key="*" wx:for="{{items}}">
-                            <radio color="#1011FF" value="{{item.name}}" checked="{{item.checked}}"/>{{item.name}}
+                            <radio color="#1011FF" value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
                         </label>
                     </radio-group>
                 </view>
                 <view class="form-age">
                     <label style="padding: 20rpx 0 20rpx 20rpx;">生日</label>
-                    <picker style="margin-left: 150rpx;" mode="date" value="{{submitData.birth}}" start="1950-01-01" end="2006-09-01" bindchange="bindDateChange">
+                    <picker style="margin-left: 150rpx;" mode="date" value="{{submitData.birth}}" start="1950-01-01" end="{{current_time}}" bindchange="bindAgeChange">
                         <view style="position: relative;top: 20rpx;" class="picker">
-                            {{submitData.birth}}
+                            {{submitData.birth || '请选择您的生日' }}
                         </view>
                     </picker>
                 </view>
 
                 <view class="form-calculate-age">
                     <label style="padding: 20rpx 0 20rpx 20rpx;">虚岁</label>
-                    <view style="margin-left: 150rpx;position: relative;top: 20rpx;">
-                        {{submitData.calYears}}
+                    <view style="margin-left: 150rpx;position: relative;top: 8rpx;display: flex;">
+                        <input value="{{submitData.calYears}}" type="number" bindblur="setCalYears" bindconfirm="setCalYears" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
+                        <span style="position: relative;top: 4rpx;">岁</span>
                     </view>
                 </view>
             </form>
@@ -132,18 +335,18 @@ wxa.launchPage(Form);
                 </view>
                 <view class="form-age">
                     <label style="padding: 20rpx 0 20rpx 20rpx;">是否吸烟</label>
-                    <radio-group style="padding-top: 10rpx;" class="radio-group" bindchange="radioChange">
+                    <radio-group style="padding-top: 10rpx;" class="radio-group" bindchange="radioSmokeChange">
                         <label style="margin-left: 102rpx;" class="radio" wx:key="*" wx:for="{{smoke}}">
-                            <radio color="#1011FF" value="{{item.name}}" checked="{{item.checked}}"/>{{item.name}}
+                            <radio color="#1011FF" value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
                         </label>
                     </radio-group>
                 </view>
 
                 <view class="form-age">
                     <label style="padding: 20rpx 0 20rpx 20rpx;">居住地区</label>
-                    <radio-group style="padding-top: 10rpx;" class="radio-group" bindchange="radioChange">
-                        <label style="margin-left: 102rpx;" class="radio" wx:key="*" wx:for="{{smoke}}">
-                            <radio color="#1011FF" value="{{item.name}}" checked="{{item.checked}}"/>{{item.name}}
+                    <radio-group style="padding-top: 10rpx;" class="radio-group" bindchange="radioLivingChange">
+                        <label style="margin-left: 102rpx;" class="radio" wx:key="*" wx:for="{{living}}">
+                            <radio color="#1011FF" value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
                         </label>
                     </radio-group>
                 </view>
@@ -151,11 +354,47 @@ wxa.launchPage(Form);
                 <view class="form-calculate-age">
                     <label style="padding: 20rpx 0 20rpx 20rpx;">缴费年期</label>
                     <view style="margin-left: 150rpx;position: relative;top: 20rpx;">
-                        <picker bindchange="bindInsuranceYearsChange" value="{{index}}" range="{{insurance_years}}">
+                        <picker style="width: 400rpx;" mode="selector" bindchange="bindInsuranceYearsChange" value="{{index}}" range="{{insurance_years}}">
                             <view class="picker">
-                                {{submitData.giveMoneyYear}}
+                                {{submitData.giveMoneyYear}}年
                             </view>
                         </picker>
+                    </view>
+                </view>
+
+                <view class="form-calculate-age">
+                    <label style="padding: 20rpx 0 20rpx 20rpx;">保额</label>
+                    <view style="margin-left: 40rpx;position: relative;top: 8rpx;display: flex;flex-direction:row;">
+                        <view>
+                            <input value="{{insurance_item.insurance_credit}}" type="number" bindblur="requestGetInsuranceMoney" bindconfirm="requestGetInsuranceMoney" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
+                        </view>
+                        <view style="position: relative;top: 10rpx;">
+                            万元（美元）
+                        </view>
+                        <view style="margin-left: 40rpx;">
+                            <input disabled="true" value="{{insurance_item.change_insurance_credit}}" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
+                        </view>
+                        <view style="position: relative;top: 10rpx;">
+                            万元（人民币）
+                        </view>
+                    </view>
+                </view>
+
+                <view class="form-calculate-age">
+                    <label style="padding: 20rpx 0 20rpx 20rpx;">保费</label>
+                    <view style="margin-left: 40rpx;position: relative;top: 8rpx;display: flex;flex-direction:row;">
+                        <view>
+                            <input type="number" value="{{insurance_item.insurance_money}}" bindblur="requestGetInsuranceCredit" bindconfirm="requestGetInsuranceCredit" value="{{insurance_item.insurance_money}}" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
+                        </view>
+                        <view style="position: relative;top: 10rpx;">
+                            （美元）
+                        </view>
+                        <view style="margin-left: 40rpx;">
+                            <input disabled="true" value="{{insurance_item.change_insurance_money}}" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
+                        </view>
+                        <view style="position: relative;top: 10rpx;">
+                            （人民币）
+                        </view>
                     </view>
                 </view>
             </form>

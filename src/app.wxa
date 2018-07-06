@@ -3,7 +3,12 @@ import {wxa, App} from '@wxa/core';
 
 @App
 class Main {
-    constructor() {}
+    constructor() {
+        this.globalData = {
+          httpUrl:'http://119.23.31.157',
+          port:3000
+        }
+    }
 }
 
 wxa.launchApp(Main);

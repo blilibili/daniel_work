@@ -3,7 +3,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>CIE</title>
-    <script src="Non-Guaranteed Bonus.js"></script>
 </head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <body>
@@ -121,178 +120,197 @@
 </table>
 
 <p>&nbsp;</p>
-</body>
 
-</html>
-<script src="js/Non-Guaranteed Bonus.js"></script>
+<script src="Non-Guaranteed_Bonus.js"></script>
 <script type="text/javascript">
 
-  
- 
-//   for(var k=1;k<66;k++){    //一维长度为i,i为变量，可以根据实际情况改变，k为年龄1-66岁,i为项目，0为保单年度终结，1-非保证退保价值，2-非保证理赔红利
-//   
-//   
-//	   //一维数组里面每个元素数组可以包含的数量p，p也是一个变量；j=0,保单年度终结；j=1,非保证退保红利；j=2，非保证理赔红利
-//	 
-//	  for(var i=0;i<2;i++){
-//	        document.write("arr_Bonus[20]["+k+"]["+i+"] = [<br/>");	   }
-//	 }
-//	 document.write("<br/>");
-
-  
-
-//知道保额计算保费
-function chk_bx(){
-var bx_area = $("#area").val(); //地区	
-var bx_sex = $("#sex").val(); //性别
-var bx_smoke = $("#smoke").val(); //是否吸烟
-var bx_nian = $("#nian").val(); //供款年期
-var bx_age = $("#age").val(); //年龄
-var bx_be = $("#be").val(); //保额
-
-if (bx_be==''){
- alert("请输入保额!");
-  $("#be").focus();
-  return false;	
-}
 
 
-var bfl = chk_bfl(bx_sex,bx_smoke,bx_nian,bx_age); //查保费率
-var dis_be = Math.round(dis_bf(bfl,bx_be)); //计算保费折扣
+  //   for(var k=1;k<66;k++){    //一维长度为i,i为变量，可以根据实际情况改变，k为年龄1-66岁,i为项目，0为保单年度终结，1-非保证退保价值，2-非保证理赔红利
+  //
+  //
+  //	   //一维数组里面每个元素数组可以包含的数量p，p也是一个变量；j=0,保单年度终结；j=1,非保证退保红利；j=2，非保证理赔红利
+  //
+  //	  for(var i=0;i<2;i++){
+  //	        document.write("arr_Bonus[20]["+k+"]["+i+"] = [<br/>");	   }
+  //	 }
+  //	 document.write("<br/>");
+
+
+
+  //知道保额计算保费
+  function chk_bx(){
+    var bx_area = $("#area").val(); //地区
+    var bx_sex = $("#sex").val(); //性别
+    var bx_smoke = $("#smoke").val(); //是否吸烟
+    var bx_nian = $("#nian").val(); //供款年期
+    var bx_age = $("#age").val(); //年龄
+    var bx_be = $("#be").val(); //保额
+    console.log(bx_sex , bx_smoke , bx_nian , bx_age , bx_be);
+
+    if (bx_be==''){
+      alert("请输入保额!");
+      $("#be").focus();
+      return false;
+    }
+    var bfl = chk_bfl(bx_sex,bx_smoke,bx_nian,bx_age); //查保费率
+    var dis_be = Math.round(dis_bf(bfl,bx_be)); //计算保费折扣
 //$("#basic_bf").val(bfl*10) ;
-$("#bf").val(dis_be) ;
-}
-//知道保费预算计算保额
-function chk_bx1(){
-var bx_area = $("#area1").val(); //地区	
-var bx_sex = $("#sex1").val(); //性别
-var bx_smoke = $("#smoke1").val(); //是否吸烟
-var bx_nian = $("#nian1").val(); //供款年期
-var bx_age = $("#age1").val(); //年龄
-var bx_bf = $("#bf1").val(); //保费
+    $("#bf").val(dis_be) ;
+    console.log(dis_be);
+  }
+  //知道保费预算计算保额
+  function chk_bx1(){
+    var bx_area = $("#area1").val(); //地区
+    var bx_sex = $("#sex1").val(); //性别
+    var bx_smoke = $("#smoke1").val(); //是否吸烟
+    var bx_nian = $("#nian1").val(); //供款年期
+    var bx_age = $("#age1").val(); //年龄
+    var bx_bf = $("#bf1").val(); //保费
 
-if (bx_bf==''){
- alert("请输入保费金额!");
-  $("#bf1").focus();
-  return false;	
-}
-$("#be1").val(Math.round(dis_be(bx_sex,bx_age,bx_nian,bx_smoke,bx_bf))) ;
-}
+    if (bx_bf==''){
+      alert("请输入保费金额!");
+      $("#bf1").focus();
+      return false;
+    }
+    var be = dis_be(bx_sex,bx_age,bx_nian,bx_smoke,bx_bf).toFixed(2); //先算取保额，然后再将这个保额再计算一遍保费
+    if(be < 2){
+      be=2;
+    } //如果保额不足2万，自动以2万计算
+    if(bx_age>=18){
+      if(be>50){be = 50}; //成年人的保额不能高于50W美元
+    }else{
+      if(be>40){be = 40}; //未成年人的保额不能高于50W美元
+    }
 
-//生成计划书
-function mak_plan(){
-	
-var bx_area = $("#area").val(); //地区
-var bx_sex = $("#sex").val(); //性别
-var bx_age = parseInt($("#age").val()); //年龄	
-var bx_smoke = $("#smoke").val(); //是否吸烟
-var bx_nian = parseInt($("#nian").val()); //供款年期
-var bx_be = $("#be").val(); //保额
-var bx_bf = Math.round($("#bf").val()); //保费
-var x,tmp_bf = 0,arr_bf  = new Array();//记录保费数据
-var trHTML ="";
-var Payment_Item;
+    var bfl = chk_bfl(bx_sex,bx_smoke,bx_nian,bx_age); //查保费率
+    var bf = Math.round(dis_bf(bfl,be)); //重新计算保费
 
-switch(bx_nian) //供款年期
-{
-case 10:
-  Payment_Item = 0;
-  break;
-case 15:
-  Payment_Item = 1;
-  break;
-case 20:
-  Payment_Item = 2  ;
-  break
-default:
-  Payment_Item = 3; //25年供
-}
+
+    $("#be1").val(be) ;
+    $("#bf1").val(bf);
+  }
+
+  //生成计划书
+  function mak_plan(){
+
+    var bx_area = $("#area").val(); //地区
+    var bx_sex = $("#sex").val(); //性别
+    var bx_age = parseInt($("#age").val()); //年龄
+    var bx_smoke = $("#smoke").val(); //是否吸烟
+    var bx_nian = parseInt($("#nian").val()); //供款年期
+    var bx_be = $("#be").val(); //保额
+    var bx_bf = Math.round($("#bf").val()); //保费
+    var x,tmp_bf = 0,arr_bf  = new Array();//记录保费数据
+    var trHTML ="";
+    var Payment_Item;
+
+    console.log(bx_be , bx_bf);
+
+    switch(bx_nian) //供款年期
+    {
+      case 10:
+        Payment_Item = 0;
+        break;
+      case 15:
+        Payment_Item = 1;
+        break;
+      case 20:
+        Payment_Item = 2  ;
+        break
+      default:
+        Payment_Item = 3; //25年供
+    }
 
 //arr_bf[i][j],j-0保单年度,1所缴保费总额,2保证退保金额,3非保证退保红利,4-退保总额,5-非保证特别红利,6-保额,7-赠送保额,8-理赔总额
 
-for (var i=1; i<=20; i++) //计算保费
-{
-  arr_bf[i] = new Array() ;
-  arr_bf[i][0] = i+bx_age;
-  if (i<=bx_nian){ //计算累计保费
-     arr_bf[i][1] = i*bx_bf;
-  }else{
-     arr_bf[i][1] = bx_nian*bx_bf;
-  }
-} 
+    for (var i=1; i<=20; i++) //计算保费
+    {
+      arr_bf[i] = new Array() ;
+      arr_bf[i][0] = i+bx_age;
+      if (i<=bx_nian){ //计算累计保费
+        arr_bf[i][1] = i*bx_bf;
+      }else{
+        arr_bf[i][1] = bx_nian*bx_bf;
+      }
+    }
 //添加25年的记录
-arr_bf[25]  = new Array() ;
-arr_bf[25][0] = 25+bx_age;
-if (bx_nian == 25){
- arr_bf[25][1] = 25*bx_bf;
-}else{
- arr_bf[25][1] = bx_nian*bx_bf;
-}
+    arr_bf[25]  = new Array() ;
+    arr_bf[25][0] = 25+bx_age;
+    if (bx_nian == 25){
+      arr_bf[25][1] = 25*bx_bf;
+    }else{
+      arr_bf[25][1] = bx_nian*bx_bf;
+    }
 //添加30年的记录
-arr_bf[30]  = new Array() ;
-arr_bf[30][0] = 30 + bx_age ;
-arr_bf[30][1] = bx_nian*bx_bf;
+    arr_bf[30]  = new Array() ;
+    arr_bf[30][0] = 30 + bx_age ;
+    arr_bf[30][1] = bx_nian*bx_bf;
 //添加66-101岁的记录
-var tmpAge=0;
-for (i=66; i<=101; i+=5){
- tmpAge = i-bx_age;
- arr_bf[i]  = new Array() ;
- arr_bf[i][0] = i ; 
- 	if(tmpAge<= bx_nian ){
-		arr_bf[i][1] = tmpAge*bx_bf;
-	}else{
-		arr_bf[i][1] = bx_nian*bx_bf;
-	}	
-	}
+    var tmpAge=0;
+    for (i=66; i<=101; i+=5){
+      tmpAge = i-bx_age;
+      arr_bf[i]  = new Array() ;
+      arr_bf[i][0] = i ;
+      if(tmpAge<= bx_nian ){
+        arr_bf[i][1] = tmpAge*bx_bf;
+      }else{
+        arr_bf[i][1] = bx_nian*bx_bf;
+      }
+    }
 
 //计算保证退保金额：85岁前保证退保价值 ＝ 保证退保率*保费，85岁后 保证退保价值 ＝保额
 //strBF-不打折时的保费  strNian- 供款年期 strAge-翌年岁整因子）
 
-trHTML =""	
-var k=0;
-var jj=10; //前10年额外赠送50%保额
- 
-var arr_bonus = new Array();
-var arr_bonus2 = new Array();
-arr_bonus = GetBasic_Bonus(Payment_Item,bx_age,0); //求基础非保证退保红利
-arr_bonus2 = GetBasic_Bonus(Payment_Item,bx_age,1); //求基础非保证理赔金额
-var tmp_years;
-for (var x in arr_bf)
-{
-	//计算保证退保价值
-	tmp_years = arr_bf[x][0] - bx_age;
-  if ( arr_bf[x][0] > 85 ){  //如果到了85岁,那么保证退保价值=保额
-	  arr_bf[x][2] = bx_be*10000;
-  }else { //否则保证退保价值 ＝ 保证退保率*保费
-	arr_bf[x][2] = Math.round(tuibaoliu(bx_nian,tmp_years)* arr_bf[x][1]); 
+    trHTML =""
+    var k=0;
+    var jj=10; //前10年额外赠送50%保额
+
+    var arr_bonus = new Array();
+    var arr_bonus2 = new Array();
+    arr_bonus = GetBasic_Bonus(Payment_Item,bx_age,0); //求基础非保证退保红利
+    arr_bonus2 = GetBasic_Bonus(Payment_Item,bx_age,1); //求基础非保证理赔金额
+    var tmp_years;
+    for (var x in arr_bf)
+    {
+      //计算保证退保价值
+      tmp_years = arr_bf[x][0] - bx_age;
+      if ( arr_bf[x][0] > 85 ){  //如果到了85岁,那么保证退保价值=保额
+        arr_bf[x][2] = bx_be*10000;
+      }else { //否则保证退保价值 ＝ 保证退保率*保费
+        arr_bf[x][2] = Math.round(tuibaoliu(bx_nian,tmp_years)* arr_bf[x][1]);
+      }
+
+      k++
+      //计算非保证退保红利
+      arr_bf[x][3] = Math.round(arr_bonus[k]*bx_be);  //求非保证退保红利
+      arr_bf[x][4] = Math.round(arr_bf[x][2]) + Math.round(arr_bf[x][3]); //退保总额
+
+      //计算非保证理赔红利
+      console.log(arr_bonus2[k]*bx_be);
+      arr_bf[x][5] = Math.round(arr_bonus2[k]*bx_be);
+      arr_bf[x][6] = Math.round(bx_be)*10000;//基本保额
+      //计算赠送保额前10年赠送10年50%保额)
+      if(tmp_years<=jj){
+        arr_bf[x][7] = Math.round(bx_be)*10000/2;
+      }else{
+        arr_bf[x][7] = 0;
+      }
+      //理赔总额
+      arr_bf[x][8] = arr_bf[x][5]+arr_bf[x][6]+arr_bf[x][7];
+      //console.log(arr_bf[x][5] ,arr_bf[x][6],arr_bf[x][7] )
+    }
+
+    var j = 0;
+    for (var x in arr_bf)
+    {
+      //j = parseInt(arr_bf[x][2])+parseInt(arr_bf[x][3]);
+      trHTML += "<tr><td>"+x+"</td><td>"+arr_bf[x][0]+"岁</td><td>" + arr_bf[x][1] +"</td><td>" + arr_bf[x][2]+"</td><td>"+ arr_bf[x][3]+"</td><td>" +arr_bf[x][4]+"</td><td>"+arr_bf[x][6]+"</td><td>"+arr_bf[x][7]+"</td><td>"+arr_bf[x][5]+"</td><td>"+arr_bf[x][8]+"</td></tr>";
+    }
+    $("#tbl").append(trHTML);//在table最后面添加一行
   }
-  
-  k++
-  //计算非保证退保红利
-  arr_bf[x][3] = Math.round(arr_bonus[k]*bx_be);  //求非保证退保红利
-  arr_bf[x][4] = Math.round(arr_bf[x][2]) + Math.round(arr_bf[x][3]); //退保总额
-
-  //计算非保证理赔红利
- 
-  arr_bf[x][5] = Math.round(arr_bonus2[k]*bx_be);
-  arr_bf[x][6] = Math.round(bx_be)*10000;//基本保额
-  //计算赠送保额前10年赠送10年50%保额)
-  if(tmp_years<=jj){
-  arr_bf[x][7] = Math.round(bx_be)*10000/2;
-	  }else{
-  arr_bf[x][7] = 0;		
-	  }
-  //理赔总额
-  arr_bf[x][8] = arr_bf[x][5]+arr_bf[x][6]+arr_bf[x][7];
-
-}	
-
-var j = 0;
-for (var x in arr_bf)
-{
-	//j = parseInt(arr_bf[x][2])+parseInt(arr_bf[x][3]);
-	trHTML += "<tr><td>"+x+"</td><td>"+arr_bf[x][0]+"岁</td><td>" + arr_bf[x][1] +"</td><td>" + arr_bf[x][2]+"</td><td>"+ arr_bf[x][3]+"</td><td>" +arr_bf[x][4]+"</td><td>"+arr_bf[x][6]+"</td><td>"+arr_bf[x][7]+"</td><td>"+arr_bf[x][5]+"</td><td>"+arr_bf[x][8]+"</td></tr>";
-}	
-$("#tbl").append(trHTML);//在table最后面添加一行
-}
 </script>
+
+</body>
+
+</html>

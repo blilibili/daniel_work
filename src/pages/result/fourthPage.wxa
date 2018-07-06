@@ -1,17 +1,11 @@
 <script>
     /* eslint-disable linebreak-style */
-    import {wxa, Page , Mixins} from '@wxa/core';
+    import {wxa, Page} from '@wxa/core';
+
 @Page
-class firstPage {
+class Form {
     constructor(){
         this.data = {
-            bar:0,
-            currentPeopleBE:'',
-            currentPeopleAge:'',
-            currentPeopleTB:'',
-            currentPeopleSum:'',
-            currentPeopleGG:'',
-            currentPeopleTBReport:'',
             condition: {
               showPartOneTable:false,
               showPartTwoTable:false,
@@ -23,22 +17,11 @@ class firstPage {
                 {"code":"平安3","money":"text3","years":"type3" , "money_years":"40年交" , "first_years":"4283.00"},
                 {"code":"平安4","money":"text4","years":"type4" , "money_years":"40年交" , "first_years":"4283.00"},
                 {"code":"平安5","money":"text5","years":"type5" , "money_years":"40年交" , "first_years":"4283.00"},
-              ],
-            tableData:[],
-            age:0
+              ]
         }
     }
     onLoad() {
-      this.setData({
-        currentPeopleBE:this.app.globalData.tableData.data[0].LPZE,
-        currentPeopleTB:this.app.globalData.tableData.data[0].TB,
-        currentPeopleSum:this.app.globalData.tableData.data[0].sum,
-        currentPeopleGG:(this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
-        currentPeopleTBReport:((this.app.globalData.tableData.data[0].TB - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum).toFixed(2),
-        tableData:this.app.globalData.tableData.data,
-        age:this.app.globalData.submitData.calYears,
-        currentPeopleAge:this.app.globalData.submitData.calYears
-      })
+        console.log('hello, this is form page');
     }
     showPartOneTable(event){
       //初始化所有操作
@@ -102,84 +85,9 @@ class firstPage {
       }
     }
 
-  decreaseAge(){
-      let arr = this.app.globalData.tableData.data;
-      let index = parseInt(this.data.bar) - 1;
-      this.setData({
-        bar:index,
-        currentPeopleAge:arr[index].age,
-        currentPeopleBE:arr[index].LPZE,
-        currentPeopleTB:arr[index].TB,
-        currentPeopleSum:arr[index].sum,
-        currentPeopleGG:(arr[index].LPZE / arr[index].sum).toFixed(2),
-        currentPeopleTBReport:((arr[index].TB - arr[index].sum) / arr[index].sum).toFixed(2),
-      })
-    }
-  addAge(){
-    let arr = this.app.globalData.tableData.data;
-    let index = parseInt(this.data.bar) + 1;
-    this.setData({
-      bar:index,
-      currentPeopleAge:arr[index].age,
-      currentPeopleBE:arr[index].LPZE,
-      currentPeopleTB:arr[index].TB,
-      currentPeopleSum:arr[index].sum,
-      currentPeopleGG:(arr[index].LPZE / arr[index].sum).toFixed(2),
-      currentPeopleTBReport:((arr[index].TB - arr[index].sum) / arr[index].sum).toFixed(2),
-    })
-  }
-  changeInsuranceAge(event){
-      let host = this.app.globalData.httpUrl;
-      let port = this.app.globalData.port;
-      // this.app.globalData.submitData.calYears = event.detail.value;
-      let arr = this.app.globalData.tableData.data;
-      let index = event.detail.value;
-
-      this.setData({
-        bar:index,
-        currentPeopleAge:arr[index].age,
-        currentPeopleBE:arr[index].LPZE,
-        currentPeopleTB:arr[index].TB,
-        currentPeopleSum:arr[index].sum,
-        currentPeopleGG:(arr[index].LPZE / arr[index].sum).toFixed(2),
-        currentPeopleTBReport:((arr[index].TB - arr[index].sum) / arr[index].sum).toFixed(2),
-      })
-    // wx.request({
-    //   url:host + ':' + port + '/makeplain',
-    //   data:data,
-    //   method:'POST',
-    //   success:(res) => {
-    //     console.log(res.data.data.length ,  event.detail.value);
-    //     this.app.globalData.submitData = data;
-    //     this.app.globalData.tableData = res.data;
-    //     this.setData({
-    //       tableData:res.data.data,
-    //       currentPeopleAge:event.detail.value,
-    //       currentPeopleBE:res.data.data[0].LPZE,
-    //       currentPeopleTB:res.data.data[0].TB,
-    //       currentPeopleSum:res.data.data[0].sum,
-    //       currentPeopleGG:(res.data.data[0].LPZE / res.data.data[0].sum).toFixed(2),
-    //       currentPeopleTBReport:((res.data.data[0].TB - res.data.data[0].sum) / res.data.data[0].sum).toFixed(2)
-    //     })
-    //   }
-    // })
-  }
-
-  onShareAppMessage(res) {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
-    return {
-      title: '自定义转发标题',
-      path: '/page/user?id=123'
-    }
-  }
-
-
 }
 
-wxa.launchPage(firstPage);
+wxa.launchPage(Form);
 </script>
 <config>
 {
@@ -193,7 +101,7 @@ wxa.launchPage(firstPage);
     <!--</view>-->
     <view class="part1">
         <view style="padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe;font-size: 16px;font-weight: bold;">
-            保障计划: 男30岁 first page
+            保障计划: 男30岁 third page
         </view>
         <view style="display: flex;flex-direction: row;justify-content: center;">
             <view>
@@ -257,13 +165,14 @@ wxa.launchPage(firstPage);
 
     <view class="part2">
         <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
-            早期严重疾病
+            轻症不轻
         </view>
         <view style="margin-left: 30rpx;">
-            <view><span> • </span>保障61种早期疾病，可支付<span>3</span>次赔偿</view>
-            <view><span> • </span>每项赔偿额为当时保额的20%或 <span>25%</span></view>
-            <view><span> • </span>赔偿早期后，将 <span>豁免1年</span>的保费</view>
-            <view><span> • </span>每次赔偿上限为 <span>5万</span> 美元约32万人民币</view>
+            <view><span> • </span>20中轻症不分组 , 独立赔3次</view>
+            <view><span> • </span>第一次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>第二次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>第三次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>轻症最高保障 <span>198000</span>元</view>
         </view>
 
         <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
@@ -274,8 +183,7 @@ wxa.launchPage(firstPage);
 
         <view wx:if="{{condition.showPartTwoTable}}">
             <view style="margin-left: 30rpx;color: #606266;">
-                注1支付早期疾病保障后，须从严重疾病赔偿、身故赔偿或退保时扣除相关赔偿额
-                注2：当时保额不计额外赠送的保额
+                轻症最高赔付包含前两次轻症之后增加的保障及24个月运动达标的增加的保障
             </view>
             <view bindtap="hidePartOneTable" data-type="2" style="text-align: center;">
                 <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
@@ -286,18 +194,14 @@ wxa.launchPage(firstPage);
 
     <view class="part3">
         <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
-            严重疾病
+            重疾不重
         </view>
         <view style="margin-left: 30rpx;">
-            <view style="display: flex;flex-direction: row;">
-                <view><span style="position: relative;top: -5rpx;"> • </span></view>
-                <view style="margin-left: 10rpx;">定期供款，保障终身涵盖重大疾病、严重意外和身故保障，保障人生大部分主要风险</view>
-            </view>
-            <view style="display: flex;flex-direction: row;">
-                <view><span style="position: relative;top: -5rpx;"> • </span></view>
-                <view style="margin-left: 10rpx;">定期供款，保障终身涵盖重大疾病、严重意外和身故保障，保障人生大部分主要风险</view>
-            </view>
-
+            <view><span> • </span>80种重疾提前给付 <span>30万</span> 元</view>
+            <view><span> • </span>第一次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>第二次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>第三次轻症保障 <span>6万</span>元</view>
+            <view><span> • </span>70岁前重疾最高保障 <span>51万</span>元</view>
         </view>
 
         <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
@@ -340,72 +244,6 @@ wxa.launchPage(firstPage);
         </view>
 
     </view>
-
-    <view class="part4">
-        <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
-            保单利益演示
-        </view>
-        <view>
-            <view>
-                <text>拖动按钮查看不同年龄保单利益</text>
-            </view>
-            <view style='margin-top: 20rpx;border:1px solid black;width: 90%;margin: 0 auto;text-align: center;'>
-                <view>被保人 <span>{{currentPeopleAge}}</span> 岁时</view>
-                <view>重疾/身故赔偿金额: <span>{{currentPeopleBE}}美元</span></view>
-                <view>退保价值: <span>{{currentPeopleTB}}美元</span></view>
-                <view>所缴保费总额: <span>{{currentPeopleSum}}美元</span></view>
-                <view>保障杠杆: <span>{{currentPeopleGG}}倍</span></view>
-                <view>预计退保汇报: <span>{{currentPeopleTBReport}}%</span></view>
-            </view>
-            <view class="section section_gap">
-                <view class="body-view" style="display: flex;flex-direction:row;justify-content:center;">
-                    <view><span bindtap="decreaseAge" style="font-size: 20px;position: relative;top: 6rpx;">-</span></view>
-                    <view style="width: 90%;">
-                        <slider value="{{bar}}" bindchanging="changeInsuranceAge" min="0" max="29" />
-                    </view>
-                    <view><span bindtap="addAge" style="font-size: 20px;position: relative;top: 6rpx;">+</span></view>
-                </view>
-            </view>
-            <view class="table-box">
-                <scroll-view scroll-x scroll-y class="table">
-                    <view class="tr bg-w">
-                        <view class="th" style="width: 5%">保单年期</view>
-                        <view class="th" style="width: 2%">年龄</view>
-                        <view class="th">所缴保费总额</view>
-                        <view class="th ">保证退保金额</view>
-                        <view class="th " style="width: 8.8%;">非保证退保红利</view>
-                        <view class="th " style="width: 5%;">退保总额</view>
-                        <view class="th " style="width: 8.8%;">非保证特别红利</view>
-                        <view class="th " style="width: 2%;">保额</view>
-                        <view class="th ">赠送保额</view>
-                        <view class="th ">理赔总额</view>
-                    </view>
-                    <text>{{'\n'}}</text>
-
-                    <block wx:for="{{tableData}}" wx:key="*">
-                        <view class="tr bg-g">
-                            <view class="td" style="width: 7%">{{index + 1}}</view>
-                            <view class="td" style="width: 4%">{{item.age}}</view>
-                            <view class="td" style="width: 9.3%;">{{item.sum}}</view>
-                            <view class="td" style="width: 10%;">{{item.TB}}</view>
-                            <view class="td" style="width: 11%;">{{item.FTB}}</view>
-                            <view class="td" style="width: 7.6%;">{{item.TBZ}}</view>
-                            <view class="td" style="width: 10%;">{{item.FBZTBH}}</view>
-                            <view class="td" style="width: 4.5%;">{{item.BE}}</view>
-                            <view class="td" style="width: 9.7%;">{{item.ZSBE}}</view>
-                            <view class="td">{{item.LPZE}}</view>
-                        </view>
-                        <text>{{'\n'}}</text>
-                    </block>
-                </scroll-view>
-            </view>
-        </view>
-
-    </view>
-
-    <view style="width: 95%;margin: 20rpx auto;">
-        <button type="primary" open-type="share">立即分享</button>
-    </view>
 </view>
 </template>
 <style lang="scss">
@@ -446,32 +284,20 @@ wxa.launchPage(firstPage);
 
 .table {
     border: 0px solid darkgray;
-    width: 170%;
-    height: 600rpx;
-    white-space: nowrap;
-}
-.table-box{
-    width: 90%;
-    margin: 0 auto;
-    overflow: hidden;
-    border: 1px solid black;
 }
 .tr {
-    /*display: flex;*/
-    width: 200%;
+    display: flex;
+    width: 100%;
+    justify-content: center;
     height: 62rpx;
     align-items: center;
-    display: inline-block;
-    white-space: nowrap;
 }
 .td {
-    width:7.6%;
+    width:40%;
     text-align:center;
     height:49rpx;
     border-bottom:1px solid lightgray;
     padding-top:11rpx;
-    display: inline-block;
-    white-space: nowrap;
 
 }
 .bg-w{
@@ -481,14 +307,13 @@ wxa.launchPage(firstPage);
     background: #E6F3F9;
 }
 .th {
-    width:7.6%;
-    justify-content:center;
-    background:#fefefe;
-    color:black;
-    display:inline-block;
-    height:23rpx;
+    width: 40%;
+    justify-content: center;
+    background: #fefefe;
+    color: black;
+    display: flex;
+    height: 62rpx;
+    align-items: center;
     border:1px solid lightgray;
-    padding:10px;
-    white-space: nowrap;
 }
 </style>
