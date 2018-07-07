@@ -6,6 +6,7 @@
 class Form {
     constructor(){
         this.data = {
+            proId:'',
             title:'',
             submitData:{
                 sex:'0',
@@ -67,8 +68,8 @@ class Form {
       }
     }
     onLoad(option) {
-      console.log(this.data);
         let title = '';
+        this.proId = option.pro;
         switch (option.pro){
           case 'EGS':
             title = '特级携升2';
@@ -112,11 +113,21 @@ class Form {
 
         let age = e.detail.value , ageYear = ageArr[0] , ageMonth = ageArr[1] , ageDay = ageArr[2];
         let nominalAge = 0;
-      if(currentArr[1] - ageArr[1] <= 3){
-        nominalAge = currentArr[0] - ageArr[0]
-      }else{
-        nominalAge = currentArr[0] - ageArr[0] + 1
-      }
+        //特级携升2的年龄算法
+        if(this.proId == 'EGS'){
+          if(currentArr[1] - ageArr[1] >= 0){
+            nominalAge = currentArr[0] - ageArr[0] + 1
+          }else{
+            nominalAge = currentArr[0] - ageArr[0]
+          }
+        //重疾年龄的算法
+        }else{
+          if(currentArr[1] - ageArr[1] <= 3){
+            nominalAge = currentArr[0] - ageArr[0]
+          }else{
+            nominalAge = currentArr[0] - ageArr[0] + 1
+          }
+        }
 
       if(nominalAge == 0){
         wx.showToast({
@@ -200,6 +211,7 @@ class Form {
         let port = this.app.globalData.port;
         this.data.submitData.be = event.detail.value;
         this.data.insurance_item.insurance_credit = event.detail.value;
+        this.data.submitData.type = 'usd';
         wx.request({
           url:host + ':' + port + '/getbf',
           data:this.data.submitData,
@@ -253,6 +265,77 @@ class Form {
       let port = this.app.globalData.port;
 
       this.data.submitData.bf = event.detail.value;
+      this.data.submitData.type = 'usd';
+      wx.request({
+        url:host + ':' + port + '/getbe',
+        data:this.data.submitData,
+        method:'POST',
+        success:(res) => {
+          this.setData({
+            ['insurance_item.insurance_money']:res.data.data.insurance_money || 0,
+            ['insurance_item.insurance_credit']:Math.round(res.data.data.be) ||0,
+            ['insurance_item.change_insurance_credit']:Math.round(res.data.data.changeBaoe) || 0,
+            ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0
+          });
+          wx.hideLoading();
+        }
+      })
+    }
+  }
+
+  //输入人民币计算保费汇率
+  requestGetInsuranceRMBMoney(event){
+    if(this.data.submitData.calYears == ''){
+      wx.showToast({
+        title:'请先选择您的出生日期',
+        icon:'none',
+        mask:'true'
+      })
+    }else{
+      wx.showLoading({
+        title:'正在加载汇率...请稍后',
+        mask:true
+      })
+      let host = this.app.globalData.httpUrl;
+      let port = this.app.globalData.port;
+
+      this.data.submitData.be = event.detail.value;
+      this.data.submitData.type = 'rmb';
+      wx.request({
+        url:host + ':' + port + '/getbf',
+        data:this.data.submitData,
+        method:'POST',
+        success:(res) => {
+          this.setData({
+            ['insurance_item.insurance_money']:res.data.data.guranteed || 0,
+            ['insurance_item.insurance_credit']:parseFloat(res.data.data.changeBe).toFixed(2) ||0,
+            ['insurance_item.change_insurance_credit']:Math.round(event.detail.value) || 0,
+            ['insurance_item.change_insurance_money']:parseFloat(Math.round(res.data.data.changeBaofei)).toFixed(2) || 0
+          });
+          wx.hideLoading();
+        }
+      })
+    }
+  }
+
+  //输入保费人民币算保额
+  requestGetInsuranceRMBCredit(event){
+    if(this.data.submitData.calYears == ''){
+      wx.showToast({
+        title:'请先选择您的出生日期',
+        icon:'none',
+        mask:'true'
+      })
+    }else{
+      wx.showLoading({
+        title:'正在加载汇率...请稍后',
+        mask:true
+      })
+      let host = this.app.globalData.httpUrl;
+      let port = this.app.globalData.port;
+
+      this.data.submitData.bf = event.detail.value;
+      this.data.submitData.type = 'rmb';
       wx.request({
         url:host + ':' + port + '/getbe',
         data:this.data.submitData,
@@ -372,7 +455,7 @@ wxa.launchPage(Form);
                             万元（美元）
                         </view>
                         <view style="margin-left: 40rpx;">
-                            <input disabled="true" value="{{insurance_item.change_insurance_credit}}" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
+                            <input value="{{insurance_item.change_insurance_credit}}" style="border-bottom:1px solid black;width: 80rpx" placeholder="" bindblur="requestGetInsuranceRMBMoney" bindconfirm="requestGetInsuranceRMBMoney" />
                         </view>
                         <view style="position: relative;top: 10rpx;">
                             万元（人民币）
@@ -390,7 +473,7 @@ wxa.launchPage(Form);
                             （美元）
                         </view>
                         <view style="margin-left: 40rpx;">
-                            <input disabled="true" value="{{insurance_item.change_insurance_money}}" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
+                            <input value="{{insurance_item.change_insurance_money}}" bindblur="requestGetInsuranceRMBCredit" bindconfirm="requestGetInsuranceRMBCredit" style="border-bottom:1px solid black;width: 120rpx" placeholder="" />
                         </view>
                         <view style="position: relative;top: 10rpx;">
                             （人民币）

@@ -5,6 +5,9 @@
 class firstPage {
     constructor(){
         this.data = {
+            topBarPos:'',
+            thTop:0,
+            tdTop:0,
             bar:0,
             currentPeopleBE:'',
             currentPeopleAge:'',
@@ -144,25 +147,13 @@ class firstPage {
         currentPeopleGG:(arr[index].LPZE / arr[index].sum).toFixed(2),
         currentPeopleTBReport:((arr[index].TB - arr[index].sum) / arr[index].sum).toFixed(2),
       })
-    // wx.request({
-    //   url:host + ':' + port + '/makeplain',
-    //   data:data,
-    //   method:'POST',
-    //   success:(res) => {
-    //     console.log(res.data.data.length ,  event.detail.value);
-    //     this.app.globalData.submitData = data;
-    //     this.app.globalData.tableData = res.data;
-    //     this.setData({
-    //       tableData:res.data.data,
-    //       currentPeopleAge:event.detail.value,
-    //       currentPeopleBE:res.data.data[0].LPZE,
-    //       currentPeopleTB:res.data.data[0].TB,
-    //       currentPeopleSum:res.data.data[0].sum,
-    //       currentPeopleGG:(res.data.data[0].LPZE / res.data.data[0].sum).toFixed(2),
-    //       currentPeopleTBReport:((res.data.data[0].TB - res.data.data[0].sum) / res.data.data[0].sum).toFixed(2)
-    //     })
-    //   }
-    // })
+  }
+
+  moveTable(event){
+
+      this.setData({
+        topBarPos:event.detail.scrollTop
+      })
   }
 
   onShareAppMessage(res) {
@@ -346,8 +337,8 @@ wxa.launchPage(firstPage);
             保单利益演示
         </view>
         <view>
-            <view>
-                <text>拖动按钮查看不同年龄保单利益</text>
+            <view style="margin-bottom: 20rpx;">
+                <text style="margin-left: 30rpx;">拖动按钮查看不同年龄保单利益</text>
             </view>
             <view style='margin-top: 20rpx;border:1px solid black;width: 90%;margin: 0 auto;text-align: center;'>
                 <view>被保人 <span>{{currentPeopleAge}}</span> 岁时</view>
@@ -367,37 +358,50 @@ wxa.launchPage(firstPage);
                 </view>
             </view>
             <view class="table-box">
-                <scroll-view scroll-x scroll-y class="table">
+                <view class="table" style="width: 20%;">
                     <view class="tr bg-w">
-                        <view class="th" style="width: 5%">保单年期</view>
-                        <view class="th" style="width: 2%">年龄</view>
-                        <view class="th">所缴保费总额</view>
-                        <view class="th ">保证退保金额</view>
-                        <view class="th " style="width: 8.8%;">非保证退保红利</view>
-                        <view class="th " style="width: 5%;">退保总额</view>
-                        <view class="th " style="width: 8.8%;">非保证特别红利</view>
-                        <view class="th " style="width: 2%;">保额</view>
-                        <view class="th ">赠送保额</view>
-                        <view class="th ">理赔总额</view>
+                        <view style="margin-top: 22rpx;">年龄</view>
                     </view>
-                    <text>{{'\n'}}</text>
-
-                    <block wx:for="{{tableData}}" wx:key="*">
-                        <view class="tr bg-g">
-                            <view class="td" style="width: 7%">{{index + 1}}</view>
-                            <view class="td" style="width: 4%">{{item.age}}</view>
-                            <view class="td" style="width: 9.3%;">{{item.sum}}</view>
-                            <view class="td" style="width: 10%;">{{item.TB}}</view>
-                            <view class="td" style="width: 11%;">{{item.FTB}}</view>
-                            <view class="td" style="width: 7.6%;">{{item.TBZ}}</view>
-                            <view class="td" style="width: 10%;">{{item.FBZTBH}}</view>
-                            <view class="td" style="width: 4.5%;">{{item.BE}}</view>
-                            <view class="td" style="width: 9.7%;">{{item.ZSBE}}</view>
-                            <view class="td">{{item.LPZE}}</view>
+                    <scroll-view bindscroll="moveTable" scroll-y style="height: 806rpx;white-space: nowrap;">
+                        <view>
+                            <block wx:for="{{tableData}}" wx:key="*">
+                                <view class="tr bg-g">
+                                    <view class="td" style="width: 2%;position: relative;top: 0;">{{item.age}}</view>
+                                </view>
+                                <text>{{'\n'}}</text>
+                            </block>
                         </view>
-                        <text>{{'\n'}}</text>
-                    </block>
-                </scroll-view>
+                    </scroll-view>
+                </view>
+                <view class="table">
+                    <scroll-view scroll-x scroll-y bindscroll="moveTable"  style="white-space: nowrap;width: 2000px;" class="bg-w">
+                        <!--<view class="th" style="width: 2%;position: relative;top:0;">年龄</view>-->
+                        <view class="th">所缴保费总额</view>
+                        <view class="th">保证退保金额</view>
+                        <view class="th">非保证退保红利</view>
+                        <view class="th">退保总额</view>
+                        <view class="th">非保证特别红利</view>
+                        <view class="th">保额</view>
+                        <view class="th">赠送保额</view>
+                        <view class="th">理赔总额</view>
+                    </scroll-view>
+                    <scroll-view scroll-top="{{topBarPos}}" bindscroll="moveTable" scroll-x scroll-y style="height: 800rpx;white-space: nowrap;">
+
+                        <block wx:for="{{tableData}}" wx:key="*">
+                            <view class="tr bg-g">
+                                <view class="td" style="width: 9.3%;">{{item.sum}}</view>
+                                <view class="td" style="width: 10%;">{{item.TB}}</view>
+                                <view class="td" style="width: 11%;">{{item.FTB}}</view>
+                                <view class="td" style="width: 7.6%;">{{item.TBZ}}</view>
+                                <view class="td" style="width: 10%;">{{item.FBZTBH}}</view>
+                                <view class="td" style="width: 4.5%;">{{item.BE}}</view>
+                                <view class="td" style="width: 9.7%;">{{item.ZSBE}}</view>
+                                <view class="td">{{item.LPZE}}</view>
+                            </view>
+                            <text>{{'\n'}}</text>
+                        </block>
+                    </scroll-view>
+                </view>
             </view>
         </view>
 
@@ -447,14 +451,25 @@ wxa.launchPage(firstPage);
 .table {
     border: 0px solid darkgray;
     width: 170%;
-    height: 600rpx;
+    height: 868rpx;
     white-space: nowrap;
+    overflow:scroll;//超出内容滚动
+    overflow-x:hidden;//隐藏x方向滚动条
+    overflow-y:hidden;//隐藏y方向滚动条
 }
 .table-box{
     width: 90%;
     margin: 0 auto;
     overflow: hidden;
     border: 1px solid black;
+    display: flex;
+}
+.table-th{
+    width: 10%;
+    height: 22rpx;
+    align-items: center;
+    display: inline-block;
+    white-space: nowrap;
 }
 .tr {
     /*display: flex;*/
@@ -481,8 +496,7 @@ wxa.launchPage(firstPage);
     background: #E6F3F9;
 }
 .th {
-    width:7.6%;
-    justify-content:center;
+    width:200px;
     background:#fefefe;
     color:black;
     display:inline-block;
