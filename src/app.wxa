@@ -5,8 +5,8 @@ import {wxa, App} from '@wxa/core';
 class Main {
     constructor() {
         this.globalData = {
-          httpUrl:'http://119.23.31.157',
-          port:3000
+          httpUrl:'https://dan.samxiao.cn',
+          port:80
         }
     }
 }
@@ -20,11 +20,13 @@ wxa.launchApp(Main);
         "pages/form/form",
         "pages/result/firstPage",
         "pages/result/secondPage",
-        "pages/result/thirdPage"
+        "pages/result/thirdPage",
+        "pages/change/change"
     ]
 }
 </config>
 <style lang="scss">
+    @import 'style/weui.wxss';
 page {
     width: 100%;
     height: 100%;

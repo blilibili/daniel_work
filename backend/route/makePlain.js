@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 let router = express.Router();
 let tool = require('../util/Non-Guaranteed_Bonus');
+let changeRate = require('../util/exchangeRate');
 
 app.post('/' , (req , res) => {
 
@@ -115,34 +116,50 @@ app.post('/' , (req , res) => {
 
   let ageArr = [];
   let tmp = [];
-  let count = 0
-  //arr_bf[i][j],j-0保单年度,1所缴保费总额,2保证退保金额,3非保证退保红利,4-退保总额,5-非保证特别红利,6-保额,7-赠送保额,8-理赔总额
-  for (var x in arr_bf)
-  {
-    tmp[count] = {
-      age:arr_bf[x][0],
-      sum:arr_bf[x][1],
-      TB:arr_bf[x][2],
-      FTB:arr_bf[x][3],
-      TBZ:arr_bf[x][4],
-      FBZTBH:arr_bf[x][5],
-      BE:arr_bf[x][6],
-      ZSBE:arr_bf[x][7],
-      LPZE:arr_bf[x][8]
+  let count = 0;
+  //获取汇率
+  changeRate.getMoneyRate(1).then((result) => {
+    //arr_bf[i][j],j-0保单年度,1所缴保费总额,2保证退保金额,3非保证退保红利,4-退保总额,5-非保证特别红利,6-保额,7-赠送保额,8-理赔总额
+    for (var x in arr_bf)
+    {
+      tmp[count] = {
+        age:arr_bf[x][0],
+        sum:arr_bf[x][1],
+        changeSum:Math.round(arr_bf[x][1] * parseFloat(result)),
+        TB:Math.round(arr_bf[x][2]),
+        changeTB:Math.round(arr_bf[x][2] * parseFloat(result)),
+        FTB:arr_bf[x][3],
+        changeFTB:Math.round(arr_bf[x][3] * parseFloat(result)),
+        TBZ:arr_bf[x][4],
+        changeTBZ:Math.round(arr_bf[x][4] * parseFloat(result)),
+        FBZTBH:arr_bf[x][5],
+        changeFBZTBH:Math.round(arr_bf[x][5] * parseFloat(result)),
+        BE:arr_bf[x][6],
+        changeBe:Math.round(arr_bf[x][6] * parseFloat(result)),
+        CSBE:arr_bf[x][6] + arr_bf[x][7],
+        changeCSBE:Math.round((arr_bf[x][6] + arr_bf[x][7]) * parseFloat(result)),
+        ZSBE:arr_bf[x][7],
+        changeZSBE:Math.round(arr_bf[x][7] * parseFloat(result)),
+        LPZE:arr_bf[x][8],
+        changeLPZE:Math.round(arr_bf[x][8] * parseFloat(result)),
+        BF:bx_bf,
+        changeBF:Math.round(bx_bf * parseFloat(result))
+      }
+      //j = parseInt(arr_bf[x][2])+parseInt(arr_bf[x][3]);
+      // tmp['age'][count] = arr_bf[x][0];
+      // tmp['sum'][count] = arr_bf[x][1];
+      //trHTML += "<tr><td>"+x+"</td><td>"+arr_bf[x][0]+"岁</td><td>" + arr_bf[x][1] +"</td><td>" + arr_bf[x][2]+"</td><td>"+ arr_bf[x][3]+"</td><td>" +arr_bf[x][4]+"</td><td>"+arr_bf[x][6]+"</td><td>"+arr_bf[x][7]+"</td><td>"+arr_bf[x][5]+"</td><td>"+arr_bf[x][8]+"</td></tr>";
+      count++;
     }
-    //j = parseInt(arr_bf[x][2])+parseInt(arr_bf[x][3]);
-    // tmp['age'][count] = arr_bf[x][0];
-    // tmp['sum'][count] = arr_bf[x][1];
-    //trHTML += "<tr><td>"+x+"</td><td>"+arr_bf[x][0]+"岁</td><td>" + arr_bf[x][1] +"</td><td>" + arr_bf[x][2]+"</td><td>"+ arr_bf[x][3]+"</td><td>" +arr_bf[x][4]+"</td><td>"+arr_bf[x][6]+"</td><td>"+arr_bf[x][7]+"</td><td>"+arr_bf[x][5]+"</td><td>"+arr_bf[x][8]+"</td></tr>";
-    count++;
-  }
 
-  res.send({
-    code:1,
-    age:bx_age,
-    data:tmp,
-    msg:'获取表格成功'
+    res.send({
+      code:1,
+      age:bx_age,
+      data:tmp,
+      msg:'获取表格成功'
+    })
   })
+
   //$("#tbl").append(trHTML);//在table最后面添加一行
 });
 

@@ -1,0 +1,176 @@
+<script>
+  /* eslint-disable linebreak-style */
+  import {wxa, Page} from '@wxa/core';
+
+  @Page
+  class CIECNDTable {
+    constructor() {
+      this.data = {
+        bd_years:[],
+        redirectUrl:'',
+        timer:'',
+        topBarPos: '',
+        leftBarPos: '',
+        thTop: 0,
+        tdTop: 0,
+        bar: 0,
+        currentPeopleBE: '',
+        currentPeopleAge: '',
+        currentPeopleTB: '',
+        currentPeopleSum: '',
+        currentPeopleGG: '',
+        currentPeopleTBReport: '',
+        currentPeopleChangeBE: '',
+        currentPeopleChangeTB: '',
+        currentPeopleChangeSum: '',
+        CIEAge: '',
+        CIESmoke: '',
+        CIELiving: '',
+        CIEBE: '',
+        CIEChangeBe: '',
+        CIEZSBE: '',
+        CIEChangeZSBE: '',
+        changeCIEBE: '',
+        giveMoneyYears: '',
+        CIEBF: '',
+        CIEchangeBF: '',
+      }
+    }
+
+    onLoad(option) {
+      let tmp = [];
+      this.app.globalData.tableData.data.forEach((v , k) => {
+        tmp[k] = v.age;
+      });
+      this.setData({
+        bd_years:tmp,
+        CIEAge: this.app.globalData.submitData.calYears,
+        CIESmoke: this.app.globalData.submitData.smoke == 0 ? '非吸烟' : '吸烟',
+        CIELiving: this.app.globalData.submitData.living == 0 ? '香港' : '大陆',
+        giveMoneyYears: this.app.globalData.submitData.giveMoneyYear,
+        CIEBE: Math.round(this.app.globalData.tableData.data[0].BE / 10000),
+        CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
+        CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
+        CIEChangeZSBE: Math.round(this.app.globalData.tableData.data[0].changeZSBE / 10000),
+        CIECSBE: Math.round(this.app.globalData.tableData.data[0].CSBE / 10000),
+        CIEChangeCSBE: Math.round(this.app.globalData.tableData.data[0].changeCSBE / 10000),
+        CIEBF: this.app.globalData.tableData.data[0].BF,
+        CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
+
+        //保单价值演示
+        currentPeopleBE: this.app.globalData.tableData.data[0].LPZE,
+        currentPeopleTB: this.app.globalData.tableData.data[0].TB,
+        currentPeopleSum: this.app.globalData.tableData.data[0].sum,
+        currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
+        currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum).toFixed(2),
+        tableData: this.app.globalData.tableData.data,
+        age: this.app.globalData.submitData.calYears,
+        currentPeopleAge: this.app.globalData.submitData.calYears,
+        currentPeopleChangeBE: Math.round(this.app.globalData.tableData.data[0].changeLPZE),
+        currentPeopleChangeTB: Math.round(this.app.globalData.tableData.data[0].changeTB),
+        currentPeopleChangeSum: Math.round(this.app.globalData.tableData.data[0].changeSum),
+
+      })
+    }
+  }
+
+  wxa.launchComponent(CIECNDTable);
+</script>
+<config lang="json">
+    {
+    "component": true
+    }
+</config>
+<template>
+    <view>
+        <view class="table" style="width: 30%;border-right: 1px solid darkgray;">
+            <view class="tr bg-w" style="border:1px solid lightgray;height: 29px;">
+                <view style="margin: 12rpx 0 0 12rpx;">年龄</view>
+            </view>
+            <scroll-view upper-threshold="1" lower-threshold="1" bindscroll="moveTopTable" scroll-top="{{topBarPos}}" scroll-y style="height: 806rpx;white-space: nowrap;">
+                <view>
+                    <block wx:for="{{tableData}}" wx:key="*">
+                        <view class="tr bg-w">
+                            <view class="td" style="width: 53%;position: relative;top: 0;border-bottom: 1px solid lightgray;">{{item.age}}</view>
+                        </view>
+                        <text>{{'\n'}}</text>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="table">
+            <scroll-view upper-threshold="1" lower-threshold="1" scroll-x scroll-left="{{leftBarPos}}" style="white-space: nowrap;" class="bg-w">
+                <!--<view class="th" style="width: 2%;position: relative;top:0;">年龄</view>-->
+                <view class="th">所缴保费总额</view>
+                <view class="th">保证退保金额</view>
+                <view class="th">非保证退保红利</view>
+                <view class="th">退保总额</view>
+                <view class="th">保额</view>
+                <view class="th">赠送保额</view>
+                <view class="th">非保证特别红利</view>
+                <view class="th">理赔总额</view>
+            </scroll-view>
+            <scroll-view bindscrolltolower="scrollBottom" upper-threshold="4" lower-threshold="4" scroll-top="{{topBarPos}}" scroll-left="{{leftBarPos}}" bindscroll="moveTable" scroll-x scroll-y style="height: 806rpx;white-space: nowrap;">
+
+                <block wx:for="{{tableData}}" wx:key="*">
+                    <view class="tr bg-w">
+                        <view class="td" >{{item.sum}}</view>
+                        <view class="td">{{item.TB}}</view>
+                        <view class="td" >{{item.FTB}}</view>
+                        <view class="td" >{{item.TBZ}}</view>
+                        <view class="td" >{{item.BE}}</view>
+                        <view class="td" >{{item.ZSBE}}</view>
+                        <view class="td" >{{item.FBZTBH}}</view>
+                        <view class="td">{{item.LPZE}}</view>
+                    </view>
+                    <text>{{'\n'}}</text>
+                </block>
+            </scroll-view>
+        </view>
+    </view>
+</template>
+<style lang="scss">
+    .table {
+        margin: 0 auto;
+        overflow: hidden;
+        border: 0px solid darkgray;
+        font-size: 12px;
+    }
+    .td {
+        width:93px;
+        text-align:center;
+        height:auto;
+        border:1px solid lightgray;
+        padding-top:11rpx;
+        display: inline-block;
+
+    }
+
+    .td-title{
+        width:67px;
+        text-align:center;
+        height:auto;
+        border-bottom:1px solid lightgray;
+        padding-top:11rpx;
+        display: inline-block;
+        vertical-align: top;
+        border-left:1px solid lightgray;
+        border-right:1px solid lightgray;
+    }
+    .bg-w{
+        background: white;
+    }
+    .bg-g{
+        background: #E6F3F9;
+    }
+    .th {
+        width:83px;
+        background:#fefefe;
+        color:black;
+        display:inline-block;
+        height:auto;
+        border:1px solid lightgray;
+        padding:5px;
+        text-align: center;
+    }
+</style>

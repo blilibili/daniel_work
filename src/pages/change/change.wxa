@@ -1,0 +1,87 @@
+<script>
+  /* eslint-disable linebreak-style */
+  import {wxa, Page} from '@wxa/core';
+
+  @Page
+  class Change {
+    constructor(){
+      this.data = {
+        redirectUrl:''
+      }
+    }
+    forMatTime(inputTime , methods){
+      let date = new Date(inputTime);
+      let y = date.getFullYear();
+      let m = date.getMonth() + 1;
+      m = m < 10 ? ('0' + m) : m;
+      let d = date.getDate();
+      d = d < 10 ? ('0' + d) : d;
+      let h = date.getHours();
+      h = h < 10 ? ('0' + h) : h;
+      let minute = date.getMinutes();
+      let second = date.getSeconds();
+      minute = minute < 10 ? ('0' + minute) : minute;
+      second = second < 10 ? ('0' + second) : second;
+      switch (methods){
+        case 'day':
+          return y + '-' + m + '-' + d;
+          break;
+        case 'seconds':
+          return y + '-' + m + '-' + d + ' ' + h + ':' +minute + ':' + second;
+          break;
+        default:
+          return '参数错误请检查';
+          break;
+      }
+    }
+    onLoad(option) {
+      console.log(option.provision);
+      switch (option.provision){
+          case '0001':
+          this.setData({
+            redirectUrl:'https://dan.samxiao.cn/yb.html'
+          })
+          break;
+          case '0002':
+          this.setData({
+            redirectUrl:'https://dan.samxiao.cn/bz.html'
+          })
+          break;
+          case '0003':
+          this.setData({
+            redirectUrl:'https://dan.samxiao.cn/zq.html'
+          })
+          break;
+          case '0004':
+          this.setData({
+            redirectUrl:'https://dan.samxiao.cn/yz.html'
+          })
+          break;
+          case '0005':
+          this.setData({
+            redirectUrl:'https://dan.samxiao.cn/lx.html'
+          })
+          break;
+      }
+    }
+
+
+  }
+
+  wxa.launchPage(Change);
+</script>
+<config>
+    {
+    "navigationTextTitle": "表单页"
+    }
+</config>
+<template>
+    <view>
+        <web-view src="{{redirectUrl}}">
+
+        </web-view>
+    </view>
+</template>
+<style lang="scss">
+
+</style>
