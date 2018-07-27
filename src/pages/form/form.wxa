@@ -6,6 +6,7 @@
 class Form {
     constructor(){
         this.data = {
+            currencyCny:0,
             calButton:false,
             proId:'',
             title:'',
@@ -13,7 +14,7 @@ class Form {
                 sex:'0',
                 birth:'',
                 calYears:'',
-                giveMoneyYear:'10',
+                giveMoneyYear:'',
                 living:'0',
                 smoke:'0',
                 proId:'',
@@ -36,8 +37,8 @@ class Form {
                 {name:'吸烟' , value:'1'}
             ],
             living:[
-                {name:'香港' , value:'0' , checked:'true'},
-                {name:'大陆' , value:'1'}
+                {name:'大陆' , value:'1' , checked:'true'},
+                {name:'其他地区' , value:'0'}
             ],
             insurance_years:['10' , '15' , '20' , '25'],
             current_time:this.forMatTime(Date.parse(new Date()) , 'day')
@@ -69,6 +70,14 @@ class Form {
       }
     }
     onLoad(option) {
+        let currentTime = new Date();
+        let thirtyYears = currentTime.getFullYear() - 30;
+        let thirtyBirth = thirtyYears + '-01-01';
+        this.setData({
+            ['submitData.birth']: thirtyBirth
+        })
+        this.getCurrentRate();
+        this.clearInsuranceValue();
         let title = '';
         this.proId = option.pro;
         switch (option.pro){
@@ -93,20 +102,46 @@ class Form {
           title:title
         })
     }
+    //获取汇率
+    getCurrentRate(){
+        let host = this.app.globalData.httpUrl;
+        wx.request({
+            url:host +'/getrate',
+            method:'POST',
+            success:(res) => {
+                this.setData({
+                    currencyCny:parseFloat(res.data.rate).toFixed(2)
+                })
+            }
+        })
+    }
+    clearInsuranceValue(){
+        this.setData({
+            insurance_item:{
+                ['insurance_credit']:0,
+                ['insurance_money']:0,
+                ['change_insurance_credit']:0,
+                ['change_insurance_money']:0
+            }
+        })
+    }
     radioSexChange(e){
         this.setData({
           ['submitData.sex']:e.detail.value
-        })
+        });
+        this.clearInsuranceValue();
     }
     radioSmokeChange(e){
       this.setData({
         ['submitData.smoke']:e.detail.value
-      })
+      });
+      this.clearInsuranceValue();
     }
     radioLivingChange(e){
       this.setData({
         ['submitData.living']:e.detail.value
-      })
+      });
+        this.clearInsuranceValue();
     }
     bindAgeChange(e) {
         let ageArr = e.detail.value.split('-');
@@ -150,18 +185,21 @@ class Form {
         }else if(nominalAge <= 65){
           tmp = ['10']
         }
+        console.log(nominalAge);
         this.setData({
           ['submitData.birth']:e.detail.value,
           ['submitData.calYears']:nominalAge,
           ['submitData.giveMoneyYear']:tmp[0],
           insurance_years:tmp
         })
+          this.clearInsuranceValue();
       }
     }
     bindInsuranceYearsChange(e){
       this.setData({
         ['submitData.giveMoneyYear']:this.data.insurance_years[e.detail.value]
       })
+        this.clearInsuranceValue();
     }
   createInsurance(e){
     let ins = this.data.insurance_item;
@@ -189,21 +227,11 @@ class Form {
 
       this.data.submitData.be = this.data.insurance_item.insurance_credit;
       this.data.submitData.bf = this.data.insurance_item.insurance_money;
-      let host = this.app.globalData.httpUrl;
-      let port = this.app.globalData.port;
-      wx.request({
-        url:host +'/makeplain',
-        data:this.data.submitData,
-        method:'POST',
-        success:(res) => {
-          wx.hideLoading();
-          this.app.globalData.submitData = this.data.submitData;
-          this.app.globalData.tableData = res.data;
-          wx.navigateTo({
-            url:'/pages/result/' + page
-          })
-        }
-      })
+      this.app.globalData.submitData = this.data.submitData;
+      //0 页面跳转 1 分享
+        wx.navigateTo({
+            url:'/pages/result/' + page + '?share=0'
+        })
     }
 
   }
@@ -223,20 +251,7 @@ class Form {
         this.data.submitData.be = event.detail.value;
         this.data.insurance_item.insurance_credit = event.detail.value;
         this.data.submitData.type = 'usd';
-        // wx.request({
-        //   url:host +'/getbf',
-        //   data:this.data.submitData,
-        //   method:'POST',
-        //   success:(res) => {
-        //     console.log(res.data.data);
-        //     this.setData({
-        //       ['insurance_item.insurance_money']:res.data.data.guranteed||0,
-        //       ['insurance_item.change_insurance_credit']:parseFloat(res.data.data.changeBe).toFixed(2) || 0,
-        //       ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0,
-        //     });
-        //     wx.hideLoading();
-        //   }
-        // })
+        this.requestAllBfBe('insurance_credit');
       }
 
   }
@@ -365,20 +380,7 @@ class Form {
 
       this.data.submitData.bf = event.detail.value;
       this.data.submitData.type = 'usd';
-      // wx.request({
-      //   url:host +'/getbe',
-      //   data:this.data.submitData,
-      //   method:'POST',
-      //   success:(res) => {
-      //     this.setData({
-      //       ['insurance_item.insurance_money']:res.data.data.insurance_money || 0,
-      //       ['insurance_item.insurance_credit']:parseFloat(res.data.data.be).toFixed(2) ||0,
-      //       ['insurance_item.change_insurance_credit']:parseFloat(res.data.data.changeBaoe).toFixed(2) || 0,
-      //       ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0
-      //     });
-      //     wx.hideLoading();
-      //   }
-      // })
+        this.requestAllBfBe('insurance_money');
     }
   }
 
@@ -399,20 +401,7 @@ class Form {
       this.setData({
         ['insurance_item.change_insurance_credit']:event.detail.value,
       });
-      // wx.request({
-      //   url:host + '/getbf',
-      //   data:this.data.submitData,
-      //   method:'POST',
-      //   success:(res) => {
-      //     this.setData({
-      //       ['insurance_item.insurance_money']:res.data.data.guranteed || 0,
-      //       ['insurance_item.insurance_credit']:parseFloat(res.data.data.changeBe).toFixed(2) ||0,
-      //       ['insurance_item.change_insurance_credit']:event.detail.value || 0,
-      //       ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0
-      //     });
-      //     wx.hideLoading();
-      //   }
-      // })
+      this.requestAllBfBe('change_insurance_credit');
     }
   }
 
@@ -434,20 +423,8 @@ class Form {
       this.setData({
         ['insurance_item.change_insurance_money']:event.detail.value,
       });
-      // wx.request({
-      //   url:host +'/getbe',
-      //   data:this.data.submitData,
-      //   method:'POST',
-      //   success:(res) => {
-      //     this.setData({
-      //       ['insurance_item.insurance_money']:res.data.data.insurance_money || 0,
-      //       ['insurance_item.insurance_credit']:parseFloat(res.data.data.be).toFixed(2) ||0,
-      //       ['insurance_item.change_insurance_credit']:parseFloat(res.data.data.changeBaoe).toFixed(2) || 0,
-      //       ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0
-      //     });
-      //     wx.hideLoading();
-      //   }
-      // })
+
+        this.requestAllBfBe('change_insurance_money');
     }
   }
 
@@ -523,7 +500,7 @@ wxa.launchPage(Form);
         </view>
         <view class="form-content">
             <form>
-                <view style="padding: 20rpx 0 20rpx 20rpx;">受保人信息</view>
+                <view style="padding: 20rpx 0 20rpx 20rpx;font-weight: bold;">受保人信息</view>
                 <view class="form-sex">
                     <label style="position: relative;top: 7rpx;">性别</label>
                     <radio-group class="radio-group" bindchange="radioSexChange">
@@ -542,10 +519,11 @@ wxa.launchPage(Form);
                 </view>
 
                 <view class="form-calculate-age">
-                    <label style="padding: 20rpx 0 20rpx 20rpx;">虚岁</label>
-                    <view style="margin-left: 150rpx;position: relative;top: 8rpx;display: flex;">
-                        <input value="{{submitData.calYears}}" type="number" bindblur="setCalYears" bindconfirm="setCalYears" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
-                        <span style="position: relative;top: 4rpx;">岁</span>
+                    <label style="padding: 20rpx 0 20rpx 20rpx;">年龄</label>
+                    <view style="margin-left: 60rpx;position: relative;top: 12rpx;display: flex;">
+                        <!--submitData.calYears-->
+                        <input type="number" value="{{submitData.calYears}}" bindblur="setCalYears" bindconfirm="setCalYears" style="border-bottom:1px solid black;width: 380rpx;text-align: center;" placeholder="请选择出生日期或输入年龄" />
+                        <span style="position: relative;top: 4rpx;">岁(虚岁)</span>
                     </view>
                 </view>
             </form>
@@ -553,7 +531,7 @@ wxa.launchPage(Form);
 
         <view class="form-content">
             <form>
-                <view style="padding: 20rpx 0 20rpx 20rpx;">保费测算</view>
+                <view style="padding: 20rpx 0 20rpx 20rpx;font-weight: bold;">投保信息</view>
                 <view class="form-sex">
                     <label style="position: relative;top: 7rpx;">货币</label>
                     <radio-group class="radio-group" bindchange="radioChange">
@@ -564,7 +542,7 @@ wxa.launchPage(Form);
                 </view>
                 <view class="form-age">
                     <label style="padding: 20rpx 0 20rpx 20rpx;">是否吸烟</label>
-                    <radio-group style="padding-top: 10rpx;" class="radio-group" bindchange="radioSmokeChange">
+                    <radio-group style="padding-top: 16rpx;" class="radio-group" bindchange="radioSmokeChange">
                         <label style="margin-left: 102rpx;" class="radio" wx:key="*" wx:for="{{smoke}}">
                             <radio color="#1011FF" value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
                         </label>
@@ -573,7 +551,7 @@ wxa.launchPage(Form);
 
                 <view class="form-age">
                     <label style="padding: 20rpx 0 20rpx 20rpx;">居住地区</label>
-                    <radio-group style="padding-top: 10rpx;" class="radio-group" bindchange="radioLivingChange">
+                    <radio-group style="padding-top: 16rpx;" class="radio-group" bindchange="radioLivingChange">
                         <label style="margin-left: 102rpx;" class="radio" wx:key="*" wx:for="{{living}}">
                             <radio color="#1011FF" value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
                         </label>
@@ -582,44 +560,73 @@ wxa.launchPage(Form);
 
                 <view class="form-calculate-age">
                     <label style="padding: 20rpx 0 20rpx 20rpx;">缴费年期</label>
-                    <view style="margin-left: 150rpx;position: relative;top: 20rpx;">
-                        <picker style="width: 400rpx;" mode="selector" bindchange="bindInsuranceYearsChange" value="{{index}}" range="{{insurance_years}}">
+                    <view style="position: relative;top: 20rpx;">
+                        <picker style="width: 400rpx;text-align: center;" mode="selector" bindchange="bindInsuranceYearsChange" value="{{index}}" range="{{insurance_years}}">
                             <view class="picker">
-                                {{submitData.giveMoneyYear}}年
+                                {{submitData.giveMoneyYear == ""? "请选择":submitData.giveMoneyYear}} {{submitData.giveMoneyYear != ""?"年":""}}
                             </view>
                         </picker>
                     </view>
+                </view>
+
+                <!--<view style="text-align: center;display: block;padding-bottom: 20rpx;" class="form-calculate-age">-->
+                    <!--<view>-->
+                        <!--<view>-->
+                            <!--<button size="mini" type="primary" bindtap="calBf" disabled="{{calButton}}" style="margin-right: 50rpx;">-->
+                                <!--计算保费-->
+                            <!--</button>-->
+
+                            <!--<button size="mini" type="primary" bindtap="resetAll">-->
+                                <!--清空-->
+                            <!--</button>-->
+                        <!--</view>-->
+                    <!--</view>-->
+
+                <!--</view>-->
+
+            </form>
+        </view>
+        <view class="form-content">
+            <form>
+                <view style="padding: 20rpx 0 20rpx 20rpx;font-weight: bold;">保费测算</view>
+
+                <view style="padding-left: 20rpx;">
+                    今日汇率 1(美元) : {{currencyCny}}(人民币)
                 </view>
 
                 <view class="form-calculate-age">
                     <label style="padding: 20rpx 0 20rpx 20rpx;">保额</label>
                     <view style="margin-left: 40rpx;position: relative;top: 8rpx;display: flex;flex-direction:row;">
                         <view>
-                            <input value="{{insurance_item.insurance_credit}}" type="number" bindblur="requestGetInsuranceMoney" bindconfirm="requestGetInsuranceMoney" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
+                            <input value="{{insurance_item.insurance_credit}}" type="number" bindblur="requestGetInsuranceMoney" bindconfirm="requestGetInsuranceMoney" style="border-bottom:1px solid black;width: 80rpx;position: relative;top: 4rpx;" placeholder="" />
                         </view>
                         <view style="position: relative;top: 10rpx;">
                             万元（美元）
                         </view>
                         <view style="margin-left: 40rpx;">
-                            <input value="{{insurance_item.change_insurance_credit}}" type="number" style="border-bottom:1px solid black;width: 80rpx" placeholder="" bindblur="requestGetInsuranceRMBMoney" bindconfirm="requestGetInsuranceRMBMoney" />
+                            <input value="{{insurance_item.change_insurance_credit}}" type="number" style="border-bottom:1px solid black;width: 80rpx;position: relative;top: 4rpx;" placeholder="" bindblur="requestGetInsuranceRMBMoney" bindconfirm="requestGetInsuranceRMBMoney" />
                         </view>
                         <view style="position: relative;top: 10rpx;">
                             万元（人民币）
                         </view>
                     </view>
                 </view>
+                
+                <view style="font-size: 12px;color: #909399;margin: 15rpx 0 15rpx 0;padding-left: 10px;">
+                    保额不能低于2万美元，最高不超过50万美元
+                </view>
 
                 <view class="form-calculate-age">
                     <label style="padding: 20rpx 0 20rpx 20rpx;">保费</label>
                     <view style="margin-left: 40rpx;position: relative;top: 8rpx;display: flex;flex-direction:row;">
                         <view>
-                            <input type="number" value="{{insurance_item.insurance_money}}" bindblur="requestGetInsuranceCredit" bindconfirm="requestGetInsuranceCredit" value="{{insurance_item.insurance_money}}" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
+                            <input type="digit" value="{{insurance_item.insurance_money}}" bindblur="requestGetInsuranceCredit" bindconfirm="requestGetInsuranceCredit" value="{{insurance_item.insurance_money}}" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
                         </view>
                         <view style="position: relative;top: 10rpx;">
                             （美元）
                         </view>
                         <view style="margin-left: 40rpx;">
-                            <input value="{{insurance_item.change_insurance_money}}" type="number" bindblur="requestGetInsuranceRMBCredit" bindconfirm="requestGetInsuranceRMBCredit" style="border-bottom:1px solid black;width: 120rpx" placeholder="" />
+                            <input value="{{insurance_item.change_insurance_money}}" type="digit" bindblur="requestGetInsuranceRMBCredit" bindconfirm="requestGetInsuranceRMBCredit" style="border-bottom:1px solid black;width: 120rpx" placeholder="" />
                         </view>
                         <view style="position: relative;top: 10rpx;">
                             （人民币）
@@ -628,20 +635,24 @@ wxa.launchPage(Form);
 
                 </view>
 
-                <view style="text-align: center;display: block;padding-bottom: 20rpx;" class="form-calculate-age">
-                    <view>
-                        <view>
-                            <button size="mini" type="primary" bindtap="calBf" disabled="{{calButton}}" style="margin-right: 50rpx;">
-                                计算保费
-                            </button>
-
-                            <button size="mini" type="primary" bindtap="resetAll">
-                                清空
-                            </button>
-                        </view>
-                    </view>
-
+                <view style="font-size: 12px;color: #909399;margin: 15rpx 0 30rpx 0;padding-left: 10px;padding-bottom: 10px;">
+                    保额或保费只需要输入一个数值，系统自动计算其他数值，汇率按当天计算
                 </view>
+
+                <!--<view style="text-align: center;display: block;padding-bottom: 20rpx;" class="form-calculate-age">-->
+                <!--<view>-->
+                <!--<view>-->
+                <!--<button size="mini" type="primary" bindtap="calBf" disabled="{{calButton}}" style="margin-right: 50rpx;">-->
+                <!--计算保费-->
+                <!--</button>-->
+
+                <!--<button size="mini" type="primary" bindtap="resetAll">-->
+                <!--清空-->
+                <!--</button>-->
+                <!--</view>-->
+                <!--</view>-->
+
+                <!--</view>-->
 
             </form>
         </view>

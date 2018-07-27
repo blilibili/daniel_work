@@ -35,11 +35,10 @@
       }
     }
     onLoad(option) {
-      console.log(option.provision);
       switch (option.provision){
           case '0001':
           this.setData({
-            redirectUrl:'https://dan.samxiao.cn/yb.html'
+            redirectUrl:'https://dan.samxiao.cn/menu.html'
           })
           break;
           case '0002':

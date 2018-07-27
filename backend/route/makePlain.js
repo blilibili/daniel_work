@@ -156,7 +156,8 @@ app.post('/' , (req , res) => {
       code:1,
       age:bx_age,
       data:tmp,
-      msg:'获取表格成功'
+      msg:'获取表格成功',
+      rate:parseFloat(result)
     })
   })
 

@@ -79,8 +79,6 @@ app.post('/getbe' , (req , res) => {
     var bfl = tool.chk_bfl(sex,isSmoke,insuranceYears,age); //查保费率
     bf = Math.round(tool.dis_bf(bfl,be)); //重新计算保费
 
-    console.log(bf , be);
-
     exchangeRateMethods.getMoneyRate(1).then((result) => {
       let returnObj = {
         code:1,
@@ -166,6 +164,7 @@ app.get('/demo' , (req , res) => {
 
 
 
-app.use('/makeplain' , require('./route/makePlain'))
+app.use('/makeplain' , require('./route/makePlain'));
+app.use('/getrate' , require('./route/getRate'))
 
 app.listen(3006);

@@ -31,6 +31,8 @@
         "@wxa/plugin-uglifyjs": "^1.0.2"
     },
     "dependencies": {
-        "@wxa/core": "^1.4.3"
+        "@wxa/core": "^1.4.3",
+        "g": "^2.0.1",
+        "wxa": "^1.0.0"
     }
 }

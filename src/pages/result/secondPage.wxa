@@ -36,6 +36,7 @@ class secondPage {
       CIEBF: '',
       CIEchangeBF: '',
       condition: {
+        showPartProvision:false,
         showPartOneTable: false,
         showPartTwoTable: false,
         showPartThreeTable: false,
@@ -65,46 +66,141 @@ class secondPage {
       ]
     }
   }
-
+    /**
+     *
+     be:"10"
+     bf:3542
+     birth:""
+     calYears:"22"
+     giveMoneyYear :"10"
+     living:"0"
+     proId:""
+     sex:"0"
+     smoke:"0"
+     type:"usd"
+     */
   onLoad(option) {
-    let tmp = [];
-    this.app.globalData.tableData.data.forEach((v , k) => {
-      tmp[k] = v.age;
-    })
+    console.log(option);
+    if(option.share == 1){
+        let host = option.httpUrl;
+        let submitData = {
+            be:option.be,
+            bf:parseInt(option.bf),
+            birth:option.birth,
+            calYears:option.calYears,
+            giveMoneyYear:option.giveMoneyYear,
+            living:option.living,
+            sex:option.sex,
+            smoke:option.smoke,
+        }
+        console.log(submitData);
+        wx.request({
+            url:host +'/makeplain',
+            data:submitData,
+            method:'POST',
+            success:(res) => {
+                wx.hideLoading();
+                this.app.globalData.tableData = res.data;
 
-    this.setData({
-      bd_years:tmp,
-      CIEAge: this.app.globalData.submitData.calYears,
-      CIESmoke: this.app.globalData.submitData.smoke == 0 ? '非吸烟' : '吸烟',
-      CIELiving: this.app.globalData.submitData.living == 0 ? '香港' : '大陆',
-      giveMoneyYears: this.app.globalData.submitData.giveMoneyYear,
-      CIEBE: Math.round(this.app.globalData.tableData.data[0].BE / 10000),
-      CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
-      CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
-      CIEChangeZSBE: Math.round(this.app.globalData.tableData.data[0].changeZSBE / 10000),
-      CIECSBE: Math.round(this.app.globalData.tableData.data[0].CSBE / 10000),
-      CIEChangeCSBE: Math.round(this.app.globalData.tableData.data[0].changeCSBE / 10000),
-      CIEBF: this.app.globalData.tableData.data[0].BF,
-      CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
+                let tmp = [];
+                console.log(this.app.globalData.tableData);
+                this.app.globalData.tableData.data.forEach((v , k) => {
+                    tmp[k] = v.age;
+                })
+                this.setData({
+                    CIESex:option.sex == 0 ? '男':'女',
+                    bd_years:tmp,
+                    CIEAge: option.calYears,
+                    CIESmoke: option.smoke == 0 ? '非吸烟' : '吸烟',
+                    CIELiving: option.living == 0 ? '香港' : '大陆',
+                    giveMoneyYears: option.giveMoneyYear,
+                    CIEBE: Math.round(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
+                    CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
+                    CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
+                    CIEChangeZSBE: Math.round(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
+                    CIECSBE: Math.round(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
+                    CIEChangeCSBE: Math.round(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
+                    CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
+                    CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
+                    changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
+                    currentRate:this.app.globalData.tableData.rate,
+                    cnyUnit:(1 * this.app.globalData.tableData.rate).toFixed(2),
 
-      //保单价值演示
-      currentPeopleBE: this.app.globalData.tableData.data[0].LPZE,
-      currentPeopleTB: this.app.globalData.tableData.data[0].TB,
-      currentPeopleSum: this.app.globalData.tableData.data[0].sum,
-      currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
-      currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum).toFixed(2),
-      tableData: this.app.globalData.tableData.data,
-      age: this.app.globalData.submitData.calYears,
-      currentPeopleAge: this.app.globalData.submitData.calYears,
-      currentPeopleChangeBE: Math.round(this.app.globalData.tableData.data[0].changeLPZE),
-      currentPeopleChangeTB: Math.round(this.app.globalData.tableData.data[0].changeTB),
-      currentPeopleChangeSum: Math.round(this.app.globalData.tableData.data[0].changeSum),
+                    //保单价值演示
+                    currentPeopleBE: this.app.globalData.tableData.data[0].LPZE,
+                    currentPeopleTB: this.app.globalData.tableData.data[0].TB,
+                    currentPeopleSum: this.app.globalData.tableData.data[0].sum,
+                    currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
+                    currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum).toFixed(2),
+                    tableData: this.app.globalData.tableData.data,
+                    age: option.calYears,
+                    currentPeopleAge: option.calYears,
+                    currentPeopleChangeBE: Math.round(this.app.globalData.tableData.data[0].changeLPZE),
+                    currentPeopleChangeTB: Math.round(this.app.globalData.tableData.data[0].changeTB),
+                    currentPeopleChangeSum: Math.round(this.app.globalData.tableData.data[0].changeSum),
 
-      listData: [
-        {"code": "守护健康危疾加护保（CIE）", "money": Math.round(this.app.globalData.tableData.data[0].BE / 10000)+"万", "years": "终身", "money_years": this.app.globalData.submitData.giveMoneyYear+"年", "first_years": this.app.globalData.tableData.data[0].BF},
-        {"code": "额外危疾加护保（CICE）", "money": "50,000", "years": "10", "money_years": "-", "first_years": "-"},
-      ]
-    })
+                    listData: [
+                        {"code": "守护健康危疾加护保（CIE）", "money": Math.round(this.app.globalData.tableData.data[0].BE / 10000)+"万", "years": "终身", "money_years": option.giveMoneyYear+"年", "first_years": this.app.globalData.tableData.data[0].BF},
+                        {"code": "额外危疾加护保（CICE）", "money": "50,000", "years": "10", "money_years": "-", "first_years": "-"},
+                    ]
+                })
+            }
+        })
+    }else{
+        let host = this.app.globalData.httpUrl;
+        let port = this.app.globalData.port;
+        wx.request({
+            url:host +'/makeplain',
+            data:this.app.globalData.submitData,
+            method:'POST',
+            success:(res) => {
+                wx.hideLoading();
+                this.app.globalData.tableData = res.data;
+
+                let tmp = [];
+                this.app.globalData.tableData.data.forEach((v , k) => {
+                    tmp[k] = v.age;
+                })
+                this.setData({
+                    CIESex:this.app.globalData.submitData.sex == 0 ? '男':'女',
+                    bd_years:tmp,
+                    CIEAge: this.app.globalData.submitData.calYears,
+                    CIESmoke: this.app.globalData.submitData.smoke == 0 ? '非吸烟' : '吸烟',
+                    CIELiving: this.app.globalData.submitData.living == 0 ? '香港' : '大陆',
+                    giveMoneyYears: this.app.globalData.submitData.giveMoneyYear,
+                    CIEBE: Math.round(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
+                    CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
+                    CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
+                    CIEChangeZSBE: Math.round(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
+                    CIECSBE: Math.round(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
+                    CIEChangeCSBE: Math.round(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
+                    CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
+                    CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
+                    changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
+                    currentRate:this.app.globalData.tableData.rate,
+                    cnyUnit:(1 * this.app.globalData.tableData.rate).toFixed(2),
+
+                    //保单价值演示
+                    currentPeopleBE: this.app.globalData.tableData.data[0].LPZE,
+                    currentPeopleTB: this.app.globalData.tableData.data[0].TB,
+                    currentPeopleSum: this.app.globalData.tableData.data[0].sum,
+                    currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
+                    currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum).toFixed(2),
+                    tableData: this.app.globalData.tableData.data,
+                    age: this.app.globalData.submitData.calYears,
+                    currentPeopleAge: this.app.globalData.submitData.calYears,
+                    currentPeopleChangeBE: Math.round(this.app.globalData.tableData.data[0].changeLPZE),
+                    currentPeopleChangeTB: Math.round(this.app.globalData.tableData.data[0].changeTB),
+                    currentPeopleChangeSum: Math.round(this.app.globalData.tableData.data[0].changeSum),
+
+                    listData: [
+                        {"code": "守护健康危疾加护保（CIE）", "money": Math.round(this.app.globalData.tableData.data[0].BE / 10000)+"万", "years": "终身", "money_years": this.app.globalData.submitData.giveMoneyYear+"年", "first_years": this.app.globalData.tableData.data[0].BF},
+                        {"code": "额外危疾加护保（CICE）", "money": "50,000", "years": "10", "money_years": "-", "first_years": "-"},
+                    ]
+                })
+            }
+        })
+    }
   }
 
   changePage(){
@@ -456,31 +552,6 @@ class secondPage {
 
   }
 
-  // moveTable(event) {
-  //   let timer = null;
-  //
-  //   this.setData({
-  //     timer:event
-  //   });
-  //
-  //   setTimeout(() => {
-  //     let top = 0;
-  //     let left = 0;
-  //     if(this.data.timer == null){
-  //       top = this.data.topBarPos;
-  //       left = this.data.leftBarPos
-  //     }else{
-  //       top = this.data.timer.detail.scrollTop;
-  //       left = this.data.timer.detail.scrollLeft
-  //     }
-  //     this.setData({
-  //       topBarPos:top,
-  //       leftBarPos:left,
-  //       timer:null
-  //     })
-  //   } , 1000)
-  // }
-
   moveTopTable(event) {
 
     let timer = null;
@@ -610,6 +681,42 @@ class secondPage {
       }
     })
   }
+
+  showProvision(){
+    this.setData({
+      condition:{
+        ["showPartProvision"]:true
+      }
+    })
+  }
+
+  hidePartProvision(){
+    this.setData({
+      condition:{
+        ["showPartProvision"]:false
+      }
+    })
+  }
+
+    /**
+     *
+     be:"10"
+     bf:3542
+     birth:""
+     calYears:"22"
+     giveMoneyYear :"10"
+     living:"0"
+     proId:""
+     sex:"0"
+     smoke:"0"
+     type:"usd"
+     */
+    onShareAppMessage(){
+        return {
+            title: 'CIE保险',
+            path: '/pages/result/secondPage?be=' +  this.app.globalData.submitData.be + '&bf='+this.app.globalData.submitData.bf + '&httpUrl=' + this.app.globalData.httpUrl + '&share=1' + '&birth=' + this.app.globalData.submitData.birth + '&calYears=' + this.app.globalData.submitData.calYears + '&giveMoneyYear=' + this.app.globalData.submitData.giveMoneyYear + '&living=' + this.app.globalData.submitData.living + '&proId=' + this.app.globalData.submitData.proId + '&sex=' + this.app.globalData.submitData.sex + '&smoke=' + this.app.globalData.submitData.smoke + '&type=' +this.app.globalData.submitData.type
+        }
+    }
 }
 
 wxa.launchPage(secondPage);
@@ -635,12 +742,12 @@ wxa.launchPage(secondPage);
 
         </view>
 
-        <view wx:if="{{condition.showZC}}" style="margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">
-            第1类：与恶性肿瘤相关的疾病
+        <view wx:if="{{condition.showZC}}" style="line-height:2.3333;letter-spacing:2px;margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">
+            <text style="font-weight: bold;">第1类：与恶性肿瘤相关的疾病</text>
             <text>{{"\n"}}</text>1.    原位癌（癌前病变）
             <text>{{"\n"}}</text>2.    早期甲状腺或前列腺癌
             <text>{{"\n"}}</text>3.    次级侵害性恶性肿瘤
-            <text>{{"\n"}}</text>第2类：与心脏相关的疾病
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第2类：与心脏相关的疾病</text>
             <text>{{"\n"}}</text>4.    主动脉瘤
             <text>{{"\n"}}</text>5.    冠状动脉血管成形术
             <text>{{"\n"}}</text>6.    植入心脏除纤颤器
@@ -653,7 +760,7 @@ wxa.launchPage(secondPage);
             <text>{{"\n"}}</text>13. 心包切除手术
             <text>{{"\n"}}</text>14. 风湿热合并心瓣膜损害 [保障期：1 – 18岁（翌年岁）]
             <text>{{"\n"}}</text>15. 激光心肌血运重建术
-            <text>{{"\n"}}</text>第3类：与神经系统相关的疾病
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第3类：与神经系统相关的疾病</text>
             <text>{{"\n"}}</text>16. 自闭症 [保障期：1 – 18岁（翌年岁）]
             <text>{{"\n"}}</text>17. 于颈动脉进行内膜切除手术及血管成形术及植入支架
             <text>{{"\n"}}</text>18. 脑动静脉畸形外科手术
@@ -671,7 +778,7 @@ wxa.launchPage(secondPage);
             <text>{{"\n"}}</text>30. 硬脑膜下血肿手术
             <text>{{"\n"}}</text>31. 脑下垂体肿瘤切除手术
             <text>{{"\n"}}</text>32. 第一型儿童脊髓肌萎缩 [保障期：1 – 18岁（翌年岁）]
-            <text>{{"\n"}}</text>第4类：与主要器官及功能相关的疾病
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第4类：与主要器官及功能相关的疾病</text>
             <text>{{"\n"}}</text>33. 急性坏死性胰脏炎
             <text>{{"\n"}}</text>34. 糖尿病并发症引致单足切除
             <text>{{"\n"}}</text>35. 胆道重建手术
@@ -686,10 +793,10 @@ wxa.launchPage(secondPage);
             <text>{{"\n"}}</text>44. 丧失单肢
         </view>
 
-        <view wx:if="{{condition.showYZ}}" style="margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">
-            第1类：癌症
+        <view wx:if="{{condition.showYZ}}" style="line-height:2.3333;letter-spacing:2px;margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">
+            <text style="font-weight: bold;">第1类：癌症</text>
             <text>{{"\n"}}</text>1. 癌症
-            <text>{{"\n"}}</text>第2类：与心脏相关的疾病
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第2类：与心脏相关的疾病</text>
             <text>{{"\n"}}</text>2.   心肌病
             <text>{{"\n"}}</text>3.   需要进行外科手术的冠状动脉病
             <text>{{"\n"}}</text>4.   心脏病发作
@@ -697,7 +804,7 @@ wxa.launchPage(secondPage);
             <text>{{"\n"}}</text>6.   感染性心内膜炎
             <text>{{"\n"}}</text>7.   原发性肺动脉高血压
             <text>{{"\n"}}</text>8.   大动脉外科手术
-            <text>{{"\n"}}</text>第3类：与神经系统相关的疾病
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第3类：与神经系统相关的疾病</text>
             <text>{{"\n"}}</text>9.   阿耳滋海默氏症
             <text>{{"\n"}}</text>10. 肌萎缩性脊髓侧索硬化
             <text>{{"\n"}}</text>11. 植物人
@@ -720,7 +827,7 @@ wxa.launchPage(secondPage);
             <text>{{"\n"}}</text>28. 严重重症肌无力症
             <text>{{"\n"}}</text>29. 脊髓肌肉萎缩症
             <text>{{"\n"}}</text>30. 中风
-            <text>{{"\n"}}</text>第4类：与主要器官及功能相关的疾病
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第4类：与主要器官及功能相关的疾病</text>
             <text>{{"\n"}}</text>31. 慢性肝病
             <text>{{"\n"}}</text>32. 复发性慢性胰脏炎
             <text>{{"\n"}}</text>33. 末期肺病
@@ -729,11 +836,11 @@ wxa.launchPage(secondPage);
             <text>{{"\n"}}</text>36. 坏死性筋膜炎
             <text>{{"\n"}}</text>37. 肢体切断
             <text>{{"\n"}}</text>38. 系统性红斑狼疮而并发狼疮性肾炎
-            <text>{{"\n"}}</text>第5类：末期疾病及伤残
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第5类：末期疾病及伤残</text>
             <text>{{"\n"}}</text>39. 失去独立生活能力 [保障期：1 – 65岁（翌年岁）]
             <text>{{"\n"}}</text>40. 末期疾病
             <text>{{"\n"}}</text>41. 完全及永久伤残 [保障期：1 – 65岁（翌年岁）]
-            <text>{{"\n"}}</text>第6类：其他疾病
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第6类：其他疾病</text>
             <text>{{"\n"}}</text>42. 因输血引致的艾滋病
             <text>{{"\n"}}</text>43. 障碍性贫血
             <text>{{"\n"}}</text>44. 失明
@@ -768,7 +875,7 @@ wxa.launchPage(secondPage);
 
     <view class="part1">
         <view style="padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid rgb(232 , 232 , 232);font-size: 16px;font-weight: bold;">
-            男{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
+            {{CIESex}},{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
         </view>
         <view style="text-align: center;margin-top: 10rpx;">
             <view class="header-basic-info">
@@ -779,7 +886,7 @@ wxa.launchPage(secondPage);
             <view class="header-basic-info" style="margin-left: 100rpx;">
                 <view>赠送保额</view>
                 <view><span>{{CIEZSBE}}</span> 万美元</view>
-                <view>约<span>{{CIEChangeZSBE}}</span> 万美元</view>
+                <view>约<span>{{CIEChangeZSBE}}</span> 万人民币</view>
             </view>
         </view>
 
@@ -808,8 +915,8 @@ wxa.launchPage(secondPage);
             </view>
         </view>
 
-        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
-            <view wx:if="{{!condition.showPartOneTable}}" data-type="1" bindtap="showPartOneTable">
+        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;" data-type="1" bindtap="showPartOneTable">
+            <view wx:if="{{!condition.showPartOneTable}}">
                 <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
             </view>
         </view>
@@ -851,22 +958,22 @@ wxa.launchPage(secondPage);
             <span class="tags" bindtap="showDiseaseListHandler" data-type="zc">疾病列表</span>
         </view>
         <view style="margin-left: 30rpx;">
-            <view><span> • </span>保障 <span>61种</span>早起疾病 ， 可支付 <span>3次</span>赔偿</view>
+            <view><span> • </span>保障 <span>61种</span>早期疾病 ， 可支付 <span>3次</span>赔偿</view>
             <view>
                 <span> • </span>每项赔偿额为当时保额的 <span>20%</span>或<span>25%</span>
             </view>
 
             <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
-                原位癌（癌前病变）、冠状动脉血管成形术可分别获2次赔偿，每次赔当时保额的25%
-                早期甲状腺或前列腺癌、次级侵害性恶性肿瘤则可各获1次赔偿，赔偿为当时保额的25%
+                原位癌（癌前病变）、冠状动脉血管成形术可分别获2次赔偿，每次赔当时保额的25%  <text>{{'\n'}}</text>
+                早期甲状腺或前列腺癌、次级侵害性恶性肿瘤则可各获1次赔偿，赔偿为当时保额的25% <text>{{'\n'}}</text>
                 其余57种早期疾病每种可获1次赔偿，赔偿为当时保额的20%
             </view>
             <view><span> • </span>赔偿早期后，将<span>豁免1年</span>的保费</view>
-            <view><span> • </span>每次赔偿上限为 <span>5万</span>美元约32万人民币</view>
+            <view><span> • </span>每次赔偿上限为 <span>5万</span>美元约{{changeUpperlimitMoney}}万人民币</view>
         </view>
 
-        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
-            <view wx:if="{{!condition.showPartTwoTable}}" data-type="2" bindtap="showPartOneTable">
+        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;" data-type="2" bindtap="showPartOneTable" >
+            <view wx:if="{{!condition.showPartTwoTable}}">
                 <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
             </view>
         </view>
@@ -948,8 +1055,8 @@ wxa.launchPage(secondPage);
                 </view>
             </view>
 
-            <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
-                <view wx:if="{{!condition.showPartSixthPart}}" data-type="6" bindtap="showPartOneTable">
+            <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;" data-type="6" bindtap="showPartOneTable">
+                <view wx:if="{{!condition.showPartSixthPart}}">
                     <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
                 </view>
             </view>
@@ -1012,6 +1119,7 @@ wxa.launchPage(secondPage);
                 <view>(约为 <span>{{currentPeopleChangeSum}}</span> 人民币)</view>
                 <view>保障杠杆: <span>{{currentPeopleGG}}倍</span></view>
                 <view>预计退保回报: <span>{{currentPeopleTBReport}}%</span></view>
+                <view>当前汇率:  <span> 1(美元): {{cnyUnit}}(人民币)</span></view>
             </view>
             <view class="section section_gap">
                 <view class="body-view" style="display: flex;flex-direction:row;justify-content:center;">
@@ -1194,8 +1302,8 @@ wxa.launchPage(secondPage);
                 <span> • </span>
                 不保因空中航行引致的完全及永久伤残
             </view>
-            <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
-                <view wx:if="{{!condition.showPartFourteenthPart}}" data-type="14" bindtap="showPartOneTable">
+            <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;" data-type="14" bindtap="showPartOneTable">
+                <view wx:if="{{!condition.showPartFourteenthPart}}" >
                     <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
                 </view>
             </view>
@@ -1213,55 +1321,67 @@ wxa.launchPage(secondPage);
         <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
             条款详情
         </view>
-        <view style="height: 1px;width: 100%;background-color: darkgray;"></view>
-
-        <navigator hover-class="none" url="/pages/change/change?provision=0001" hover-class="navigator-hover">
-            <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
-                <view style="display: inline-block;">0001一般条款</view>
-                <view style="display: inline-block;float: right;"> > </view>
+        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
+            <view wx:if="{{!condition.showPartProvision}}" bindtap="showProvision">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
             </view>
-        </navigator>
+        </view>
+        <view wx:if="{{condition.showPartProvision}}">
+            <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
 
-        <view style="height: 1px;width: 100%;background-color: darkgray;"></view>
+            <navigator hover-class="none" url="/pages/change/change?provision=0001" hover-class="navigator-hover">
+                <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
+                    <view style="display: inline-block;">0001    一般条款</view>
+                    <view style="display: inline-block;float: right;"> > </view>
+                </view>
+            </navigator>
 
-        <navigator hover-class="none" url="/pages/change/change?provision=0002" hover-class="navigator-hover">
-            <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
-                <view style="display: inline-block;">0002保障条款</view>
-                <view style="display: inline-block;float: right;"> > </view>
+            <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
+
+            <navigator hover-class="none" url="/pages/change/change?provision=0002" hover-class="navigator-hover">
+                <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
+                    <view style="display: inline-block;">0002    保障条款</view>
+                    <view style="display: inline-block;float: right;"> > </view>
+                </view>
+            </navigator>
+
+            <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
+
+            <navigator hover-class="none" url="/pages/change/change?provision=0003" hover-class="navigator-hover">
+                <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
+                    <view style="display: inline-block;">0003    早期疾病定义</view>
+                    <view style="display: inline-block;float: right;"> > </view>
+                </view>
+            </navigator>
+
+            <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
+
+            <navigator hover-class="none" url="/pages/change/change?provision=0004" hover-class="navigator-hover">
+                <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
+                    <view style="display: inline-block;">0004    严重疾病定义</view>
+                    <view style="display: inline-block;float: right;"> > </view>
+                </view>
+            </navigator>
+
+            <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
+
+            <navigator hover-class="none" url="/pages/change/change?provision=0005" hover-class="navigator-hover">
+                <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
+                    <view style="display: inline-block;">0005  良性疾病定义</view>
+                    <view style="display: inline-block;float: right;"> > </view>
+                </view>
+            </navigator>
+
+            <view bindtap="hidePartProvision" data-type="17" style="text-align: center;">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
             </view>
-        </navigator>
+        </view>
 
-        <view style="height: 1px;width: 100%;background-color: darkgray;"></view>
 
-        <navigator hover-class="none" url="/pages/change/change?provision=0003" hover-class="navigator-hover">
-            <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
-                <view style="display: inline-block;">0003早期疾病定义</view>
-                <view style="display: inline-block;float: right;"> > </view>
-            </view>
-        </navigator>
-
-        <view style="height: 1px;width: 100%;background-color: darkgray;"></view>
-
-        <navigator hover-class="none" url="/pages/change/change?provision=0004" hover-class="navigator-hover">
-            <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
-                <view style="display: inline-block;">0004严重疾病定义</view>
-                <view style="display: inline-block;float: right;"> > </view>
-            </view>
-        </navigator>
-
-        <view style="height: 1px;width: 100%;background-color: darkgray;"></view>
-
-        <navigator hover-class="none" url="/pages/change/change?provision=0005" hover-class="navigator-hover">
-            <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
-                <view style="display: inline-block;">0005良性疾病定义</view>
-                <view style="display: inline-block;float: right;"> > </view>
-            </view>
-        </navigator>
-
-        <view style="height: 1px;width: 100%;background-color: darkgray;"></view>
+        <!--<view style="height: 1px;width: 100%;background-color: darkgray;"></view>-->
     </view>
 
-    <view class="part4">
+    <view class="part4" style="margin-bottom: 120rpx;">
         <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
             风险提示
         </view>
@@ -1282,17 +1402,31 @@ wxa.launchPage(secondPage);
 
     </view>
 
-    <view class="part5">
-        <view>
-            <button size="mini">分享到朋友圈</button>
-        </view>
-        <view style="margin-left: 30rpx;">
-            <button size="mini" bindtap="goBack">回到首页</button>
+    <view class="part4 floatButton" style="padding-bottom: 0;width: 100%;border-radius: 0;">
+        <view style="display: flex;flex-direction:row;">
+            <button class="shareFButton" open-type="share">发给朋友</button>
+            <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;" bindtap="goBack">重做计划书</view>
         </view>
     </view>
 </view>
 </template>
 <style lang="scss">
+    .floatButton{
+        position: fixed;
+        bottom:0;
+        z-index: 1000;
+    }
+    button::after{ border: none; }
+    .shareFButton{
+        width: 50%;
+        font-size:14px;
+        padding:43rpx 0 0 0;
+        border-radius:0!important;
+        background-color: white;
+        line-height: 0;
+        border-right:1px solid lightgrey;
+
+    }
     .CNYButton{
         border-radius: 15px;
         padding: 20rpx;
