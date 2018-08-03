@@ -8,12 +8,21 @@
         <meta name="description" content="Pushy is an off-canvas navigation menu for your website.">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-        <link rel="stylesheet" href="./css/normalize.css">
-        <link rel="stylesheet" href="./css/site.css">
+        <link rel="stylesheet" href="../css/normalize.css">
+        <link rel="stylesheet" href="../css/site.css">
         <!-- Pushy CSS -->
-        <link rel="stylesheet" href="./css/pushy.css">
-        <link href="./css/style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../css/pushy.css">
+        <link href="../css/style.css" rel="stylesheet" />
         <style>
+            ul, menu, dir {
+                display: block;
+                list-style-type: disc;
+                -webkit-margin-before: 1em;
+                -webkit-margin-after: 1em;
+                -webkit-margin-start: 0px;
+                -webkit-margin-end: 0px;
+                -webkit-padding-start: 40px;
+            }
             html, body {
                 color: #3f3f3f;
                 font-size: 14px;
@@ -52,7 +61,7 @@
             }
         </style>
         <!-- jQuery -->
-        <script src="./js/jquery.min.js"></script>
+        <script src="../js/jquery.min.js"></script>
     </head>
     <body>
         <!-- Pushy Menu -->
@@ -151,17 +160,15 @@
 
         <!-- Site Overlay -->
         <div class="site-overlay"></div>
-
         <div class="header-section-li">
             <!-- Menu Button -->
             <button class="menu-btn">&#9776; 菜单</button>
-            <span class="main-title">早期疾病定义</span>
+            <span class="main-title">危疾终身加护保 - 早期疾病定义</span>
             <button class="back-btn">返回小程序</button>
         </div>
-
         <!-- Your Content -->
         <div id="container">
-
+<h1>早期疾病定义</h1>
 <h2 >一、	癌症</h2>
 <h3 id="1">1.	原位癌</h3>
 <p>癌细胞的局部自行生长而没有浸润正常组织。「浸润」是指浸润透过上皮基膜。</P>
@@ -444,8 +451,8 @@
     </div>
 
         <!-- Pushy JS -->
-        <script src="./js/pushy.js?v=1.1.0"></script>
-        <script type="text/javascript" src="./js/jwexin.js"></script>
+        <script src="../js/pushy.js?v=1.1.0"></script>
+        <script type="text/javascript" src="../js/jwexin.js"></script>
 
         <script>
             function GetQueryString(name) {

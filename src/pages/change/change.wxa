@@ -35,31 +35,48 @@
       }
     }
     onLoad(option) {
+        let proTK = '';
+        if(this.app.globalData.proName == 'secondPage'){
+            proTK = 'cie'
+        }
+        if(this.app.globalData.proName == 'thirdPage'){
+            proTK = 'cim'
+        }
+        if(this.app.globalData.proName == 'fourthPage'){
+            proTK = 'cir'
+        }
+        let submitData = this.app.globalData.submitData;
       switch (option.provision){
           case '0001':
           this.setData({
-            redirectUrl:'https://dan.samxiao.cn/menu.html'
+            redirectUrl:'https://dan.samxiao.cn/'+proTK+'/yb.html?proName=' + this.app.globalData.proName + '&be=' + submitData.be + 'bf=' + submitData.bf + '&birth=' + submitData.birth + 'calYears=' + submitData.calYears + 'giveMoneyYear=' + submitData.giveMoneyYear + '&living=' + submitData.living + '&sex=' + submitData.sex + '&smoke=' +submitData.smoke
           })
           break;
           case '0002':
           this.setData({
-            redirectUrl:'https://dan.samxiao.cn/bz.html'
+            redirectUrl:'https://dan.samxiao.cn/'+proTK+'/bz.html?proName=' + this.app.globalData.proName + '&be=' + submitData.be  + 'bf=' + submitData.bf + '&birth=' + submitData.birth + '&calYears=' + submitData.calYears + '&giveMoneyYear=' + submitData.giveMoneyYear + '&living=' + submitData.living + '&sex=' + submitData.sex + '&smoke=' +submitData.smoke
           })
           break;
           case '0003':
           this.setData({
-            redirectUrl:'https://dan.samxiao.cn/zq.html'
+            redirectUrl:'https://dan.samxiao.cn/'+proTK+'/zq.html?proName=' + this.app.globalData.proName + '&be=' + submitData.be + 'bf=' + submitData.bf + '&birth=' + submitData.birth + '&calYears=' + submitData.calYears + '&giveMoneyYear=' + submitData.giveMoneyYear + '&living=' + submitData.living + '&sex=' + submitData.sex + '&smoke=' +submitData.smoke
           })
           break;
           case '0004':
           this.setData({
-            redirectUrl:'https://dan.samxiao.cn/yz.html'
+            redirectUrl:'https://dan.samxiao.cn/'+proTK+'/yz.html?proName=' + this.app.globalData.proName + '&be=' + submitData.be + '&bf=' + submitData.bf + '&birth=' + submitData.birth + '&calYears=' + submitData.calYears + '&giveMoneyYear=' + submitData.giveMoneyYear + '&living=' + submitData.living + '&sex=' + submitData.sex + '&smoke=' +submitData.smoke
           })
           break;
           case '0005':
-          this.setData({
-            redirectUrl:'https://dan.samxiao.cn/lx.html'
-          })
+          if(proTK == 'cim' || proTK == 'cir'){
+              this.setData({
+                  redirectUrl:'https://dan.samxiao.cn/'+proTK+'/mq.html?proName=' + this.app.globalData.proName + '&be=' + submitData.be + '&bf=' + submitData.bf + '&birth=' + submitData.birth + '&calYears=' + submitData.calYears + '&giveMoneyYear=' + submitData.giveMoneyYear + '&living=' + submitData.living + '&sex=' + submitData.sex + '&smoke=' +submitData.smoke
+              })
+          }else{
+              this.setData({
+                  redirectUrl:'https://dan.samxiao.cn/'+proTK+'/lx.html?proName=' + this.app.globalData.proName + '&be=' + submitData.be + '&bf=' + submitData.bf + '&birth=' + submitData.birth + '&calYears=' + submitData.calYears + '&giveMoneyYear=' + submitData.giveMoneyYear + '&living=' + submitData.living + '&sex=' + submitData.sex + '&smoke=' +submitData.smoke
+              })
+          }
           break;
       }
     }

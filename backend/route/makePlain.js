@@ -17,8 +17,6 @@ app.post('/' , (req , res) => {
   let trHTML ="";
   let Payment_Item;
 
-  console.log(bx_age , bx_nian , bx_be , bx_bf);
-
   switch(bx_nian) //供款年期
   {
     case 10:

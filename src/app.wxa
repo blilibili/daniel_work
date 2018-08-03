@@ -21,7 +21,10 @@ wxa.launchApp(Main);
         "pages/result/firstPage",
         "pages/result/secondPage",
         "pages/result/thirdPage",
-        "pages/change/change"
+        "pages/result/fourthPage",
+        "pages/change/change",
+        "pages/form/cirForm",
+        "pages/form/cimForm"
     ]
 }
 </config>

@@ -225,7 +225,9 @@ class Form {
       this.data.submitData.bf = this.data.insurance_item.insurance_money;
       this.app.globalData.submitData = this.data.submitData;
       //0 页面跳转 1 分享
-      this.router.push('/pages/result/' + page + '?share=0');
+        wx.navigateTo({
+            url:'/pages/result/' + page + '?share=0'
+        })
     }
 
   }
@@ -272,12 +274,12 @@ class Form {
           let port = this.app.globalData.port;
           if(name == 'insurance_credit'){
               wx.request({
-                  url:host +'/getCiebf',
+                  url:host +'/getCimbf',
                   data:this.data.submitData,
                   method:'POST',
                   success:(res) => {
                       this.setData({
-                          ['insurance_item.insurance_money']:res.data.data.guranteed||0,
+                          ['insurance_item.insurance_money']:parseFloat(res.data.data.guranteed).toFixed(2)||0,
                           ['insurance_item.change_insurance_credit']:parseFloat(res.data.data.changeBe).toFixed(2) || 0,
                           ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0,
                       });
@@ -292,12 +294,12 @@ class Form {
           }else if(name == 'insurance_money'){
 
               wx.request({
-                  url:host +'/getCiebe',
+                  url:host +'/getCimbe',
                   data:this.data.submitData,
                   method:'POST',
                   success:(res) => {
                       this.setData({
-                          ['insurance_item.insurance_money']:res.data.data.insurance_money || 0,
+                          ['insurance_item.insurance_money']:parseFloat(res.data.data.insurance_money).toFixed(2) || 0,
                           ['insurance_item.insurance_credit']:parseFloat(res.data.data.be).toFixed(2) ||0,
                           ['insurance_item.change_insurance_credit']:parseFloat(res.data.data.changeBaoe).toFixed(2) || 0,
                           ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0
@@ -313,12 +315,12 @@ class Form {
           }else if(name == 'change_insurance_credit'){
 
               wx.request({
-                  url:host + '/getCiebf',
+                  url:host + '/getCimbf',
                   data:this.data.submitData,
                   method:'POST',
                   success:(res) => {
                       this.setData({
-                          ['insurance_item.insurance_money']:res.data.data.guranteed || 0,
+                          ['insurance_item.insurance_money']:parseFloat(res.data.data.guranteed).toFixed(2) || 0,
                           ['insurance_item.insurance_credit']:parseFloat(res.data.data.changeBe).toFixed(2) ||0,
                           ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0
                       });
@@ -333,12 +335,12 @@ class Form {
           }else if(name == 'change_insurance_money'){
 
               wx.request({
-                  url:host +'/getCiebe',
+                  url:host +'/getCimbe',
                   data:this.data.submitData,
                   method:'POST',
                   success:(res) => {
                       this.setData({
-                          ['insurance_item.insurance_money']:res.data.data.insurance_money || 0,
+                          ['insurance_item.insurance_money']:parseFloat(res.data.data.insurance_money).toFixed(2) || 0,
                           ['insurance_item.insurance_credit']:parseFloat(res.data.data.be).toFixed(2) ||0,
                           ['insurance_item.change_insurance_credit']:parseFloat(res.data.data.changeBaoe).toFixed(2) || 0,
                           ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0
@@ -730,7 +732,7 @@ wxa.launchPage(Form);
                     <label style="padding: 20rpx 0 20rpx 20rpx;">保费</label>
                     <view style="margin-left: 40rpx;position: relative;top: 8rpx;display: flex;flex-direction:row;">
                         <view>
-                            <input bindinput="limitNumber" bindfocus="clearInputValue" data-type="baof" type="digit" value="{{insurance_item.insurance_money}}" bindblur="requestGetInsuranceCredit" bindconfirm="requestGetInsuranceCredit" value="{{insurance_item.insurance_money}}" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
+                            <input bindinput="limitNumber" bindfocus="clearInputValue" data-type="baof" type="digit" value="{{insurance_item.insurance_money}}" bindblur="requestGetInsuranceCredit" bindconfirm="requestGetInsuranceCredit" value="{{insurance_item.insurance_money}}" style="border-bottom:1px solid black;width: 108rpx" placeholder="" />
                         </view>
                         <view style="position: relative;top: 10rpx;">
                             （美元）

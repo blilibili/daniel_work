@@ -80,7 +80,11 @@ class secondPage {
      type:"usd"
      */
   onLoad(option) {
-    console.log(option);
+    wx.showLoading({
+        title:'正在努力加载中...',
+        mask:true,
+    })
+        this.app.globalData.proName = 'secondPage';
     if(option.share == 1){
         let host = option.httpUrl;
         let submitData = {
@@ -93,7 +97,8 @@ class secondPage {
             sex:option.sex,
             smoke:option.smoke,
         }
-        console.log(submitData);
+        this.app.globalData.submitData = option;
+
         wx.request({
             url:host +'/makeplain',
             data:submitData,
@@ -103,7 +108,7 @@ class secondPage {
                 this.app.globalData.tableData = res.data;
 
                 let tmp = [];
-                console.log(this.app.globalData.tableData);
+
                 this.app.globalData.tableData.data.forEach((v , k) => {
                     tmp[k] = v.age;
                 })
@@ -617,9 +622,7 @@ class secondPage {
   }
 
   goBack(){
-    wx.navigateTo({
-      url:'/pages/index'
-    })
+      this.router.reLaunch('/pages/index')
   }
 
   directDisease(event){
@@ -1329,12 +1332,12 @@ wxa.launchPage(secondPage);
         <view wx:if="{{condition.showPartProvision}}">
             <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
 
-            <navigator hover-class="none" url="/pages/change/change?provision=0001" hover-class="navigator-hover">
-                <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
-                    <view style="display: inline-block;">0001    一般条款</view>
-                    <view style="display: inline-block;float: right;"> > </view>
-                </view>
-            </navigator>
+            <!--<navigator hover-class="none" url="/pages/change/change?provision=0001" hover-class="navigator-hover">-->
+                <!--<view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">-->
+                    <!--<view style="display: inline-block;">0001    一般条款</view>-->
+                    <!--<view style="display: inline-block;float: right;"> > </view>-->
+                <!--</view>-->
+            <!--</navigator>-->
 
             <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
 
@@ -1437,7 +1440,7 @@ wxa.launchPage(secondPage);
     }
     .disease{
         position:fixed;
-        top:200rpx;
+        top:60rpx;
         z-index:101;
         background-color:white;
         width:94%;

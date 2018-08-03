@@ -83,23 +83,23 @@ wxa.launchPage(Index);
         </view>
         </navigator>
 
-        <navigator url="/pages/form/form?pro=CIM" hover-class="navigator-hover">
+        <navigator url="/pages/form/cimForm?pro=CIM" hover-class="navigator-hover">
         <view class="productor-intro">
             <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="../img/timg.jpeg"></image>
             <view class="productor-intro-words">
                 <view class="productor-intro-words-header">守护健康危疾加倍保</view>
-                <view>113种病况享有终身一次性现金赔偿， 并获得多次索偿保障</view>
+                <view>保障59种早期疾病，无总赔偿次数限制。</view>
             </view>
             <image src="../img/add.png" class="productor-intro-words-add-image"></image>
         </view>
         </navigator>
 
-        <navigator url="/pages/form/form?pro=CIR" hover-class="navigator-hover">
+        <navigator url="/pages/form/cirForm?pro=CIR" hover-class="navigator-hover">
             <view class="productor-intro">
                 <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="../img/timg.jpeg"></image>
                 <view class="productor-intro-words">
                     <view class="productor-intro-words-header">守护健康危疾全护保</view>
-                    <view>索偿早期严重疾病后， 依然享有百分百危疾保障</view>
+                    <view>保障人生大部分主要风险，真正做到有事赔钱，没事存钱</view>
                 </view>
                 <image src="../img/add.png" class="productor-intro-words-add-image"></image>
             </view>

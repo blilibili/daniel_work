@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<body>
+<p>
+  <label>知道保额算保费:</label>
+  <br />
+  <label>请选择地区:</label>
+  &nbsp;&nbsp;
+  <select name="area" id="area" >
+    <option value="0" selected="selected">香港</option>
+    <option value="1">大陆</option>
+  </select>
+  <label>请选择性别:</label>
+  &nbsp;&nbsp;
+  <select name="SEX" id="sex" >
+    <option value="0" selected="selected">男性</option>
+    <option value="1">女性</option>
+  </select>
+  <label>请选择吸烟状态:</label>
+  &nbsp;&nbsp;
+  <select name="smoke" id="smoke">
+    <option value="1">吸烟</option>
+    <option value="0" selected="selected">非吸烟</option>
+  </select>
+  
+  <br />
+  <label>请输入年龄:</label>
+  &nbsp;&nbsp;<input name="age" type="text" value="30" id="age" /><br />
+  <label>请选择供款年期:</label>
+  &nbsp;&nbsp;
+  <select name="nian" id="nian">
+    <option value="5">5年</option>
+    <option value="10">10年</option>
+    <option value="15">15年</option>
+    <option value="20" selected="selected">20年</option>
+    <option value="25">25年</option>
+  </select>
+  
+  <label>请输入保额:</label>
+  &nbsp;&nbsp;<input name="be" type="text" id="be" value="" />
+  <label>万美元</label>
+  
+  <input name="立即计算" type="button"  onclick="chk_bx()" value="立即计算"/>
+  <input name="生成计划书" type="button"  onclick="mak_plan()" value="生成计划书"/>
+  <br />
+  <label>您需要的保费:</label>
+  &nbsp;&nbsp;<input name="bf" type="text" id="bf" value="" readonly="readonly" />
+  <label>美元</label>
+  <input name="basic_bf" type="hidden" value="" id="basic_bf" />
+  <br/>
+  
+  
+  <label>知道保费算保额:</label>
+  <br />
+  <label>请选择地区:</label>
+  &nbsp;&nbsp;
+  <select name="area1" id="area1" >
+    <option value="0" selected="selected">香港</option>
+    <option value="1">大陆</option>
+  </select>
+  <label>请选择性别:</label>
+  &nbsp;&nbsp;
+  <select name="SEX" id="sex1" >
+    <option value="0" selected="selected">男性</option>
+    <option value="1">女性</option>
+  </select>
+  <label>请选择吸烟状态:</label>
+  &nbsp;&nbsp;
+  <select name="smoke" id="smoke1">
+    <option value="1">吸烟</option>
+    <option value="0" selected="selected">非吸烟</option>
+  </select>
+  <label>请选择供款年期:</label>
+  &nbsp;&nbsp;
+  <select name="nian" id="nian1">
+    <option value="5">5年</option>
+    <option value="10">10年</option>
+    <option value="15">15年</option>
+    <option value="20" selected="selected">20年</option>
+    <option value="25">25年</option>
+  </select>
+  <br />
+  <label>请输入年龄:</label>
+  &nbsp;&nbsp;<input name="age" type="text" value="30" id="age1" /><br />
+  
+  <label>请输入保费:</label>
+  &nbsp;&nbsp;<input name="bf" type="text" id="bf1" value="" />
+  <label>美元</label>
+  
+  <input name="立即计算" type="button"  onclick="chk_bx1()" value="立即计算"/>
+  <br />
+  <label>您需要的保额:</label>
+  &nbsp;&nbsp;<input name="be" type="text" id="be1" value="" readonly="readonly" />
+  <label>万美元</label>
+  
+</p>
+<table width="100%" border="1" id="tbl">
+  <tr>
+    <td rowspan="2" align="center">保单年期</td>
+    <td rowspan="2" align="center">年龄</td>
+    <td rowspan="2" align="center">保费总额</td>
+    <td colspan="3" align="center">退保价值</td>
+    <td colspan="4" align="center">理赔金额</td>
+  </tr>
+  <tr>
+    <td align="center">保证价值</td>
+    <td align="center">非保证红利</td>
+    <td align="center">退保总额</td>
+    <td align="center">基础保额</td>
+    <td align="center">赠送保额</td>
+    <td align="center">特别红利</td>
+    <td align="center">总额</td>
+  </tr>
+  
+</table>
+<p>&nbsp;</p>
+</body>
+
+</html>
+<script src="js/bfl.js"></script>
+<script src="js/Non-Guaranteed_Bonus.js"></script>
+<script type="text/javascript">
+//计算保费
+function chk_bx(){
+var bx_area = $("#area").val(); //地区	
+var bx_sex = $("#sex").val(); //性别
+var bx_smoke = $("#smoke").val(); //是否吸烟
+var bx_nian = $("#nian").val(); //供款年期
+var bx_age = $("#age").val(); //年龄
+var bx_be = $("#be").val(); //保额
+
+if (bx_be==''){
+ alert("请输入保额!");
+  $("#be").focus();
+  return false;	
+}
+var bfl = chk_bfl(bx_area,bx_sex,bx_smoke,bx_nian,bx_age);
+var dis_be = dis_bf(bfl,bx_be)
+//$("#basic_bf").val(bfl*10) ;
+$("#bf").val(dis_be) ;
+}
+//计算保额
+function chk_bx1(){
+var bx_area = $("#area1").val(); //地区	
+var bx_sex = $("#sex1").val(); //性别
+var bx_smoke = $("#smoke1").val(); //是否吸烟
+var bx_nian = $("#nian1").val(); //供款年期
+var bx_age = $("#age1").val(); //年龄
+var bx_bf = $("#bf1").val(); //保费
+
+if (bx_bf==''){
+ alert("请输入保费金额!");
+  $("#bf1").focus();
+  return false;	
+}
+$("#be1").val(dis_be(bx_area,bx_sex,bx_age,bx_nian,bx_smoke,bx_bf)) ;
+}
+//生成计划书
+function mak_plan_bak(){
+var bx_area = $("#area").val(); //地区
+var bx_sex = $("#sex").val(); //性别
+var bx_age = parseInt($("#age").val()); //年龄	
+var bx_smoke = $("#smoke").val(); //是否吸烟
+var bx_nian = parseInt($("#nian").val()); //供款年期
+var bx_be = $("#be").val(); //保额
+var bx_bf = Math.round($("#bf").val()); //保费
+var x,tmp_bf = 0,arr_bf  = new Array();//记录保费数据
+var basic_bf; //基础保费(HK女不吸烟)
+var trHTML ="";
+
+basic_bf = chk_bfl(0,1,0,bx_nian,bx_age)*10;
+//arr_bf[i][j],j-0保单年度,1所缴保费总额,2保证退保金额,3非保证退保红利,4-退保总额,5-非保证特别红利,6-保额,7-赠送保额,8-理赔总额
+for (var i=1; i<=20; i++)
+{
+arr_bf[i] = new Array() ;
+arr_bf[i][0] = i+bx_age+"岁";
+if (i<=bx_nian){
+ arr_bf[i][1] = i*bx_bf;
+}else{
+arr_bf[i][1] = bx_nian*bx_bf;
+}
+} 
+//添加25年的记录
+arr_bf[25]  = new Array() ;
+arr_bf[25][0] = 25+bx_age+"岁";
+if (bx_nian == 25){
+arr_bf[25][1] = 25*bx_bf;
+}else{
+arr_bf[25][1] = bx_nian*bx_bf;
+}
+//添加30年的记录
+arr_bf[30]  = new Array() ;
+arr_bf[30][0] = 30 + bx_age+"岁" ;
+arr_bf[30][1] = bx_nian*bx_bf;
+//添加66-101岁的记录
+var tmpAge=0;
+for (i=66; i<=101; i+=5){
+ tmpAge = i-bx_age;
+ arr_bf[i]  = new Array() ;
+ arr_bf[i][0] = i +"岁" ; 
+ 	if(tmpAge<= bx_nian ){
+		arr_bf[i][1] = tmpAge*bx_bf;
+	}else{
+		arr_bf[i][1] = bx_nian*bx_bf;
+	}	
+	}
+//计算保证退保金额 公式保证退保价值 ＝ 基本退保价值*保额*保费调整因子
+//strBF-不打折时的保费  strNian- 供款年期 strAge-翌年岁整因子）
+
+var arr_TBL = new Array(),Ajust_BF ;
+
+	arr_TBL =  Get_Basci_BF(basic_bf,bx_nian,bx_age);	//基本退保价值
+	
+Ajust_BF = Get_Adjust(bx_area,bx_sex,bx_age,bx_nian,bx_smoke,bx_be);	 //计算保费调整因子
+
+trHTML =""	
+var k=0;
+var jj=10;
+if(bx_age<=45){jj=15;} //jj为计算赠送保额之参数
+ 
+var arr_bonus = new Array();
+var arr_bonus2 = new Array();
+arr_bonus = GetBasic(bx_age,1);
+
+for (var x in arr_bf)
+{
+	
+if ( parseInt(x) >85){  //如果到了85岁,那么保证退保价值=保额
+    arr_bf[x][2] = bx_be*10000;
+}else { //否则保证退保价值 ＝ 基本退保价值*保额*保费调整因子
+	arr_bf[x][2] = Math.round(arr_TBL[x]*bx_be*Ajust_BF);
+}
+//计算非保证退保红利
+k++
+arr_bf[x][3] = Math.round(arr_bonus[k]*bx_be);
+arr_bf[x][4] = Math.round(arr_bf[x][2]) + Math.round(arr_bf[x][3]); //退保总额
+
+//计算非保证理赔红利
+arr_bonus2 = GetBasic(bx_age,2);
+arr_bf[x][5] = Math.round(arr_bonus2[k]*bx_be);
+arr_bf[x][6] = Math.round(bx_be)*10000;//基本保额
+//计算赠送保额(<=40岁赠送15年50%保额,>40岁赠送10年50%保额)
+if(k<=jj){
+arr_bf[x][7] = Math.round(bx_be)*10000/2;
+	}else{
+arr_bf[x][7] = 0;		
+	}
+//理赔总额
+arr_bf[x][8] = arr_bf[x][5]+arr_bf[x][6]+arr_bf[x][7];
+
+}	
+
+var j = 0;
+for (var x in arr_bf)
+{
+	//j = parseInt(arr_bf[x][2])+parseInt(arr_bf[x][3]);
+	trHTML += "<tr><td>"+x+"</td><td>"+arr_bf[x][0]+"</td><td>" + arr_bf[x][1] +"</td><td>" + arr_bf[x][2]+"</td><td>"+ arr_bf[x][3]+"</td><td>" +arr_bf[x][4]+"</td><td>"+arr_bf[x][6]+"</td><td>"+arr_bf[x][7]+"</td><td>"+arr_bf[x][5]+"</td><td>"+arr_bf[x][8]+"</td></tr>";
+	
+
+
+}	
+$("#tbl").append(trHTML);//在table最后面添加一行
+}
+
+//生成计划书
+function mak_plan(){
+	
+var bx_area = $("#area").val(); //地区
+var bx_sex = $("#sex").val(); //性别
+var bx_age = parseInt($("#age").val()); //年龄	
+var bx_smoke = $("#smoke").val(); //是否吸烟
+var bx_nian = parseInt($("#nian").val()); //供款年期
+var bx_be = $("#be").val(); //保额
+var bx_bf = Math.round($("#bf").val()); //保费
+var x,tmp_bf = 0,arr_bf  = new Array();//记录保费数据
+var trHTML ="";
+var Payment_Item;
+
+
+
+//basic_bf = chk_bfl(bx_sex,bx_smoke,bx_nian,bx_age)*10; //chk_bfl(bx_sex,bx_smoke,bx_nian,bx_age);
+
+//arr_bf[i][j],j-0保单年度,1所缴保费总额,2保证退保金额,3非保证退保红利,4-退保总额,5-非保证特别红利,6-保额,7-赠送保额,8-理赔总额
+
+for (var i=1; i<=20; i++) //计算保费
+{
+  arr_bf[i] = new Array() ;
+  arr_bf[i][0] = i+bx_age;
+  if (i<=bx_nian){ //计算累计保费
+     arr_bf[i][1] = i*bx_bf;
+  }else{
+     arr_bf[i][1] = bx_nian*bx_bf;
+  }
+} 
+//添加25年的记录
+arr_bf[25]  = new Array() ;
+arr_bf[25][0] = 25+bx_age;
+if (bx_nian == 25){
+ arr_bf[25][1] = 25*bx_bf;
+}else{
+ arr_bf[25][1] = bx_nian*bx_bf;
+}
+//添加30年的记录
+arr_bf[30]  = new Array() ;
+arr_bf[30][0] = 30 + bx_age ;
+arr_bf[30][1] = bx_nian*bx_bf;
+//添加66-101岁的记录
+var tmpAge=0;
+for (i=66; i<=101; i+=5){
+ tmpAge = i-bx_age;
+ arr_bf[i]  = new Array() ;
+ arr_bf[i][0] = i ; 
+ 	if(tmpAge<= bx_nian ){
+		arr_bf[i][1] = tmpAge*bx_bf;
+	}else{
+		arr_bf[i][1] = bx_nian*bx_bf;
+	}	
+	}
+
+
+trHTML =""	
+var k=0;
+var jj; 
+if(bx_age>40){jj=10;}else{jj=15;} //如果大于40岁，额外赠送10年保费，否则赠送15年
+ 
+var arr_bonus = new Array();
+var arr_bonus2 = new Array();
+//arr_bonus = GetBasic(bx_age,1); //求基础非保证退保红利
+arr_bonus = GetBasic_Bonus(bx_age,0); //求基础非保证退保红
+var tmp_years;
+for (var x in arr_bf)
+{
+	tmp_years = arr_bf[x][0] - bx_age;
+  if ( arr_bf[x][0] > 85 ){  //如果到了85岁,那么保证退保价值=保额
+	  arr_bf[x][2] = bx_be*10000;
+  }else { //否则保证退保价值 ＝ 保证退保率*保费
+
+	
+		  arr_bf[x][2] = Math.round(TuibaoRate(bx_nian,tmp_years,bx_area)* arr_bf[x][1]); 
+
+	 
+  }
+//计算非保证退保红利
+k++
+arr_bf[x][3] = Math.round(arr_bonus[k]*bx_be);  //求非保证退保红利
+arr_bf[x][4] = Math.round(arr_bf[x][2]) + Math.round(arr_bf[x][3]); //退保总额
+
+//计算非保证理赔红利
+//arr_bonus2 = GetBasic(bx_age,2);
+arr_bonus2 = GetBasic_Bonus(bx_age,1); //求基础非保证理赔金额
+arr_bf[x][5] = Math.round(arr_bonus2[k]*bx_be);
+arr_bf[x][6] = Math.round(bx_be)*10000;//基本保额
+//计算赠送保
+//计算赠送保额前10年赠送10年50%保额)
+if(tmp_years<=jj){
+arr_bf[x][7] = Math.round(bx_be)*10000/2;
+	}else{
+arr_bf[x][7] = 0;		
+	}
+//理赔总额
+arr_bf[x][8] = arr_bf[x][5]+arr_bf[x][6]+arr_bf[x][7];
+
+}	
+
+var j = 0;
+for (var x in arr_bf)
+{
+	//j = parseInt(arr_bf[x][2])+parseInt(arr_bf[x][3]);
+	trHTML += "<tr><td>"+x+"</td><td>"+arr_bf[x][0]+"岁</td><td>" + arr_bf[x][1] +"</td><td>" + arr_bf[x][2]+"</td><td>"+ arr_bf[x][3]+"</td><td>" +arr_bf[x][4]+"</td><td>"+arr_bf[x][6]+"</td><td>"+arr_bf[x][7]+"</td><td>"+arr_bf[x][5]+"</td><td>"+arr_bf[x][8]+"</td></tr>";
+	
+
+
+}	
+$("#tbl").append(trHTML);//在table最后面添加一行
+}
+</script>
