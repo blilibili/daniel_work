@@ -119,25 +119,25 @@ app.post('/' , (req , res) => {
             tmp[count] = {
                 age:arr_bf[x][0],
                 sum:arr_bf[x][1],
-                changeSum:Math.round(arr_bf[x][1] * parseFloat(result)),
+                changeSum:(arr_bf[x][1] * parseFloat(result)).toFixed(2),
                 TB:Math.round(arr_bf[x][2]),
-                changeTB:Math.round(arr_bf[x][2] * parseFloat(result)),
+                changeTB:(arr_bf[x][2] * parseFloat(result)).toFixed(2),
                 FTB:arr_bf[x][3],
-                changeFTB:Math.round(arr_bf[x][3] * parseFloat(result)),
+                changeFTB:(arr_bf[x][3] * parseFloat(result)).toFixed(2),
                 TBZ:arr_bf[x][4],
-                changeTBZ:Math.round(arr_bf[x][4] * parseFloat(result)),
+                changeTBZ:(arr_bf[x][4] * parseFloat(result)).toFixed(2),
                 FBZTBH:arr_bf[x][5],
-                changeFBZTBH:Math.round(arr_bf[x][5] * parseFloat(result)),
+                changeFBZTBH:(arr_bf[x][5] * parseFloat(result)).toFixed(2),
                 BE:arr_bf[x][6],
-                changeBe:Math.round(arr_bf[x][6] * parseFloat(result)),
+                changeBe:(arr_bf[x][6] * parseFloat(result)).toFixed(2),
                 CSBE:arr_bf[x][6] + arr_bf[x][7],
-                changeCSBE:Math.round((arr_bf[x][6] + arr_bf[x][7]) * parseFloat(result)),
+                changeCSBE:((arr_bf[x][6] + arr_bf[x][7]) * parseFloat(result)).toFixed(2),
                 ZSBE:arr_bf[x][7],
-                changeZSBE:Math.round(arr_bf[x][7] * parseFloat(result)),
+                changeZSBE:(arr_bf[x][7] * parseFloat(result)).toFixed(2),
                 LPZE:arr_bf[x][8],
-                changeLPZE:Math.round(arr_bf[x][8] * parseFloat(result)),
+                changeLPZE:(arr_bf[x][8] * parseFloat(result)).toFixed(2),
                 BF:bx_bf,
-                changeBF:Math.round(bx_bf * parseFloat(result))
+                changeBF:(bx_bf * parseFloat(result)).toFixed(2)
             }
             //j = parseInt(arr_bf[x][2])+parseInt(arr_bf[x][3]);
             // tmp['age'][count] = arr_bf[x][0];

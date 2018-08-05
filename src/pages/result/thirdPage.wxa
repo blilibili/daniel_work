@@ -58,7 +58,8 @@
                     showZC:false,
                     showYZ:false,
                     showUSDTable:false,
-                    showCNYTable:false
+                    showCNYTable:false,
+                    showMQ:false
                 },
                 listData: [
                     {"code": "守护健康危疾加护保（CIE）", "money": "100,000", "years": "终身", "money_years": "20年交", "first_years": "1231.00"},
@@ -114,18 +115,19 @@
                             tmp[k] = v.age;
                         })
                         this.setData({
+                            username:option.username || '未填名称',
                             CIESex:option.sex == 0 ? '男':'女',
                             bd_years:tmp,
                             CIEAge: option.calYears,
                             CIESmoke: option.smoke == 0 ? '非吸烟' : '吸烟',
-                            CIELiving: option.living == 0 ? '香港' : '大陆',
+                            CIELiving: option.living == 0 ? '其他地区' : '大陆',
                             giveMoneyYears: option.giveMoneyYear,
-                            CIEBE: Math.round(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
+                            CIEBE: parseFloat(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
                             CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
                             CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
-                            CIEChangeZSBE: Math.round(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
-                            CIECSBE: Math.round(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
-                            CIEChangeCSBE: Math.round(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
+                            CIEChangeZSBE: parseFloat(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
+                            CIECSBE: parseFloat(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
+                            CIEChangeCSBE: parseFloat(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
                             CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
                             CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
                             changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
@@ -137,17 +139,17 @@
                             currentPeopleTB: this.app.globalData.tableData.data[0].TB,
                             currentPeopleSum: this.app.globalData.tableData.data[0].sum,
                             currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
-                            currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum).toFixed(2),
+                            currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum * 100).toFixed(2),
                             tableData: this.app.globalData.tableData.data,
                             age: option.calYears,
                             currentPeopleAge: option.calYears,
-                            currentPeopleChangeBE: Math.round(this.app.globalData.tableData.data[0].changeLPZE),
-                            currentPeopleChangeTB: Math.round(this.app.globalData.tableData.data[0].changeTB),
-                            currentPeopleChangeSum: Math.round(this.app.globalData.tableData.data[0].changeSum),
+                            currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
+                            currentPeopleChangeTB: parseFloat(this.app.globalData.tableData.data[0].changeTB).toFixed(2),
+                            currentPeopleChangeSum: parseFloat(this.app.globalData.tableData.data[0].changeSum).toFixed(2),
 
                             listData: [
                                 {"code": "守护健康危疾加倍保（CIM）", "money": Math.round(this.app.globalData.tableData.data[0].BE / 10000)+"万", "years": "终身", "money_years": option.giveMoneyYear+"年", "first_years": this.app.globalData.tableData.data[0].BF},
-                                {"code": option.living == 1 ? "危疾终身加倍保(CME)\n国籍:地区B" : "危疾终身加倍保(CME)\n国籍:地区A" , "money": "50,000", "years": "15", "money_years": "-", "first_years": "-"},
+                                {"code": option.living == 1 ? "危疾终身加倍保(CME)\n国籍:地区B" : "危疾终身加倍保(CME)\n国籍:地区A" , "money": parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2) + '万', "years": parseInt(this.app.globalData.submitData.calYears) < 40 ? "15":"10", "money_years": "-", "first_years": "-"},
 
                             ]
                         })
@@ -169,18 +171,19 @@
                             tmp[k] = v.age;
                         })
                         this.setData({
+                            username:option.username || '未填名称',
                             CIESex:this.app.globalData.submitData.sex == 0 ? '男':'女',
                             bd_years:tmp,
                             CIEAge: this.app.globalData.submitData.calYears,
                             CIESmoke: this.app.globalData.submitData.smoke == 0 ? '非吸烟' : '吸烟',
-                            CIELiving: this.app.globalData.submitData.living == 0 ? '香港' : '大陆',
+                            CIELiving: this.app.globalData.submitData.living == 0 ? '其他地区' : '大陆',
                             giveMoneyYears: this.app.globalData.submitData.giveMoneyYear,
-                            CIEBE: Math.round(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
+                            CIEBE: parseFloat(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
                             CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
                             CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
-                            CIEChangeZSBE: Math.round(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
-                            CIECSBE: Math.round(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
-                            CIEChangeCSBE: Math.round(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
+                            CIEChangeZSBE: parseFloat(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
+                            CIECSBE: parseFloat(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
+                            CIEChangeCSBE: parseFloat(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
                             CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
                             CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
                             changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
@@ -192,17 +195,17 @@
                             currentPeopleTB: this.app.globalData.tableData.data[0].TB,
                             currentPeopleSum: this.app.globalData.tableData.data[0].sum,
                             currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
-                            currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum).toFixed(2),
+                            currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum * 100) / this.app.globalData.tableData.data[0].sum).toFixed(2),
                             tableData: this.app.globalData.tableData.data,
                             age: this.app.globalData.submitData.calYears,
                             currentPeopleAge: this.app.globalData.submitData.calYears,
-                            currentPeopleChangeBE: Math.round(this.app.globalData.tableData.data[0].changeLPZE),
-                            currentPeopleChangeTB: Math.round(this.app.globalData.tableData.data[0].changeTB),
-                            currentPeopleChangeSum: Math.round(this.app.globalData.tableData.data[0].changeSum),
+                            currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
+                            currentPeopleChangeTB: parseFloat(this.app.globalData.tableData.data[0].changeTB).toFixed(2),
+                            currentPeopleChangeSum: parseFloat(this.app.globalData.tableData.data[0].changeSum).toFixed(2),
 
                             listData: [
                                 {"code": "守护健康危疾加倍保（CIM）", "money": Math.round(this.app.globalData.tableData.data[0].BE / 10000)+"万", "years": "终身", "money_years": this.app.globalData.submitData.giveMoneyYear+"年", "first_years": this.app.globalData.tableData.data[0].BF},
-                                {"code": option.living == 1 ? "危疾终身加倍保(CME)\n国籍:地区B" : "危疾终身加倍保(CME)\n国籍:地区A" , "money": "50,000", "years": "15", "money_years": "-", "first_years": "-"},
+                                {"code": option.living == 1 ? "危疾终身加倍保(CME)\n国籍:地区B" : "危疾终身加倍保(CME)\n国籍:地区A" , "money": parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2) + '万', "years": parseInt(this.app.globalData.submitData.calYears) < 40 ? "15":"10", "money_years": "-", "first_years": "-"},
 
                             ]
                         })
@@ -506,11 +509,11 @@
                 currentPeopleTB: arr[index].TB,
                 currentPeopleSum: arr[index].sum,
                 currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
-                currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum).toFixed(2),
+                currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum * 100).toFixed(2),
 
-                currentPeopleChangeBE: Math.round(arr[index].changeLPZE),
-                currentPeopleChangeTB: Math.round(arr[index].changeTB),
-                currentPeopleChangeSum: Math.round(arr[index].changeSum),
+                currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
+                currentPeopleChangeTB: parseFloat(this.app.globalData.tableData.data[0].changeTB).toFixed(2),
+                currentPeopleChangeSum: parseFloat(this.app.globalData.tableData.data[0].changeSum).toFixed(2),
             })
         }
 
@@ -524,11 +527,11 @@
                 currentPeopleTB: arr[index].TB,
                 currentPeopleSum: arr[index].sum,
                 currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
-                currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum).toFixed(2),
+                currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum * 100).toFixed(2),
 
-                currentPeopleChangeBE: Math.round(arr[index].changeLPZE),
-                currentPeopleChangeTB: Math.round(arr[index].changeTB),
-                currentPeopleChangeSum: Math.round(arr[index].changeSum),
+                currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
+                currentPeopleChangeTB: parseFloat(this.app.globalData.tableData.data[0].changeTB).toFixed(2),
+                currentPeopleChangeSum: parseFloat(this.app.globalData.tableData.data[0].changeSum).toFixed(2),
             })
         }
 
@@ -547,10 +550,9 @@
                 currentPeopleSum: arr[index].sum,
                 currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
                 currentPeopleTBReport: (((arr[index].TBZ - arr[index].sum) / arr[index].sum) * 100).toFixed(2),
-
-                currentPeopleChangeBE: Math.round(arr[index].changeLPZE),
-                currentPeopleChangeTB: Math.round(arr[index].changeTBZ),
-                currentPeopleChangeSum: Math.round(arr[index].changeSum),
+                currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
+                currentPeopleChangeTB: parseFloat(this.app.globalData.tableData.data[0].changeTB).toFixed(2),
+                currentPeopleChangeSum: parseFloat(this.app.globalData.tableData.data[0].changeSum).toFixed(2),
             })
         }
 
@@ -597,6 +599,7 @@
                     condition: {
                         ["showDiseaseList"]:true,
                         ["showZC"]:true,
+                        ["showMQ"]:false,
                         ["showYZ"]:false
                     }
                 })
@@ -606,7 +609,18 @@
                     condition: {
                         ["showDiseaseList"]:true,
                         ["showZC"]:false,
+                        ["showMQ"]:false,
                         ["showYZ"]:true
+                    }
+                })
+            }
+            if(kind == 'mq'){
+                this.setData({
+                    condition: {
+                        ["showDiseaseList"]:true,
+                        ["showZC"]:false,
+                        ["showYZ"]:false,
+                        ["showMQ"]:true
                     }
                 })
             }
@@ -617,7 +631,8 @@
                 condition: {
                     ["showDiseaseList"]:false,
                     ["showZC"]:false,
-                    ["showYZ"]:false
+                    ["showYZ"]:false,
+                    ["showMQ"]:false
                 }
             })
         }
@@ -652,10 +667,9 @@
                 currentPeopleSum: arr[index].sum,
                 currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
                 currentPeopleTBReport: (((arr[index].TBZ - arr[index].sum) / arr[index].sum) * 100).toFixed(2),
-
-                currentPeopleChangeBE: Math.round(arr[index].changeLPZE),
-                currentPeopleChangeTB: Math.round(arr[index].changeTBZ),
-                currentPeopleChangeSum: Math.round(arr[index].changeSum),
+                currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
+                currentPeopleChangeTB: parseFloat(this.app.globalData.tableData.data[0].changeTB).toFixed(2),
+                currentPeopleChangeSum: parseFloat(this.app.globalData.tableData.data[0].changeSum).toFixed(2),
             })
         }
 
@@ -728,6 +742,10 @@
 
         directDiseaseYZ(){
             this.router.push("/pages/change/change?provision=0004");
+        }
+
+        directDiseaseMQ(){
+            this.router.push("/pages/change/change?provision=0005");
         }
     }
 
@@ -888,6 +906,19 @@
 
             </view>
 
+            <view wx:if="{{condition.showMQ}}" style="line-height:2.3333;letter-spacing:2px;margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">
+                <text>{{"\n"}}</text>末期严重病况疾病列表：
+                <text>{{"\n"}}</text><text style="font-weight: bold;">第1类：癌症</text>
+                <text>{{"\n"}}</text>1. 	癌症
+                <text>{{"\n"}}</text><text style="font-weight: bold;">第2类：与心脏相关的疾病</text>
+                <text>{{"\n"}}</text>2. 	心脏病发作
+                <text>{{"\n"}}</text><text style="font-weight: bold;">第3类：与神经系统相关的疾病</text>
+                <text>{{"\n"}}</text> 3.	阿耳滋海默氏症	 [保障期：1 - 61岁（翌年岁）]
+                <text>{{"\n"}}</text> 4.	多发性硬化症	[保障期：1 - 61岁（翌年岁）]
+                <text>{{"\n"}}</text> 5.	柏金逊病	[保障期：1 - 61岁（翌年岁）]
+                <text>{{"\n"}}</text>6.	中风
+            </view>
+
             <view style="height: 1px;background-color: lightgray;">
 
             </view>
@@ -901,11 +932,16 @@
                 <view data-type="yz" style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;border-right: 1px solid lightgray;" bindtap="directDiseaseYZ">查看疾病定义</view>
                 <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;" bindtap="closeDiseaseList">关闭</view>
             </view>
+
+            <view style="display: flex;flex-direction:row;" wx:if="{{condition.showMQ}}">
+                <view data-type="yz" style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;border-right: 1px solid lightgray;" bindtap="directDiseaseMQ">查看疾病定义</view>
+                <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;" bindtap="closeDiseaseList">关闭</view>
+            </view>
         </div>
 
         <view class="part1">
             <view style="padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid rgb(232 , 232 , 232);font-size: 16px;font-weight: bold;">
-                {{CIESex}},{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
+                {{username}},{{CIESex}},{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
             </view>
             <view style="text-align: center;margin-top: 10rpx;">
                 <view class="header-basic-info">
@@ -1003,9 +1039,9 @@
                     豁免保费后可以继续享有保障直至86岁
                 </view>
                 <view><span> • </span>每次赔偿上限为 <span>5万</span>美元约{{changeUpperlimitMoney}}万人民币</view>
-                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
-                    支付早期疾病保障后，须从严重疾病赔偿、身故赔偿或退保时扣除相关赔偿额
-                </view>
+                <!--<view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">-->
+                    <!--支付早期疾病保障后，须从严重疾病赔偿、身故赔偿或退保时扣除相关赔偿额-->
+                <!--</view>-->
             </view>
 
             <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;" data-type="2" bindtap="showPartOneTable" >
@@ -1104,6 +1140,7 @@
         <view class="part4">
             <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
                 末期严重病况保障
+                <span class="tags" bindtap="showDiseaseListHandler" data-type="mq">疾病列表</span>
             </view>
             <view style="margin-left: 30rpx;">
                 <view>

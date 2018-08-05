@@ -1,7 +1,8 @@
 <script>
     /* eslint-disable linebreak-style */
-    import {wxa, Page} from '@wxa/core';
+    import {wxa, Page , Utils , Debounce} from '@wxa/core';
 
+@Utils
 @Page
 class Form {
     constructor(){
@@ -15,9 +16,10 @@ class Form {
                 birth:'',
                 calYears:'',
                 giveMoneyYear:'',
-                living:'0',
+                living:1,
                 smoke:'0',
                 proId:'',
+                username:''
             },
             insurance_item:{
                 insurance_credit:0,
@@ -37,8 +39,8 @@ class Form {
                 {name:'吸烟' , value:'1'}
             ],
             living:[
-                {name:'大陆' , value:'1' , checked:'true'},
-                {name:'其他地区' , value:'0'}
+                {name:'大陆' , value:1 , checked:'true'},
+                {name:'其他地区' , value:0}
             ],
             insurance_years:['10' , '15' , '20' , '25'],
             current_time:this.forMatTime(Date.parse(new Date()) , 'day')
@@ -134,8 +136,9 @@ class Form {
       this.clearInsuranceValue();
     }
     radioLivingChange(e){
+      console.log(e);
       this.setData({
-        ['submitData.living']:e.detail.value
+        ['submitData.living']:parseInt(e.detail.value)
       });
         this.clearInsuranceValue();
     }
@@ -224,6 +227,7 @@ class Form {
       this.data.submitData.be = this.data.insurance_item.insurance_credit;
       this.data.submitData.bf = this.data.insurance_item.insurance_money;
       this.app.globalData.submitData = this.data.submitData;
+      console.log(this.app.globalData.submitData);
       //0 页面跳转 1 分享
       this.router.push('/pages/result/' + page + '?share=0');
     }
@@ -373,6 +377,7 @@ class Form {
       //['submitData.giveMoneyYear']:tmp[0],
       insurance_years:tmp
     })
+    this.clearInsuranceValue();
   }
 
   requestGetInsuranceCredit(event){
@@ -424,10 +429,12 @@ class Form {
 
       this.data.submitData.be = event.detail.value;
       this.data.submitData.type = 'rmb';
-      this.setData({
-        ['insurance_item.change_insurance_credit']:event.detail.value,
-      });
-      this.requestAllBfBe('change_insurance_credit');
+      let cnyBaoe = parseFloat(event.detail.value);
+          this.setData({
+              ['insurance_item.change_insurance_credit']:event.detail.value
+          });
+          this.requestAllBfBe('change_insurance_credit');
+
     }
   }
 
@@ -555,13 +562,17 @@ class Form {
                     return this.data.insurance_item.change_insurance_money;
             }
         }else{
+            let baoeValue = parseFloat(e.detail.value);
             switch (kinds){
                 case 'baoe':
+
+                    this.limitBaoeCount(baoeValue);
                     this.setData({
                         ['insurance_item.insurance_credit'] : e.detail.value
                     });
                     return this.data.insurance_item.insurance_credit;
                 case 'changeBaoe':
+                    this.limitCNYBaoeCount(baoeValue);
                     this.setData({
                         ['insurance_item.change_insurance_credit'] : e.detail.value
                     });
@@ -579,6 +590,68 @@ class Form {
             }
         }
     }
+
+    @Debounce(500)
+    limitBaoeCount(baoeValue){
+        if(baoeValue > 50){
+            wx.showToast({
+                title:'超出50万美元',
+                icon:'none',
+                mask:true
+            })
+            this.setData({
+                ['insurance_item.insurance_credit'] : 50
+            });
+        }else if(baoeValue < 2){
+            wx.showToast({
+                title:'小于两万美元',
+                icon:'none',
+                mask:true
+            })
+            this.setData({
+                ['insurance_item.insurance_credit'] : 2
+            });
+        }else{
+            this.setData({
+                ['insurance_item.insurance_credit'] : baoeValue
+            });
+        }
+    }
+
+    @Debounce(500)
+    limitCNYBaoeCount(baoeValue){
+        if(baoeValue > parseFloat(this.data.currencyCny * 50).toFixed(2)){
+            wx.showToast({
+                title:'超出'+parseFloat(this.data.currencyCny * 50).toFixed(2)+'人民币范围',
+                icon:'none',
+                mask:'true'
+            })
+            this.setData({
+                ['submitData.be']:parseFloat(this.data.currencyCny * 50).toFixed(2),
+                ['insurance_item.change_insurance_credit']:parseFloat(this.data.currencyCny * 50).toFixed(2)
+            });
+        }else if(baoeValue < parseFloat(this.data.currencyCny * 2).toFixed(2)){
+            wx.showToast({
+                title:'小于'+parseFloat(this.data.currencyCny * 2).toFixed(2)+'人民币范围',
+                icon:'none',
+                mask:'true'
+            })
+
+            this.setData({
+                ['submitData.be']:parseFloat(this.data.currencyCny * 2).toFixed(2),
+                ['insurance_item.change_insurance_credit']:parseFloat(this.data.currencyCny * 2).toFixed(2)
+            });
+        }
+    }
+
+
+    setUsername(e){
+        this.setData({
+            ['submitData.username']:e.detail.value
+        })
+    }
+
+
 
 }
 
@@ -605,6 +678,13 @@ wxa.launchPage(Form);
         <view class="form-content">
             <form>
                 <view style="padding: 20rpx 0 20rpx 20rpx;font-weight: bold;">受保人信息</view>
+                <view class="form-sex">
+                    <label style="position: relative;top: 7rpx;">姓名</label>
+                    <view style="margin-left: 60rpx;position: relative;top: -6rpx;display: flex;">
+                        <!--submitData.calYears-->
+                        <input type="text" value="{{submitData.username}}" bindblur="setUsername" style="border-bottom:1px solid black;width: 490rpx;text-align: center;" placeholder="请输入您的姓名" />
+                    </view>
+                </view>
                 <view class="form-sex">
                     <label style="position: relative;top: 7rpx;">性别</label>
                     <radio-group class="radio-group" bindchange="radioSexChange">

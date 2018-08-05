@@ -113,18 +113,19 @@ class secondPage {
                     tmp[k] = v.age;
                 })
                 this.setData({
+                    username:option.username,
                     CIESex:option.sex == 0 ? '男':'女',
                     bd_years:tmp,
                     CIEAge: option.calYears,
                     CIESmoke: option.smoke == 0 ? '非吸烟' : '吸烟',
-                    CIELiving: option.living == 0 ? '香港' : '大陆',
+                    CIELiving: option.living == 0 ? '大陆' : '香港',
                     giveMoneyYears: option.giveMoneyYear,
                     CIEBE: Math.round(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
                     CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
                     CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
-                    CIEChangeZSBE: Math.round(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
-                    CIECSBE: Math.round(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
-                    CIEChangeCSBE: Math.round(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
+                    CIEChangeZSBE: parseFloat(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
+                    CIECSBE: parseFloat(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
+                    CIEChangeCSBE: parseFloat(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
                     CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
                     CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
                     changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
@@ -136,7 +137,7 @@ class secondPage {
                     currentPeopleTB: this.app.globalData.tableData.data[0].TB,
                     currentPeopleSum: this.app.globalData.tableData.data[0].sum,
                     currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
-                    currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum).toFixed(2),
+                    currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum * 100).toFixed(2),
                     tableData: this.app.globalData.tableData.data,
                     age: option.calYears,
                     currentPeopleAge: option.calYears,
@@ -152,6 +153,7 @@ class secondPage {
             }
         })
     }else{
+
         let host = this.app.globalData.httpUrl;
         let port = this.app.globalData.port;
         wx.request({
@@ -167,18 +169,19 @@ class secondPage {
                     tmp[k] = v.age;
                 })
                 this.setData({
+                    username:this.app.globalData.submitData.username,
                     CIESex:this.app.globalData.submitData.sex == 0 ? '男':'女',
                     bd_years:tmp,
                     CIEAge: this.app.globalData.submitData.calYears,
                     CIESmoke: this.app.globalData.submitData.smoke == 0 ? '非吸烟' : '吸烟',
-                    CIELiving: this.app.globalData.submitData.living == 0 ? '香港' : '大陆',
+                    CIELiving: this.app.globalData.submitData.living == 1 ? '大陆' : '香港',
                     giveMoneyYears: this.app.globalData.submitData.giveMoneyYear,
                     CIEBE: Math.round(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
                     CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
                     CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
-                    CIEChangeZSBE: Math.round(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
-                    CIECSBE: Math.round(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
-                    CIEChangeCSBE: Math.round(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
+                    CIEChangeZSBE: (this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
+                    CIECSBE: (this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
+                    CIEChangeCSBE: (this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
                     CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
                     CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
                     changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
@@ -190,7 +193,7 @@ class secondPage {
                     currentPeopleTB: this.app.globalData.tableData.data[0].TB,
                     currentPeopleSum: this.app.globalData.tableData.data[0].sum,
                     currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
-                    currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum).toFixed(2),
+                    currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum * 100).toFixed(2),
                     tableData: this.app.globalData.tableData.data,
                     age: this.app.globalData.submitData.calYears,
                     currentPeopleAge: this.app.globalData.submitData.calYears,
@@ -505,11 +508,11 @@ class secondPage {
       currentPeopleTB: arr[index].TB,
       currentPeopleSum: arr[index].sum,
       currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
-      currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum).toFixed(2),
+      currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum * 100).toFixed(2),
 
-      currentPeopleChangeBE: Math.round(arr[index].changeLPZE),
-      currentPeopleChangeTB: Math.round(arr[index].changeTB),
-      currentPeopleChangeSum: Math.round(arr[index].changeSum),
+        currentPeopleChangeBE: parseFloat(arr[index].changeLPZE).toFixed(2),
+        currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+        currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
     })
   }
 
@@ -523,11 +526,11 @@ class secondPage {
       currentPeopleTB: arr[index].TB,
       currentPeopleSum: arr[index].sum,
       currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
-      currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum).toFixed(2),
+      currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum * 100).toFixed(2),
 
-      currentPeopleChangeBE: Math.round(arr[index].changeLPZE),
-      currentPeopleChangeTB: Math.round(arr[index].changeTB),
-      currentPeopleChangeSum: Math.round(arr[index].changeSum),
+        currentPeopleChangeBE: parseFloat(arr[index].changeLPZE).toFixed(2),
+        currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+        currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
     })
   }
 
@@ -547,9 +550,9 @@ class secondPage {
       currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
       currentPeopleTBReport: (((arr[index].TBZ - arr[index].sum) / arr[index].sum) * 100).toFixed(2),
 
-      currentPeopleChangeBE: Math.round(arr[index].changeLPZE),
-      currentPeopleChangeTB: Math.round(arr[index].changeTBZ),
-      currentPeopleChangeSum: Math.round(arr[index].changeSum),
+      currentPeopleChangeBE: parseFloat(arr[index].changeLPZE).toFixed(2),
+      currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+      currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
     })
   }
 
@@ -652,9 +655,9 @@ class secondPage {
       currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
       currentPeopleTBReport: (((arr[index].TBZ - arr[index].sum) / arr[index].sum) * 100).toFixed(2),
 
-      currentPeopleChangeBE: Math.round(arr[index].changeLPZE),
-      currentPeopleChangeTB: Math.round(arr[index].changeTBZ),
-      currentPeopleChangeSum: Math.round(arr[index].changeSum),
+      currentPeopleChangeBE: parseFloat(arr[index].changeLPZE).toFixed(2),
+      currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+      currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
     })
   }
 
@@ -794,6 +797,24 @@ wxa.launchPage(secondPage);
             <text>{{"\n"}}</text>42. 次级严重系统性红斑狼疮
             <text>{{"\n"}}</text>43. 肝脏手术
             <text>{{"\n"}}</text>44. 丧失单肢
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第5类：其他疾病</text>
+            <text>{{"\n"}}</text>45. 植入人工耳蜗手术
+            <text>{{"\n"}}</text>46. 糖尿病视网膜病变
+            <text>{{"\n"}}</text>47. 意外损伤及烧伤进行面部重建手术
+            <text>{{"\n"}}</text>48. 意外导致身体次级严重烧伤
+            <text>{{"\n"}}</text>49. 次级克罗恩氏病
+            <text>{{"\n"}}</text>50. 单耳失聪
+            <text>{{"\n"}}</text>51. 单眼失明
+            <text>{{"\n"}}</text>52. 大理石骨病 [保障期：1 - 18岁（翌年岁）]
+            <text>{{"\n"}}</text>53. 成骨不全症 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>54. 骨质疏松症連骨折 [保障期：1 – 70岁（翌年岁）]
+            <text>{{"\n"}}</text>55. 嗜铬细胞瘤
+            <text>{{"\n"}}</text>56. 严重哮喘 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>57. 严重中枢神经性睡眠窒息症或混合性睡眠窒息症
+            <text>{{"\n"}}</text>58. 严重脑痫症
+            <text>{{"\n"}}</text>59. 严重血友病 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>60. 严重阻塞性睡眠窒息症
+            <text>{{"\n"}}</text>61. 系统性儿童类风湿关节炎 [保障期：1 – 18岁（翌年岁）]
         </view>
 
         <view wx:if="{{condition.showYZ}}" style="line-height:2.3333;letter-spacing:2px;margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">
@@ -878,7 +899,7 @@ wxa.launchPage(secondPage);
 
     <view class="part1">
         <view style="padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid rgb(232 , 232 , 232);font-size: 16px;font-weight: bold;">
-            {{CIESex}},{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
+            {{username}},{{CIESex}},{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
         </view>
         <view style="text-align: center;margin-top: 10rpx;">
             <view class="header-basic-info">
@@ -983,7 +1004,7 @@ wxa.launchPage(secondPage);
 
         <view wx:if="{{condition.showPartTwoTable}}">
             <view style="margin-left: 30rpx;color: rgb(170,173,198);">
-                * 支付早起疾病保障后，须从严重疾病赔偿、身故赔偿或退保时扣除相关赔偿额
+                * 支付早期疾病保障后，须从严重疾病赔偿、身故赔偿或退保时扣除相关赔偿额
                  <text>{{"\n"}}</text>
                 * 当时保额不计额外赠送的保额
             </view>
@@ -1050,9 +1071,6 @@ wxa.launchPage(secondPage);
                 <span> • </span>支付严重疾病赔偿后将 <span>豁免</span>往后所有保费
             </view>
             <view wx:if="{{condition.showPartTwelthPart}}">
-                <view style="margin-left: 30rpx;color: rgb(170,173,198);">
-                    轻症最高赔付包含前两次轻症之后增加的保障及24个月运动达标的增加的保障
-                </view>
                 <view bindtap="hidePartOneTable" data-type="12" style="text-align: center;">
                     <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
                 </view>
@@ -1332,12 +1350,12 @@ wxa.launchPage(secondPage);
         <view wx:if="{{condition.showPartProvision}}">
             <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
 
-            <!--<navigator hover-class="none" url="/pages/change/change?provision=0001" hover-class="navigator-hover">-->
-                <!--<view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">-->
-                    <!--<view style="display: inline-block;">0001    一般条款</view>-->
-                    <!--<view style="display: inline-block;float: right;"> > </view>-->
-                <!--</view>-->
-            <!--</navigator>-->
+            <navigator hover-class="none" url="/pages/change/change?provision=0001" hover-class="navigator-hover">
+                <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
+                    <view style="display: inline-block;">0001    一般条款</view>
+                    <view style="display: inline-block;float: right;"> > </view>
+                </view>
+            </navigator>
 
             <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
 
