@@ -139,7 +139,10 @@ app.use('/getCirBf' , require('./route/calculateCirBf'));
 app.use('/getCirBe' , require('./route/calculateCirBe'));
 app.use('/getCimBf' , require('./route/calculateCimBf'));
 app.use('/getCimBe' , require('./route/calculateCimBe'));
+app.use('/getEgsBf' , require('./route/calculateEgsBf'));
+app.use('/getEgsBe' , require('./route/calculateEgsBe'));
 app.use('/makeCimPlain' , require('./route/makeCimPlain'));
 app.use('/makeCirPlain' , require('./route/makeCirPlain'));
+app.use('/makeEgsPlain' , require('./route/makeEgsPlain'));
 
 app.listen(3006);

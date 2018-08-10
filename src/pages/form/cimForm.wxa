@@ -105,6 +105,10 @@ class Form {
     }
     //获取汇率
     getCurrentRate(){
+        wx.showLoading({
+            title:'加载汇率请稍后..',
+            mask:true
+        })
         let host = this.app.globalData.httpUrl;
         wx.request({
             url:host +'/getrate',
@@ -113,6 +117,7 @@ class Form {
                 this.setData({
                     currencyCny:parseFloat(res.data.rate).toFixed(2)
                 })
+                wx.hideLoading()
             }
         })
     }
@@ -360,7 +365,21 @@ class Form {
 
   //绑定虚岁
   setCalYears(event){
-    let nominalAge = event.detail.value;
+      if(event.detail.value >= 65){
+          wx.showToast({
+              title:'年龄不能大于65岁',
+              mask:true,
+              icon:'none'
+          })
+          this.setData({
+              ['submitData.calYears']:65
+          })
+      }else{
+          this.setData({
+              ['submitData.calYears']:event.detail.value
+          })
+      }
+      let nominalAge = this.data.submitData.calYears;
     this.data.submitData.calYears = nominalAge;
     let tmp = [];
     if(nominalAge <= 50){
@@ -787,7 +806,7 @@ wxa.launchPage(Form);
                             万元（美元）
                         </view>
                         <view style="margin-left: 40rpx;">
-                            <input bindinput="limitNumber" bindfocus="clearInputValue" data-type="changeBaoe" value="{{insurance_item.change_insurance_credit}}" type="digit" style="border-bottom:1px solid black;width: 80rpx;position: relative;top: 4rpx;" placeholder="" bindblur="requestGetInsuranceRMBMoney" bindconfirm="requestGetInsuranceRMBMoney" />
+                            <input bindinput="limitNumber" bindfocus="clearInputValue" data-type="changeBaoe" value="{{insurance_item.change_insurance_credit}}" type="digit" style="border-bottom:1px solid black;width: 104rpx;position: relative;top: 4rpx;" placeholder="" bindblur="requestGetInsuranceRMBMoney" bindconfirm="requestGetInsuranceRMBMoney" />
                         </view>
                         <view style="position: relative;top: 10rpx;">
                             万元（人民币）
@@ -803,7 +822,7 @@ wxa.launchPage(Form);
                     <label style="padding: 20rpx 0 20rpx 20rpx;">保费</label>
                     <view style="margin-left: 40rpx;position: relative;top: 8rpx;display: flex;flex-direction:row;">
                         <view>
-                            <input bindinput="limitNumber" bindfocus="clearInputValue" data-type="baof" type="digit" value="{{insurance_item.insurance_money}}" bindblur="requestGetInsuranceCredit" bindconfirm="requestGetInsuranceCredit" value="{{insurance_item.insurance_money}}" style="border-bottom:1px solid black;width: 108rpx" placeholder="" />
+                            <input bindinput="limitNumber" bindfocus="clearInputValue" data-type="baof" type="digit" value="{{insurance_item.insurance_money}}" bindblur="requestGetInsuranceCredit" bindconfirm="requestGetInsuranceCredit" value="{{insurance_item.insurance_money}}" style="border-bottom:1px solid black;width: 134rpx" placeholder="" />
                         </view>
                         <view style="position: relative;top: 10rpx;">
                             （美元）

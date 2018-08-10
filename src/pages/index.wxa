@@ -61,12 +61,12 @@ wxa.launchPage(Index);
     </view>
 
     <view class="container-content">
-        <navigator hover-class="none" url="/pages/form/form?pro=EGS" hover-class="navigator-hover">
+        <navigator hover-class="none" url="/pages/form/egsForm?pro=EGS" hover-class="navigator-hover">
         <view class="productor-intro">
             <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="../img/timg.jpeg"></image>
             <view class="productor-intro-words">
                 <view class="productor-intro-words-header">特级携升2</view>
-                <view>一份终身寿险计划 ， 专为长线储蓄而设，配合您不同的财务目标</view>
+                <view>短期供款终身储蓄,提取灵活配合不同财务需要,多种身故保障</view>
             </view>
             <image src="../img/add.png" class="productor-intro-words-add-image"></image>
         </view>

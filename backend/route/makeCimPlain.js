@@ -108,6 +108,7 @@ app.post('/' , (req , res) => {
     let ageArr = [];
     let tmp = [];
     let count = 0;
+    let cnyTmp = []
     //获取汇率
     changeRate.getMoneyRate(1).then((result) => {
         //arr_bf[i][j],j-0保单年度,1所缴保费总额,2保证退保金额,3非保证退保红利,4-退保总额,5-非保证特别红利,6-保额,7-赠送保额,8-理赔总额
@@ -136,6 +137,30 @@ app.post('/' , (req , res) => {
                 BF:bx_bf,
                 changeBF:(bx_bf * parseFloat(result)).toFixed(2)
             }
+
+            cnyTmp[count] = {
+                age:arr_bf[x][0],
+                sum:arr_bf[x][1],
+                changeSum:Math.round(arr_bf[x][1] * parseFloat(result)),
+                TB:Math.round(arr_bf[x][2]),
+                changeTB:Math.round(arr_bf[x][2] * parseFloat(result)),
+                FTB:arr_bf[x][3],
+                changeFTB:Math.round(arr_bf[x][3] * parseFloat(result)),
+                TBZ:arr_bf[x][4],
+                changeTBZ:Math.round(arr_bf[x][4] * parseFloat(result)),
+                FBZTBH:arr_bf[x][5],
+                changeFBZTBH:Math.round(arr_bf[x][5] * parseFloat(result)),
+                BE:arr_bf[x][6],
+                changeBe:Math.round(arr_bf[x][6] * parseFloat(result)),
+                CSBE:arr_bf[x][6] + arr_bf[x][7],
+                changeCSBE:Math.round((arr_bf[x][6] + arr_bf[x][7]) * parseFloat(result)),
+                ZSBE:arr_bf[x][7],
+                changeZSBE:Math.round(arr_bf[x][7] * parseFloat(result)),
+                LPZE:arr_bf[x][8],
+                changeLPZE:Math.round(arr_bf[x][8] * parseFloat(result)),
+                BF:bx_bf,
+                changeBF:Math.round(bx_bf * parseFloat(result))
+            }
             //j = parseInt(arr_bf[x][2])+parseInt(arr_bf[x][3]);
             // tmp['age'][count] = arr_bf[x][0];
             // tmp['sum'][count] = arr_bf[x][1];
@@ -148,7 +173,8 @@ app.post('/' , (req , res) => {
             age:bx_age,
             data:tmp,
             msg:'获取表格成功',
-            rate:parseFloat(result)
+            rate:parseFloat(result),
+            cnyTable:cnyTmp
         })
   });
 });

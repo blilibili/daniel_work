@@ -2,21 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b01063f-3e73-4b92-b699-fe5b452b8d4c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/util/cim/js/jquery.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/util/cir2/js/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/route/makeCimPlain.js" afterPath="$PROJECT_DIR$/backend/route/makeCimPlain.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/route/makeCirPlain.js" afterPath="$PROJECT_DIR$/backend/route/makeCirPlain.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/route/makePlain.js" afterPath="$PROJECT_DIR$/backend/route/makePlain.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/util/cim/cim.html" afterPath="$PROJECT_DIR$/backend/util/cim/cim.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/util/cir2/cir2.html" afterPath="$PROJECT_DIR$/backend/util/cir2/cir2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/form/cimForm.wxa" afterPath="$PROJECT_DIR$/src/pages/form/cimForm.wxa" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/form/cirForm.wxa" afterPath="$PROJECT_DIR$/src/pages/form/cirForm.wxa" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/form/form.wxa" afterPath="$PROJECT_DIR$/src/pages/form/form.wxa" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/result/fourthPage.wxa" afterPath="$PROJECT_DIR$/src/pages/result/fourthPage.wxa" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/result/secondPage.wxa" afterPath="$PROJECT_DIR$/src/pages/result/secondPage.wxa" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" afterPath="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" />
+      <change afterPath="$PROJECT_DIR$/backend/route/calculateEgsBe.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/route/calculateEgsBf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/route/makeEgsPlain.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/util/egs/egs2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/util/egs/js/Non-Guaranteed Bonus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/util/egs/js/Non-Guaranteed_Bonus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/util/egs/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/form/egsForm.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/route/makeCimPlain.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/route/makeCimPlain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/route/makeCirPlain.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/route/makeCirPlain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/route/makePlain.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/route/makePlain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/util/cir2/cir2.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/util/cir2/cir2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/util/exchangeRate.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/util/exchangeRate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/egs/EGS-一般条款.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views/egs/yb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/egs/EGS_保障条款.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views/egs/bz.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/change/change.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/change/change.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/form/cimForm.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/form/cimForm.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/form/cirForm.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/form/cirForm.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/form/form.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/form/form.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/result/firstPage.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/firstPage.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/result/fourthPage.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/fourthPage.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/result/secondPage.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/secondPage.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,84 +42,105 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="daniel_work" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="cirForm.wxa" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/form/cirForm.wxa">
+      <file leaf-file-name="zq.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/views/cir/zq.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+            <state relative-caret-position="8480">
+              <caret line="265" column="17" selection-start-line="265" selection-start-column="17" selection-end-line="265" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bz.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/views/egs/bz.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2880">
+              <caret line="90" column="48" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="yb.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/views/egs/yb.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="417" column="32" selection-start-line="417" selection-start-column="32" selection-end-line="417" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="change.wxa" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/change/change.wxa">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-352">
+              <caret line="55" column="12" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="firstPage.wxa" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/result/firstPage.wxa">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="241">
+              <caret line="674" column="37" selection-start-line="674" selection-start-column="34" selection-end-line="674" selection-end-column="37" />
               <folding>
-                <element signature="n#style#0;n#view#0;n#view#1;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#view#0;n#view#1;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#view#1;n#view#2;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#view#1;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#view#5;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#view#7;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#view#9;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#view#11;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#view#13;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jquery.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/util/cir2/js/jquery.min.js">
+      <file leaf-file-name="makeEgsPlain.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/backend/route/makeEgsPlain.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="177">
+              <caret line="99" column="44" lean-forward="true" selection-start-line="99" selection-start-column="44" selection-end-line="99" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fourthPage.wxa" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/pages/result/fourthPage.wxa">
+      <file leaf-file-name="egs2.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/util/egs/egs2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="1010" column="30" selection-start-line="1010" selection-start-column="30" selection-end-line="1010" selection-end-column="30" />
+            <state relative-caret-position="348">
+              <caret line="271" column="189" lean-forward="true" selection-start-line="271" selection-start-column="189" selection-end-line="271" selection-end-column="189" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="form.wxa" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/form/form.wxa">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="329" column="49" selection-start-line="329" selection-start-column="49" selection-end-line="329" selection-end-column="49" />
               <folding>
-                <element signature="n#style#0;n#text#2;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#text#5;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#text#8;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#view#2;n#view#0;n#view#2;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#view#0;n#view#4;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#view#0;n#view#0;n#view#4;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="thirdPage.wxa" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/result/thirdPage.wxa">
+      <file leaf-file-name="egsForm.wxa" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/form/egsForm.wxa">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="1142" column="16" selection-start-line="1142" selection-start-column="16" selection-end-line="1142" selection-end-column="94" />
-              <folding>
-                <element signature="n#style#0;n#text#2;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#text#5;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#text#8;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-                <marker date="1533463485718" expanded="false" signature="45686:45736" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="makeCimPlain.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/route/makeCimPlain.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="136" column="64" selection-start-line="116" selection-start-column="16" selection-end-line="136" selection-end-column="64" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cir2.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/util/cir2/cir2.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-              <folding />
+            <state relative-caret-position="337">
+              <caret line="366" column="37" selection-start-line="366" selection-start-column="37" selection-end-line="366" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -123,36 +158,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>listData</find>
-      <find>small</find>
-      <find>.small</find>
-      <find>makeplain</find>
-      <find>GetBasic_Bonus</find>
-      <find>shareFButton</find>
-      <find>living</find>
-      <find>严重</find>
-      <find>严重疾病定义</find>
-      <find>giveMoneyYear</find>
-      <find>jquery</find>
-      <find>this.app.globalData.submitData</find>
-      <find>header-section-li</find>
-      <find>menu-btn</find>
-      <find>一般</find>
-      <find>share</find>
-      <find>site</find>
-      <find>条款</find>
-      <find>proNA</find>
-      <find>li</find>
-      <find>冷静期</find>
-      <find>保单</find>
-      <find>早期严重</find>
+      <find>insurance_money</find>
       <find>createInsurance</find>
-      <find>goBack</find>
-      <find>go</find>
-      <find>疾病列表</find>
-      <find>早期疾病</find>
-      <find>早期疾病定义</find>
-      <find>disease</find>
+      <find>makeplain</find>
+      <find>makeE</find>
+      <find>giveMoneyYears</find>
+      <find>giveMoneyYear</find>
+      <find>产品特点</find>
+      <find>CHK_be</find>
+      <find>cie</find>
+      <find>保障</find>
+      <find>onL</find>
+      <find>share</find>
+      <find>CIEBE</find>
+      <find>CIECSBE</find>
+      <find>CIEBF</find>
+      <find>EGSBFZE</find>
+      <find>保额</find>
+      <find>requestGetInsuranceCredit</find>
+      <find>终身红利</find>
+      <find>submitData</find>
+      <find>request</find>
+      <find>ZSBE</find>
+      <find>FTB</find>
+      <find>BZLP</find>
+      <find>cnyTable</find>
+      <find>requestAll</find>
+      <find>PZZE</find>
+      <find>currentPeopleBE</find>
+      <find>changeTBZ</find>
+      <find>currentPeopleTB</find>
     </findStrings>
     <dirStrings>
       <dir>E:\my-work\daniel_work\src\pages</dir>
@@ -165,26 +200,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/pages/table/CIECNDTable.wxa" />
-        <option value="$PROJECT_DIR$/backend/views/yb.html" />
-        <option value="$PROJECT_DIR$/backend/views/css/normalize.css" />
-        <option value="$PROJECT_DIR$/backend/views/css/site.css" />
-        <option value="$PROJECT_DIR$/backend/views/css/pushy.css" />
-        <option value="$PROJECT_DIR$/backend/views/js/jquery.min.js" />
-        <option value="$PROJECT_DIR$/backend/views/js/push.js" />
-        <option value="$PROJECT_DIR$/backend/views/js/jwexin.js" />
-        <option value="$PROJECT_DIR$/backend/views/menu.html" />
-        <option value="$PROJECT_DIR$/backend/route/getRate.js" />
-        <option value="$PROJECT_DIR$/backend/util/cir2/js/bfl.js" />
         <option value="$PROJECT_DIR$/backend/route/calculateCirBf.js" />
         <option value="$PROJECT_DIR$/backend/route/calculateCirBe.js" />
         <option value="$PROJECT_DIR$/backend/util/cim/js/Non-Guaranteed Bonus.js" />
-        <option value="$PROJECT_DIR$/backend/route/calculateCimBf.js" />
         <option value="$PROJECT_DIR$/backend/route/calculateCimBe.js" />
         <option value="$PROJECT_DIR$/backend/util/cim/js/Non-Guaranteed_Bonus.js" />
-        <option value="$PROJECT_DIR$/backend/main.js" />
         <option value="$PROJECT_DIR$/backend/util/cir2/js/Non-Guaranteed_Bonus.js" />
-        <option value="$PROJECT_DIR$/src/app.wxa" />
         <option value="$PROJECT_DIR$/backend/views/yz.html" />
         <option value="$PROJECT_DIR$/backend/views/bz.html" />
         <option value="$PROJECT_DIR$/backend/views/zq.html" />
@@ -196,7 +217,6 @@
         <option value="$PROJECT_DIR$/backend/views/cir/mq.html" />
         <option value="$PROJECT_DIR$/backend/views/cir/yb.html" />
         <option value="$PROJECT_DIR$/backend/views/cir/yz.html" />
-        <option value="$PROJECT_DIR$/src/pages/change/change.wxa" />
         <option value="$PROJECT_DIR$/backend/views/cir/bz.html" />
         <option value="$PROJECT_DIR$/backend/views/cim/mq.html" />
         <option value="$PROJECT_DIR$/backend/views/cim/yb.html" />
@@ -204,18 +224,33 @@
         <option value="$PROJECT_DIR$/backend/views/cim/zq.html" />
         <option value="$PROJECT_DIR$/backend/views/cie/lx.html" />
         <option value="$PROJECT_DIR$/backend/views/cie/yb.html" />
-        <option value="$PROJECT_DIR$/src/pages/index.wxa" />
-        <option value="$PROJECT_DIR$/backend/route/makePlain.js" />
-        <option value="$PROJECT_DIR$/src/pages/result/secondPage.wxa" />
-        <option value="$PROJECT_DIR$/src/pages/form/form.wxa" />
         <option value="$PROJECT_DIR$/backend/util/cim/cim.html" />
+        <option value="$PROJECT_DIR$/backend/route/getRate.js" />
+        <option value="$PROJECT_DIR$/backend/util/cir2/cir2.html" />
+        <option value="$PROJECT_DIR$/backend/util/exchangeRate.js" />
+        <option value="$PROJECT_DIR$/backend/route/makePlain.js" />
         <option value="$PROJECT_DIR$/backend/route/makeCimPlain.js" />
+        <option value="$PROJECT_DIR$/backend/route/makeCirPlain.js" />
         <option value="$PROJECT_DIR$/src/pages/form/cimForm.wxa" />
         <option value="$PROJECT_DIR$/src/pages/form/cirForm.wxa" />
-        <option value="$PROJECT_DIR$/backend/util/cir2/cir2.html" />
-        <option value="$PROJECT_DIR$/backend/route/makeCirPlain.js" />
-        <option value="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" />
         <option value="$PROJECT_DIR$/src/pages/result/fourthPage.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/index.wxa" />
+        <option value="$PROJECT_DIR$/src/app.wxa" />
+        <option value="$PROJECT_DIR$/backend/route/calculateCimBf.js" />
+        <option value="$PROJECT_DIR$/backend/util/egs/egs2.html" />
+        <option value="$PROJECT_DIR$/backend/route/calculateEgsBf.js" />
+        <option value="$PROJECT_DIR$/backend/route/calculateEgsBe.js" />
+        <option value="$PROJECT_DIR$/backend/main.js" />
+        <option value="$PROJECT_DIR$/backend/util/egs/js/Non-Guaranteed_Bonus.js" />
+        <option value="$PROJECT_DIR$/src/pages/change/change.wxa" />
+        <option value="$PROJECT_DIR$/backend/views/egs/yb.html" />
+        <option value="$PROJECT_DIR$/backend/views/egs/bz.html" />
+        <option value="$PROJECT_DIR$/src/pages/result/secondPage.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/form/form.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/form/egsForm.wxa" />
+        <option value="$PROJECT_DIR$/backend/route/makeEgsPlain.js" />
+        <option value="$PROJECT_DIR$/src/pages/result/firstPage.wxa" />
       </list>
     </option>
   </component>
@@ -230,325 +265,120 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-1608" />
+    <option name="y" value="-8" />
+    <option name="width" value="1616" />
+    <option name="height" value="916" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <OptionsSetting value="true" id="Add" />
-    <OptionsSetting value="true" id="Remove" />
-    <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
-    <OptionsSetting value="true" id="Status" />
-    <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="result" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="form" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cir2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cir2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="daniel_work" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="route" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
+          <expand>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="route" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="egs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="egs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="change" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="form" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="result" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+    <property name="last_opened_file_path" value="E:/work/SDKAdmin" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.prettier" value="true" />
@@ -563,23 +393,20 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
-    <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="FullScreen" value="true" />
-    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\my-work\daniel_work\backend\route" />
+      <recent name="E:\my-work\daniel_work\src\pages\result" />
+      <recent name="E:\my-work\daniel_work\backend\util\egs\js" />
+      <recent name="E:\my-work\daniel_work\backend\util\egs" />
+      <recent name="E:\my-work\daniel_work\src\pages\form" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\my-work\daniel_work\backend\util\cir2\js" />
       <recent name="E:\my-work\daniel_work\backend\views" />
       <recent name="E:\my-work\daniel_work\backend" />
       <recent name="E:\my-work\daniel_work\backend\util" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/backend/util/cir2/js" />
-      <recent name="$PROJECT_DIR$/backend/util/cim/js" />
-      <recent name="E:\my-work\daniel_work\backend\views\cie" />
-      <recent name="E:\my-work\daniel_work\backend\views\egs" />
-      <recent name="E:\my-work\daniel_work\backend\views" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -619,9 +446,6 @@
       <option name="filePath" />
       <method />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
       <command value="run-script" />
       <scripts />
@@ -629,22 +453,25 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+    </configuration>
     <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <working-directory />
       <pass-parent-env>true</pass-parent-env>
-      <envs />
       <ui>bdd</ui>
       <extra-mocha-options />
       <test-kind>DIRECTORY</test-kind>
       <test-directory />
       <recursive>false</recursive>
-      <method />
     </configuration>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -715,33 +542,44 @@
       <workItem from="1533259566980" duration="1179000" />
       <workItem from="1533264273390" duration="9153000" />
       <workItem from="1533449486660" duration="11894000" />
+      <workItem from="1533521986507" duration="64000" />
+      <workItem from="1533522058931" duration="125000" />
+      <workItem from="1533522229027" duration="496000" />
+      <workItem from="1533522749811" duration="38000" />
+      <workItem from="1533548207287" duration="1500000" />
+      <workItem from="1533622777517" duration="5048000" />
+      <workItem from="1533632853227" duration="1909000" />
+      <workItem from="1533694978796" duration="6266000" />
+      <workItem from="1533803847013" duration="10052000" />
+      <workItem from="1533868857160" duration="15236000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="290126000" />
+    <option name="totallyTimeSpent" value="330860000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="-1608" y="-8" width="1616" height="916" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.23875" />
+      <window_info anchor="bottom" id="TODO" order="9" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="1" />
+      <window_info id="npm" order="0" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="5" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="2" />
+      <window_info id="Favorites" order="1" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="3" />
+      <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -754,132 +592,35 @@
     <breakpoint-manager>
       <option name="time" value="1" />
     </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/backend/route/getRate.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/result/secondPage.wxa">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+        <state relative-caret-position="5280">
+          <caret line="165" column="30" selection-start-line="165" selection-start-column="30" selection-end-line="165" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/Non-Guaranteed_Bonus.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/change/change.wxa">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        <state relative-caret-position="1760">
+          <caret line="55" column="12" lean-forward="true" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/exchangeRate.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/result/firstPage.wxa">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="87" column="2" selection-start-line="87" selection-start-column="2" selection-end-line="87" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/route/calculateCirBf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1376">
-          <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/cir2/js/bfl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/route/calculateCirBe.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="32" column="90" selection-start-line="32" selection-start-column="90" selection-end-line="32" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/cim/js/bfl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="201" column="1" selection-start-line="201" selection-start-column="1" selection-end-line="201" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/route/calculateCimBf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/cim/js/Non-Guaranteed_Bonus.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="379" column="25" selection-start-line="379" selection-start-column="25" selection-end-line="379" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/route/calculateCimBe.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/cir2/js/Non-Guaranteed_Bonus.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="264" column="25" selection-start-line="264" selection-start-column="25" selection-end-line="264" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="142" column="50" selection-start-line="142" selection-start-column="50" selection-end-line="142" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/yz.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/zq.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5152">
-          <caret line="161" column="29" selection-start-line="161" selection-start-column="29" selection-end-line="161" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/yb.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2304">
-          <caret line="72" column="25" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cir_bz.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1472">
-          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/egs/EGS-一般条款.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-224">
-          <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/bz.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="154" column="25" selection-start-line="154" selection-start-column="25" selection-end-line="154" selection-end-column="25" />
+        <state relative-caret-position="5504">
+          <caret line="172" column="30" selection-start-line="172" selection-start-column="30" selection-end-line="172" selection-end-column="30" />
+          <folding>
+            <element signature="n#style#0;n#view#1;n#view#2;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#1;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#5;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#7;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#9;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#11;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#13;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -911,24 +652,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cir/zq.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3904">
-          <caret line="122" column="44" selection-start-line="122" selection-start-column="37" selection-end-line="122" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/views/cir/mq.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="101" column="53" selection-start-line="101" selection-start-column="53" selection-end-line="101" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/change/change.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="70" column="46" selection-start-line="70" selection-start-column="46" selection-end-line="70" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -992,7 +719,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3625">
           <caret line="145" column="51" selection-start-line="145" selection-start-column="51" selection-end-line="145" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1000,7 +726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
           <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1008,150 +733,243 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11850">
           <caret line="474" column="17" selection-start-line="474" selection-start-column="17" selection-end-line="474" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/index.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2425">
-          <caret line="97" column="38" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/cim/js/jquery.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/cim/js/jquery.min.js" />
     <entry file="file://$PROJECT_DIR$/backend/util/cim/cim.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/form/form.wxa">
+    <entry file="file://$PROJECT_DIR$/backend/util/cir2/js/jquery.min.js" />
+    <entry file="file://$PROJECT_DIR$/backend/util/cir2/cir2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="686" column="23" selection-start-line="686" selection-start-column="23" selection-end-line="686" selection-end-column="23" />
+        <state relative-caret-position="2784">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/route/getRate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/exchangeRate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2848">
+          <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/form/cimForm.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="826" column="69" lean-forward="true" selection-start-line="826" selection-start-column="69" selection-end-line="826" selection-end-column="69" />
           <folding>
-            <element signature="n#style#0;n#view#0;n#view#1;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#input#0;n#view#0;n#view#1;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#view#0;n#view#1;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#view#0;n#view#1;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#view#2;n#view#0;n#view#2;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#view#0;n#view#0;n#view#4;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/result/secondPage.wxa">
+    <entry file="file://$PROJECT_DIR$/src/pages/form/cirForm.wxa">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-975">
-          <caret line="115" column="45" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="45" />
+        <state relative-caret-position="26400">
+          <caret line="825" column="327" selection-start-line="825" selection-start-column="327" selection-end-line="825" selection-end-column="327" />
           <folding>
-            <element signature="n#style#0;n#text#52;n#view#2;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#view#0;n#navigator#0;n#view#2;n#view#7;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#view#0;n#view#0;n#navigator#0;n#view#2;n#view#7;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#view#1;n#view#0;n#navigator#0;n#view#2;n#view#7;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#0;n#view#1;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#view#2;n#view#0;n#view#2;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#view#2;n#view#0;n#view#4;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/route/makePlain.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="143" column="56" selection-start-line="123" selection-start-column="8" selection-end-line="143" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/cir2/cir2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/form/cirForm.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-          <folding>
-            <element signature="n#style#0;n#view#0;n#view#1;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#view#0;n#view#1;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="106">
+          <caret line="126" column="14" lean-forward="true" selection-start-line="126" selection-start-column="14" selection-end-line="126" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/route/makeCimPlain.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="136" column="64" selection-start-line="116" selection-start-column="16" selection-end-line="136" selection-end-column="64" />
-          <folding />
+        <state relative-caret-position="1924">
+          <caret line="176" column="27" selection-start-line="176" selection-start-column="27" selection-end-line="176" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/route/makeCirPlain.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
-          <caret line="139" column="64" selection-start-line="139" selection-start-column="64" selection-end-line="139" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/form/cimForm.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="570" column="54" selection-start-line="570" selection-start-column="54" selection-end-line="570" selection-end-column="54" />
-          <folding>
-            <element signature="n#style#0;n#view#0;n#view#1;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#view#0;n#view#1;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/cir2/js/jquery.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="580">
+          <caret line="139" column="25" lean-forward="true" selection-start-line="139" selection-start-column="25" selection-end-line="139" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/result/thirdPage.wxa">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="1142" column="16" selection-start-line="1142" selection-start-column="16" selection-end-line="1142" selection-end-column="94" />
-          <folding>
-            <element signature="n#style#0;n#text#2;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#5;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#8;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1533463485718" expanded="false" signature="45686:45736" ph="..." />
-          </folding>
+        <state relative-caret-position="241">
+          <caret line="205" column="49" selection-start-line="205" selection-start-column="28" selection-end-line="205" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/result/fourthPage.wxa">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="1010" column="30" selection-start-line="1010" selection-start-column="30" selection-end-line="1010" selection-end-column="30" />
+        <state relative-caret-position="305">
+          <caret line="1511" column="19" lean-forward="true" selection-start-line="1511" selection-start-column="19" selection-end-line="1511" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/cir2/js/Non-Guaranteed_Bonus.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="259" selection-start-line="259" selection-end-line="267" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/route/calculateCimBe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/route/calculateCimBf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/route/calculateEgsBf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="38" column="63" lean-forward="true" selection-start-line="38" selection-start-column="63" selection-end-line="38" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/route/calculateEgsBe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="41" column="17" lean-forward="true" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/egs/js/Non-Guaranteed_Bonus.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="177" column="33" selection-start-line="177" selection-start-column="33" selection-end-line="177" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="145" column="22" selection-start-line="145" selection-start-column="10" selection-end-line="145" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/index.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="67" column="63" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cir/zq.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8480">
+          <caret line="265" column="17" selection-start-line="265" selection-start-column="17" selection-end-line="265" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/egs/bz.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2880">
+          <caret line="90" column="48" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/result/secondPage.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="165" column="30" selection-start-line="165" selection-start-column="30" selection-end-line="165" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/egs/yb.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="417" column="32" selection-start-line="417" selection-start-column="32" selection-end-line="417" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/change/change.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-352">
+          <caret line="55" column="12" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/form/egsForm.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="366" column="37" selection-start-line="366" selection-start-column="37" selection-end-line="366" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/form/form.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="329" column="49" selection-start-line="329" selection-start-column="49" selection-end-line="329" selection-end-column="49" />
           <folding>
-            <element signature="n#style#0;n#text#2;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#5;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#8;n#view#4;n#div#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#view#2;n#view#0;n#view#2;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#0;n#view#4;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#view#0;n#view#0;n#view#4;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/egs/egs2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="271" column="189" lean-forward="true" selection-start-line="271" selection-start-column="189" selection-end-line="271" selection-end-column="189" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/result/firstPage.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="674" column="37" selection-start-line="674" selection-start-column="34" selection-end-line="674" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#view#1;n#view#2;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#1;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#5;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#7;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#9;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#11;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#13;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/route/makeEgsPlain.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="99" column="44" lean-forward="true" selection-start-line="99" selection-start-column="44" selection-end-line="99" selection-end-column="44" />
         </state>
       </provider>
     </entry>

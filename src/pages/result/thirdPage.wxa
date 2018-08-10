@@ -98,6 +98,7 @@
                     living:option.living,
                     sex:option.sex,
                     smoke:option.smoke,
+                    username:option.username
                 };
                 this.app.globalData.submitData = option;
 
@@ -115,7 +116,7 @@
                             tmp[k] = v.age;
                         })
                         this.setData({
-                            username:option.username || '未填名称',
+                            username:option.username || '',
                             CIESex:option.sex == 0 ? '男':'女',
                             bd_years:tmp,
                             CIEAge: option.calYears,
@@ -141,6 +142,7 @@
                             currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
                             currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum * 100).toFixed(2),
                             tableData: this.app.globalData.tableData.data,
+                            cnyTable:this.app.globalData.tableData.cnyTable,
                             age: option.calYears,
                             currentPeopleAge: option.calYears,
                             currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
@@ -149,7 +151,7 @@
 
                             listData: [
                                 {"code": "守护健康危疾加倍保（CIM）", "money": Math.round(this.app.globalData.tableData.data[0].BE / 10000)+"万", "years": "终身", "money_years": option.giveMoneyYear+"年", "first_years": this.app.globalData.tableData.data[0].BF},
-                                {"code": option.living == 1 ? "危疾终身加倍保(CME)\n国籍:地区B" : "危疾终身加倍保(CME)\n国籍:地区A" , "money": parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2) + '万', "years": parseInt(this.app.globalData.submitData.calYears) < 40 ? "15":"10", "money_years": "-", "first_years": "-"},
+                                {"code": this.app.globalData.submitData.living == 0 ? "危疾终身加倍保(CME)\n国籍:地区A" : "危疾终身加倍保(CME)\n国籍:地区B" , "money": parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2) + '万', "years": parseInt(this.app.globalData.submitData.calYears) < 40 ? "15":"10", "money_years": "-", "first_years": "-"},
 
                             ]
                         })
@@ -171,7 +173,7 @@
                             tmp[k] = v.age;
                         })
                         this.setData({
-                            username:option.username || '未填名称',
+                            username:this.app.globalData.submitData.username || '',
                             CIESex:this.app.globalData.submitData.sex == 0 ? '男':'女',
                             bd_years:tmp,
                             CIEAge: this.app.globalData.submitData.calYears,
@@ -197,6 +199,7 @@
                             currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
                             currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum * 100) / this.app.globalData.tableData.data[0].sum).toFixed(2),
                             tableData: this.app.globalData.tableData.data,
+                            cnyTable:this.app.globalData.tableData.cnyTable,
                             age: this.app.globalData.submitData.calYears,
                             currentPeopleAge: this.app.globalData.submitData.calYears,
                             currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
@@ -205,7 +208,7 @@
 
                             listData: [
                                 {"code": "守护健康危疾加倍保（CIM）", "money": Math.round(this.app.globalData.tableData.data[0].BE / 10000)+"万", "years": "终身", "money_years": this.app.globalData.submitData.giveMoneyYear+"年", "first_years": this.app.globalData.tableData.data[0].BF},
-                                {"code": option.living == 1 ? "危疾终身加倍保(CME)\n国籍:地区B" : "危疾终身加倍保(CME)\n国籍:地区A" , "money": parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2) + '万', "years": parseInt(this.app.globalData.submitData.calYears) < 40 ? "15":"10", "money_years": "-", "first_years": "-"},
+                                {"code": this.app.globalData.submitData.living == 0 ? "危疾终身加倍保(CME)\n国籍:地区A" : "危疾终身加倍保(CME)\n国籍:地区B" , "money": parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2) + '万', "years": parseInt(this.app.globalData.submitData.calYears) < 40 ? "15":"10", "money_years": "-", "first_years": "-"},
 
                             ]
                         })
@@ -511,9 +514,9 @@
                 currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
                 currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum * 100).toFixed(2),
 
-                currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
-                currentPeopleChangeTB: parseFloat(this.app.globalData.tableData.data[0].changeTB).toFixed(2),
-                currentPeopleChangeSum: parseFloat(this.app.globalData.tableData.data[0].changeSum).toFixed(2),
+                currentPeopleChangeBE: parseFloat(arr[index].changeLPZE).toFixed(2),
+                currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+                currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
             })
         }
 
@@ -529,9 +532,9 @@
                 currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
                 currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum * 100).toFixed(2),
 
-                currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
-                currentPeopleChangeTB: parseFloat(this.app.globalData.tableData.data[0].changeTB).toFixed(2),
-                currentPeopleChangeSum: parseFloat(this.app.globalData.tableData.data[0].changeSum).toFixed(2),
+                currentPeopleChangeBE: parseFloat(arr[index].changeLPZE).toFixed(2),
+                currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+                currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
             })
         }
 
@@ -550,9 +553,9 @@
                 currentPeopleSum: arr[index].sum,
                 currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
                 currentPeopleTBReport: (((arr[index].TBZ - arr[index].sum) / arr[index].sum) * 100).toFixed(2),
-                currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
-                currentPeopleChangeTB: parseFloat(this.app.globalData.tableData.data[0].changeTB).toFixed(2),
-                currentPeopleChangeSum: parseFloat(this.app.globalData.tableData.data[0].changeSum).toFixed(2),
+                currentPeopleChangeBE: parseFloat(arr[index].changeLPZE).toFixed(2),
+                currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+                currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
             })
         }
 
@@ -667,9 +670,9 @@
                 currentPeopleSum: arr[index].sum,
                 currentPeopleGG: (arr[index].LPZE / arr[index].sum).toFixed(2),
                 currentPeopleTBReport: (((arr[index].TBZ - arr[index].sum) / arr[index].sum) * 100).toFixed(2),
-                currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
-                currentPeopleChangeTB: parseFloat(this.app.globalData.tableData.data[0].changeTB).toFixed(2),
-                currentPeopleChangeSum: parseFloat(this.app.globalData.tableData.data[0].changeSum).toFixed(2),
+                currentPeopleChangeBE: parseFloat(arr[index].changeLPZE).toFixed(2),
+                currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+                currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
             })
         }
 
@@ -731,8 +734,8 @@
          */
         onShareAppMessage(){
             return {
-                title: 'CIM保险',
-                path: '/pages/result/thirdPage?be=' +  this.app.globalData.submitData.be + '&bf='+this.app.globalData.submitData.bf + '&httpUrl=' + this.app.globalData.httpUrl + '&share=1' + '&birth=' + this.app.globalData.submitData.birth + '&calYears=' + this.app.globalData.submitData.calYears + '&giveMoneyYear=' + this.app.globalData.submitData.giveMoneyYear + '&living=' + this.app.globalData.submitData.living + '&proId=' + this.app.globalData.submitData.proId + '&sex=' + this.app.globalData.submitData.sex + '&smoke=' + this.app.globalData.submitData.smoke + '&type=' +this.app.globalData.submitData.type
+                title: '危疾终身加倍保（CIM）计划书',
+                path: '/pages/result/thirdPage?be=' +  this.app.globalData.submitData.be + '&bf='+this.app.globalData.submitData.bf + '&httpUrl=' + this.app.globalData.httpUrl + '&share=1' + '&birth=' + this.app.globalData.submitData.birth + '&calYears=' + this.app.globalData.submitData.calYears + '&giveMoneyYear=' + this.app.globalData.submitData.giveMoneyYear + '&living=' + this.app.globalData.submitData.living + '&proId=' + this.app.globalData.submitData.proId + '&sex=' + this.app.globalData.submitData.sex + '&smoke=' + this.app.globalData.submitData.smoke + '&type=' +this.app.globalData.submitData.type + '&username=' +this.app.globalData.submitData.username
             }
         }
 
@@ -941,7 +944,7 @@
 
         <view class="part1">
             <view style="padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid rgb(232 , 232 , 232);font-size: 16px;font-weight: bold;">
-                {{username}},{{CIESex}},{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
+                {{username}}  {{CIESex}},{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
             </view>
             <view style="text-align: center;margin-top: 10rpx;">
                 <view class="header-basic-info">
@@ -1312,7 +1315,7 @@
                         </scroll-view>
                         <scroll-view bindscrolltolower="scrollBottom" upper-threshold="4" lower-threshold="4" scroll-top="{{topBarPos}}" scroll-left="{{leftBarPos}}" bindscroll="moveTable" scroll-x scroll-y style="height: 806rpx;white-space: nowrap;">
 
-                            <block wx:for="{{tableData}}" wx:key="*">
+                            <block wx:for="{{cnyTable}}" wx:key="*">
                                 <view class="tr bg-w">
                                     <view class="td" >{{item.changeSum}}</view>
                                     <view class="td">{{item.changeTB}}</view>
@@ -1556,7 +1559,7 @@
     }
     .header-basic-info{
         display: inline-block;
-        width: 37%;
+        width: 40%;
         padding-bottom: 20rpx;
         border-bottom:1px solid rgb(232 , 232 , 232);
         color: rgb(157,157,157);

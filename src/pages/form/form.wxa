@@ -106,6 +106,10 @@ class Form {
     }
     //获取汇率
     getCurrentRate(){
+        wx.showLoading({
+            title:'加载汇率请稍后..',
+            mask:true
+        })
         let host = this.app.globalData.httpUrl;
         wx.request({
             url:host +'/getrate',
@@ -113,7 +117,8 @@ class Form {
             success:(res) => {
                 this.setData({
                     currencyCny:parseFloat(res.data.rate).toFixed(2)
-                })
+                });
+                wx.hideLoading()
             }
         })
     }
@@ -227,7 +232,7 @@ class Form {
       this.data.submitData.be = this.data.insurance_item.insurance_credit;
       this.data.submitData.bf = this.data.insurance_item.insurance_money;
       this.app.globalData.submitData = this.data.submitData;
-      console.log(this.app.globalData.submitData);
+
       //0 页面跳转 1 分享
       this.router.push('/pages/result/' + page + '?share=0');
     }
@@ -300,18 +305,33 @@ class Form {
                   data:this.data.submitData,
                   method:'POST',
                   success:(res) => {
-                      this.setData({
-                          ['insurance_item.insurance_money']:res.data.data.insurance_money || 0,
-                          ['insurance_item.insurance_credit']:parseFloat(res.data.data.be).toFixed(2) ||0,
-                          ['insurance_item.change_insurance_credit']:parseFloat(res.data.data.changeBaoe).toFixed(2) || 0,
-                          ['insurance_item.change_insurance_money']:Math.round(res.data.data.changeBaofei) || 0
-                      });
-                      wx.hideLoading();
-                      wx.showToast({
-                          title:'若需重新计算请先清空数据',
-                          icon:'none',
-                          mask:'true'
-                      })
+                      if(res.data.data.be < 2 || res.data.data.be > 50){
+                          this.setData({
+                              ['insurance_item.insurance_money']: 0,
+                              ['insurance_item.insurance_credit']:0,
+                              ['insurance_item.change_insurance_credit']: 0,
+                              ['insurance_item.change_insurance_money']: 0
+                          });
+                          wx.hideLoading();
+                          wx.showToast({
+                              title:'计算出保额高于50万或者小于2万',
+                              icon:'none',
+                              mask:'true'
+                          })
+                      }else{
+                          this.setData({
+                              ['insurance_item.insurance_money']: res.data.data.insurance_money,
+                              ['insurance_item.insurance_credit']:res.data.data.be,
+                              ['insurance_item.change_insurance_credit']: res.data.data.changeBaoe,
+                              ['insurance_item.change_insurance_money']: res.data.data.changeBaofei
+                          });
+                          wx.hideLoading();
+                          wx.showToast({
+                              title:'若需重新计算请先清空数据',
+                              icon:'none',
+                              mask:'true'
+                          })
+                      }
                   }
               })
           }else if(name == 'change_insurance_credit'){
@@ -361,8 +381,21 @@ class Form {
 
   //绑定虚岁
   setCalYears(event){
-    let nominalAge = event.detail.value;
-    this.data.submitData.calYears = nominalAge;
+    if(event.detail.value >= 65){
+        wx.showToast({
+            title:'年龄不能大于65岁',
+            mask:true,
+            icon:'none'
+        })
+        this.setData({
+            ['submitData.calYears']:65
+        })
+    }else{
+        this.setData({
+            ['submitData.calYears']:event.detail.value
+        })
+    }
+    let nominalAge = this.data.submitData.calYears;
     let tmp = [];
     if(nominalAge <= 50){
       tmp = ['10' , '15' , '20' , '25']
@@ -518,28 +551,7 @@ class Form {
 
     clearInputValue(e){
         let kinds = e.target.dataset.type;
-        // switch (kinds){
-        //     case 'baoe':
-        //         this.setData({
-        //             ['insurance_item.insurance_credit'] : ''
-        //         });
-        //         break;
-        //     case 'changeBaoe':
-        //         this.setData({
-        //             ['insurance_item.change_insurance_credit'] : ''
-        //         });
-        //         break;
-        //     case 'baof':
-        //         this.setData({
-        //             ['insurance_item.insurance_money'] : ''
-        //         });
-        //         break;
-        //     case 'changebaof':
-        //         this.setData({
-        //             ['insurance_item.change_insurance_money'] : ''
-        //         });
-        //         break;
-        // }
+
     }
 
     limitNumber(e){
@@ -794,7 +806,7 @@ wxa.launchPage(Form);
                             万元（美元）
                         </view>
                         <view style="margin-left: 40rpx;">
-                            <input bindinput="limitNumber" bindfocus="clearInputValue" data-type="changeBaoe" value="{{insurance_item.change_insurance_credit}}" type="digit" style="border-bottom:1px solid black;width: 80rpx;position: relative;top: 4rpx;" placeholder="" bindblur="requestGetInsuranceRMBMoney" bindconfirm="requestGetInsuranceRMBMoney" />
+                            <input bindinput="limitNumber" bindfocus="clearInputValue" data-type="changeBaoe" value="{{insurance_item.change_insurance_credit}}" type="digit" style="border-bottom:1px solid black;width: 104rpx;position: relative;top: 4rpx;" placeholder="" bindblur="requestGetInsuranceRMBMoney" bindconfirm="requestGetInsuranceRMBMoney" />
                         </view>
                         <view style="position: relative;top: 10rpx;">
                             万元（人民币）
@@ -810,7 +822,7 @@ wxa.launchPage(Form);
                     <label style="padding: 20rpx 0 20rpx 20rpx;">保费</label>
                     <view style="margin-left: 40rpx;position: relative;top: 8rpx;display: flex;flex-direction:row;">
                         <view>
-                            <input bindinput="limitNumber" bindfocus="clearInputValue" data-type="baof" type="digit" value="{{insurance_item.insurance_money}}" bindblur="requestGetInsuranceCredit" bindconfirm="requestGetInsuranceCredit" value="{{insurance_item.insurance_money}}" style="border-bottom:1px solid black;width: 80rpx" placeholder="" />
+                            <input bindinput="limitNumber" bindfocus="clearInputValue" data-type="baof" type="digit" value="{{insurance_item.insurance_money}}" bindblur="requestGetInsuranceCredit" bindconfirm="requestGetInsuranceCredit" value="{{insurance_item.insurance_money}}" style="border-bottom:1px solid black;width: 120rpx" placeholder="" />
                         </view>
                         <view style="position: relative;top: 10rpx;">
                             （美元）

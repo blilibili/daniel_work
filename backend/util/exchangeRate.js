@@ -57,16 +57,31 @@ function getMoneyRate(usd){
         console.log('[query] - :' + err);
         return;
       }
+
       //row.length == 1 已经拿到汇率
       if(rows.length == 1){
         resolve(rows[0]['rate'])
       }else{
         //没有拿到汇率 去取汇率
-        request('https://finance.google.cn/finance/converter?a='+ usd +'&from=USD&to=CNY&meta=ei%3DbcI9W7CQH83E0QTLi4OIBg' , function(err , response , body){
-          let $ = cheerio.load(body);
-          let usd = parseFloat($('#currency_converter_result').text().split(' ')[0]);
-          let changeCNY = parseFloat($('.bld').text().split(' ')[0]);
-          let rate = (changeCNY / usd).toFixed(3);
+        request('https://sapi.k780.com/?app=finance.rate&scur=USD&tcur=CNY&appkey=34909&sign=42b1018c5569a8c6a13420f04acc9c99' , function(err , response , body){
+          //let $ = cheerio.load(body);
+          let rateObj = JSON.parse(body);
+          //resolve($('.tb_01').children().eq(1).children().eq(1));
+
+         // let usd = $('#currency_converter_result').text().split(' ')[0];
+          let changeCNY = rateObj.result.rate;
+
+          let rate = parseFloat(changeCNY).toFixed(2) || false;
+
+          //若rate为NaN 则插入上一天的值
+          if(!rate){
+              let sql = "select * from rate where time = ?";
+              let tmp = [forMatTime(new Date().getTime() - 24 * 60 * 60 * 1000 , 'day')];
+              sqlConfig.query(sql , tmp, function(err, rows, fields) {
+                  rate = resolve(rows[0]['rate']);
+              })
+          }
+
           let tmp = [rate , forMatTime(new Date().getTime() , 'day')];
           let sql = "insert into rate (rate , time) values(? , ?)";
           sqlConfig.query(sql , tmp, function(err, rows, fields) {

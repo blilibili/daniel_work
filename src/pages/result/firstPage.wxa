@@ -1,245 +1,985 @@
 <script>
     /* eslint-disable linebreak-style */
     import {wxa, Page , Mixins} from '@wxa/core';
+    import common from '../../util/start'
 @Page
-class firstPage {
-    constructor(){
-        this.data = {
-            topBarPos:'',
-            thTop:0,
-            tdTop:0,
-            bar:0,
-            currentPeopleBE:'',
-            currentPeopleAge:'',
-            currentPeopleTB:'',
-            currentPeopleSum:'',
-            currentPeopleGG:'',
-            currentPeopleTBReport:'',
-            condition: {
-              showPartOneTable:false,
-              showPartTwoTable:false,
-              showPartThreeTable:false
-            },
-              listData:[
-                {"code":"平安1","money":"text1","years":"type1" , "money_years":"40年交" , "first_years":"4283.00"},
-                {"code":"平安2","money":"text2","years":"type2" , "money_years":"40年交" , "first_years":"4283.00"},
-                {"code":"平安3","money":"text3","years":"type3" , "money_years":"40年交" , "first_years":"4283.00"},
-                {"code":"平安4","money":"text4","years":"type4" , "money_years":"40年交" , "first_years":"4283.00"},
-                {"code":"平安5","money":"text5","years":"type5" , "money_years":"40年交" , "first_years":"4283.00"},
-              ],
-            tableData:[],
-            age:0
+@Mixins(common)
+class secondPage {
+  constructor() {
+    this.data = {
+      interestTableCNY:[],
+      bd_years:[],
+      redirectUrl:'',
+      timer:'',
+      topBarPos: '',
+      leftBarPos: '',
+      thTop: 0,
+      tdTop: 0,
+      bar: 0,
+      currentPeopleBE: '',
+      currentPeopleAge: '',
+      currentPeopleTB: '',
+      currentPeopleSum: '',
+      currentPeopleGG: '',
+      currentPeopleTBReport: '',
+      currentPeopleChangeBE: '',
+      currentPeopleChangeTB: '',
+      currentPeopleChangeSum: '',
+      CIEAge: '',
+      CIESmoke: '',
+      CIELiving: '',
+      CIEBE: '',
+      CIEChangeBe: '',
+      CIEZSBE: '',
+      CIEChangeZSBE: '',
+      changeCIEBE: '',
+      giveMoneyYears: '',
+      CIEBF: '',
+      CIEchangeBF: '',
+      condition: {
+        showPartProvision:false,
+        showPartOneTable: false,
+        showPartTwoTable: false,
+        showPartThreeTable: false,
+        showPartFourthTable: false,
+        showPartFifthPart:false,
+        showPartSixthPart:false,
+        showPartSeventhPart:false,
+        showPartEighthPart:false,
+        showPartNinthPart:false,
+        showPartTenthPart:false,
+        showPartElevthPart:false,
+        showPartTwelthPart:false,
+        showPartThirtythPart:false,
+        showPartFourteenthPart:false,
+        showPartFifteenthPart:false,
+        showPartSixteenthPart:false,
+        showPartSeventeenthPart:false,
+        showDiseaseList:false,
+        showZC:false,
+        showYZ:false,
+        showUSDTable:false,
+        showCNYTable:false
+      },
+      listData: []
+    }
+  }
+    /**
+     *
+     be:"10"
+     bf:3542
+     birth:""
+     calYears:"22"
+     giveMoneyYear :"10"
+     living:"0"
+     proId:""
+     sex:"0"
+     smoke:"0"
+     type:"usd"
+     */
+  onLoad(option) {
+    wx.showLoading({
+        title:'正在努力加载中...',
+        mask:true,
+    })
+    this.app.globalData.proName = 'firstPage';
+    if(option.share == 1){
+        let host = option.httpUrl;
+        let submitData = {
+            be:option.be,
+            bf:parseInt(option.bf),
+            birth:option.birth,
+            calYears:option.calYears,
+            giveMoneyYear:option.giveMoneyYear,
+            living:option.living,
+            sex:option.sex,
+            smoke:option.smoke,
+            username:option.username
         }
-    }
-    onLoad() {
-      this.setData({
-        currentPeopleBE:this.app.globalData.tableData.data[0].LPZE,
-        currentPeopleTB:this.app.globalData.tableData.data[0].TB,
-        currentPeopleSum:this.app.globalData.tableData.data[0].sum,
-        currentPeopleGG:(this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
-        currentPeopleTBReport:((this.app.globalData.tableData.data[0].TB - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum).toFixed(2),
-        tableData:this.app.globalData.tableData.data,
-        age:this.app.globalData.submitData.calYears,
-        currentPeopleAge:this.app.globalData.submitData.calYears
-      })
-    }
-    showPartOneTable(event){
-      //初始化所有操作
-      let type = event.currentTarget.dataset.type;
-      switch (type){
-          case '1':
-            this.setData({
-              condition:{
-                showPartOneTable:true
-              }
-            });
-            break;
-          case '2':
-            this.setData({
-              condition:{
-                showPartTwoTable:true
-              }
-            });
-            break;
-          case '3':
-              this.setData({
-                condition:{
-                  showPartThreeTable:true
+        this.app.globalData.submitData = option;
+
+        wx.request({
+            url:host +'/makeEgsPlain',
+            data:submitData,
+            method:'POST',
+            success:(res) => {
+                wx.hideLoading();
+                this.app.globalData.tableData = res.data;
+
+                let tmp = [];
+                let plainTable = this.app.globalData.tableData.data;
+                this.app.globalData.tableData.data.forEach((v , k) => {
+                    tmp[k] = v.age;
+                })
+                console.log(submitData);
+                let giveMoneyYears = '';
+                //转换供款年期
+                if(submitData.giveMoneyYear == '1'){
+                    giveMoneyYears = 5
+                }else if(submitData.giveMoneyYear == '2'){
+                    giveMoneyYears = 8
+                }else if(submitData.giveMoneyYear == '3'){
+                    giveMoneyYears = 12
                 }
-              });
-              break;
-          default:
-            console.log('发送错误, 请检查');
-            break;
-      }
-    }
+                this.setData({
+                    username:option.username,
+                    CIESex:option.sex == 0 ? '男':'女',
+                    bd_years:tmp,
+                    CIEAge: option.calYears,
+                    CIESmoke: option.smoke == 0 ? '非吸烟' : '吸烟',
+                    CIELiving: option.living == 0 ? '大陆' : '其他地区',
+                    giveMoneyYears: giveMoneyYears,
+                    CIEBE: parseFloat(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
+                    CIEChangeBe: parseFloat(this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
+                    CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
+                    CIEChangeZSBE: parseFloat(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
+                    CIECSBE: parseFloat(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
+                    CIEChangeCSBE: parseFloat(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
+                    CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
+                    CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
+                    EGSBFZE: parseFloat(plainTable[plainTable.length - 1].BE / 1000).toFixed(2),
+                    EGSChangeBFZE: parseFloat(plainTable[plainTable.length - 1].changeBe / 1000).toFixed(2),
+                    changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
+                    currentRate:this.app.globalData.tableData.rate,
+                    cnyUnit:(1 * this.app.globalData.tableData.rate).toFixed(2),
 
-    hidePartOneTable(event){
-      //初始化所有操作
-      let type = event.currentTarget.dataset.type;
-      switch (type){
-        case '1':
-          this.setData({
-            condition:{
-              showPartOneTable:false
-            }
-          });
-          break;
-        case '2':
-          this.setData({
-            condition:{
-              showPartTwoTable:false
-            }
-          });
-          break;
-        case '3':
-          this.setData({
-            condition:{
-              showPartThreeTable:false
-            }
-          });
-          break;
-        default:
-          console.log('发送错误, 请检查');
-          break;
-      }
-    }
+                    //保单价值演示
+                    currentPeopleBE: this.app.globalData.tableData.data[0].SJPZZE,
+                    currentPeopleTB: this.app.globalData.tableData.data[0].TB,
+                    currentPeopleSum: this.app.globalData.tableData.data[0].sum,
+                    currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
+                    currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum * 100).toFixed(2),
+                    tableData: this.app.globalData.tableData.data,
+                    cnyTable:this.app.globalData.tableData.cnyTable,
+                    age: option.calYears,
+                    currentPeopleAge: option.calYears,
+                    currentPeopleChangeBE: Math.round(this.app.globalData.tableData.data[0].changeSJPZZE),
+                    currentPeopleChangeTB: Math.round(this.app.globalData.tableData.data[0].changeTB),
+                    currentPeopleChangeSum: Math.round(this.app.globalData.tableData.data[0].changeSum),
 
-  decreaseAge(){
-      let arr = this.app.globalData.tableData.data;
-      let index = parseInt(this.data.bar) - 1;
-      this.setData({
-        bar:index,
-        currentPeopleAge:arr[index].age,
-        currentPeopleBE:arr[index].LPZE,
-        currentPeopleTB:arr[index].TB,
-        currentPeopleSum:arr[index].sum,
-        currentPeopleGG:(arr[index].LPZE / arr[index].sum).toFixed(2),
-        currentPeopleTBReport:((arr[index].TB - arr[index].sum) / arr[index].sum).toFixed(2),
-      })
+                    listData: [
+                        {"code": "特级[携升]储蓄保险计划II \n（EGSP2H）", "money": parseFloat(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2)+"万", "years": "终身", "money_years": this.app.globalData.submitData.giveMoneyYear+"年", "first_years": this.app.globalData.tableData.data[0].BF},
+                    ]
+                })
+            }
+        })
+    }else{
+
+        let host = this.app.globalData.httpUrl;
+        let port = this.app.globalData.port;
+        wx.request({
+            url:host +'/makeEgsPlain',
+            data:this.app.globalData.submitData,
+            method:'POST',
+            success:(res) => {
+                wx.hideLoading();
+                this.app.globalData.tableData = res.data;
+
+                let tmp = [];
+                this.app.globalData.tableData.data.forEach((v , k) => {
+                    tmp[k] = v.age;
+                });
+                //转换供款年期
+                let plainTable = this.app.globalData.tableData.data;
+                if(this.app.globalData.submitData.giveMoneyYear == '1'){
+                    this.app.globalData.submitData.giveMoneyYearShow = 5
+                }else if(this.app.globalData.submitData.giveMoneyYear == '2'){
+                    this.app.globalData.submitData.giveMoneyYearShow = 8
+                }else if(this.app.globalData.submitData.giveMoneyYear == '3'){
+                    this.app.globalData.submitData.giveMoneyYearShow = 12
+                }
+                this.setData({
+                    username:this.app.globalData.submitData.username,
+                    CIESex:this.app.globalData.submitData.sex == 0 ? '男':'女',
+                    bd_years:tmp,
+                    CIEAge: this.app.globalData.submitData.calYears,
+                    CIESmoke: this.app.globalData.submitData.smoke == 0 ? '非吸烟' : '吸烟',
+                    CIELiving: this.app.globalData.submitData.living == 1 ? '大陆' : '其他地区',
+                    giveMoneyYears: this.app.globalData.submitData.giveMoneyYearShow,
+                    CIEBE: parseFloat(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
+                    CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
+                    CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
+                    CIEChangeZSBE: (this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
+                    CIECSBE: (this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
+                    CIEChangeCSBE: (this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
+                    CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF / 10000).toFixed(2),
+                    CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF / 10000).toFixed(2),
+                    changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
+                    EGSBFZE: parseFloat(plainTable[plainTable.length - 1].BE / 1000).toFixed(2),
+                    EGSChangeBFZE: parseFloat(plainTable[plainTable.length - 1].changeBe / 1000).toFixed(2),
+                    currentRate:this.app.globalData.tableData.rate,
+                    cnyUnit:(1 * this.app.globalData.tableData.rate).toFixed(2),
+
+                    //保单价值演示
+                    currentPeopleBE: this.app.globalData.tableData.data[0].SJPZZE,
+                    currentPeopleTB: this.app.globalData.tableData.data[0].TB,
+                    currentPeopleSum: this.app.globalData.tableData.data[0].sum,
+                    currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
+                    currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum * 100).toFixed(2),
+                    tableData: this.app.globalData.tableData.data,
+                    cnyTable:this.app.globalData.tableData.cnyTable,
+                    age: this.app.globalData.submitData.calYears,
+                    currentPeopleAge: this.app.globalData.submitData.calYears,
+                    currentPeopleChangeBE: Math.round(this.app.globalData.tableData.data[0].changeSJPZZE),
+                    currentPeopleChangeTB: Math.round(this.app.globalData.tableData.data[0].changeTB),
+                    currentPeopleChangeSum: Math.round(this.app.globalData.tableData.data[0].changeSum),
+
+                    listData: [
+                        {"code": "特级[携升]储蓄保险计划II \n（EGSP2H）", "money": parseFloat(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2)+"万", "years": "终身", "money_years": this.app.globalData.submitData.giveMoneyYear+"年", "first_years": this.app.globalData.tableData.data[0].BF},
+                    ]
+                })
+            }
+        })
     }
-  addAge(){
+  }
+
+  changePage(){
+    this.setData({
+      redirectUrl:'https://dan.samxiao.cn/demo'
+    })
+  }
+
+  showPartOneTable(event) {
+    //初始化所有操作
+    let type = event.currentTarget.dataset.type;
+    switch (type) {
+      case '1':
+        this.setData({
+          condition: {
+            showPartOneTable: true
+          }
+        });
+        break;
+      case '2':
+        this.setData({
+          condition: {
+            ["showPartTwoTable"]:true,
+            ["showPartFifthPart"]:true
+          }
+        });
+        break;
+      case '3':
+        this.setData({
+          condition: {
+            showPartThreeTable: true
+          }
+        });
+        break;
+      case '4':
+        this.setData({
+          condition: {
+            showPartFourthTable: true
+          }
+        });
+        break;
+
+      case '5':
+        this.setData({
+          condition: {
+            showPartFifthPart: true
+          }
+        });
+        break;
+      case '6':
+        this.setData({
+          condition: {
+            showPartSixthPart: true,
+            showPartSeventhPart: true,
+            showPartEighthPart: true,
+            showPartNinthPart: true,
+            showPartTenthPart: true,
+            showPartElevthPart: true,
+            showPartTwelthPart: true,
+            showDiseaseList:false
+          }
+        });
+        break;
+      case '7':
+        this.setData({
+          condition: {
+            showPartSeventhPart: true
+          }
+        });
+        break;
+      case '8':
+        this.setData({
+          condition: {
+            showPartEighthPart: true
+          }
+        });
+        break;
+      case '9':
+        this.setData({
+          condition: {
+            showPartNinthPart: true
+          }
+        });
+        break;
+      case '10':
+        this.setData({
+          condition: {
+            showPartTenthPart: true
+          }
+        });
+        break;
+      case '11':
+        this.setData({
+          condition: {
+            showPartElevthPart: true
+          }
+        });
+        break;
+      case '12':
+        this.setData({
+          condition: {
+            showPartTwelthPart: true
+          }
+        });
+        break;
+      case '13':
+        this.setData({
+          condition: {
+            showPartThirtythPart: true
+          }
+        });
+        break;
+      case '14':
+        this.setData({
+          condition: {
+            showPartFourteenthPart: true,
+            showPartFifteenthPart:true,
+            showPartSixteenthPart: true,
+            showPartSeventeenthPart: true
+          }
+        });
+        break;
+      case '15':
+        this.setData({
+          condition: {
+            showPartFifteenthPart: true
+          }
+        });
+        break;
+      case '16':
+        this.setData({
+          condition: {
+            showPartSixteenthPart: true
+          }
+        });
+        break;
+      case '17':
+        this.setData({
+          condition: {
+            showPartSeventeenthPart: true
+          }
+        });
+        break;
+      default:
+        console.log('发送错误, 请检查');
+        break;
+    }
+  }
+
+  hidePartOneTable(event) {
+    //初始化所有操作
+    let type = event.currentTarget.dataset.type;
+    switch (type) {
+      case '1':
+        this.setData({
+          condition: {
+            showPartOneTable: false
+          }
+        });
+        break;
+      case '2':
+        this.setData({
+          condition: {
+            ["showPartTwoTable"]:false,
+            ["showPartFifthPart"]:false
+          }
+        });
+        break;
+      case '3':
+        this.setData({
+          condition: {
+            showPartThreeTable: false
+          }
+        });
+        break;
+      case '4':
+        this.setData({
+          condition: {
+            showPartFourthTable: false
+          }
+        });
+        break;
+      case '5':
+        this.setData({
+          condition: {
+            showPartFifthPart: false
+          }
+        });
+        break;
+      case '6':
+        this.setData({
+          condition: {
+            showPartSixthPart: false,
+            showPartSeventhPart: false,
+            showPartEighthPart: false,
+            showPartNinthPart: false,
+            showPartTenthPart: false,
+            showPartElevthPart: false,
+            showPartTwelthPart: false
+          }
+        });
+        break;
+      case '7':
+        this.setData({
+          condition: {
+            showPartSeventhPart: false
+          }
+        });
+        break;
+
+      case '8':
+        this.setData({
+          condition: {
+            showPartEighthPart: false
+          }
+        });
+        break;
+      case '9':
+        this.setData({
+          condition: {
+            showPartNinthPart: false
+          }
+        });
+        break;
+      case '10':
+        this.setData({
+          condition: {
+            showPartTenthPart: false
+          }
+        });
+        break;
+      case '11':
+        this.setData({
+          condition: {
+            showPartElevthPart: false
+          }
+        });
+        break;
+      case '12':
+        this.setData({
+          condition: {
+            showPartTwelthPart: false
+          }
+        });
+        break;
+      case '13':
+        this.setData({
+          condition: {
+            showPartThirtythPart: false
+          }
+        });
+        break;
+      case '14':
+        this.setData({
+          condition: {
+            showPartFourteenthPart: false,
+            showPartFifteenthPart:false,
+            showPartSixteenthPart: false,
+            showPartSeventeenthPart: false
+          }
+        });
+        break;
+      case '15':
+        this.setData({
+          condition: {
+            showPartFifteenthPart: false
+          }
+        });
+        break;
+      case '16':
+        this.setData({
+          condition: {
+            showPartSixteenthPart: false
+          }
+        });
+        break;
+      case '17':
+        this.setData({
+          condition: {
+            showPartSeventeenthPart: false
+          }
+        });
+        break;
+      default:
+        console.log('发送错误, 请检查');
+        break;
+    }
+  }
+
+  decreaseAge() {
+    let arr = this.app.globalData.tableData.data;
+    let index = parseInt(this.data.bar) - 1;
+    this.setData({
+      bar: index,
+      currentPeopleAge: arr[index].age,
+      currentPeopleBE: arr[index].SJPZZE,
+      currentPeopleTB: arr[index].TB,
+      currentPeopleSum: arr[index].sum,
+      currentPeopleGG: (arr[index].SJPZZE / arr[index].sum).toFixed(2),
+      currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum * 100).toFixed(2),
+
+        currentPeopleChangeBE: parseFloat(arr[index].changeSJPZZE).toFixed(2),
+        currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+        currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
+    })
+  }
+
+  addAge() {
     let arr = this.app.globalData.tableData.data;
     let index = parseInt(this.data.bar) + 1;
     this.setData({
-      bar:index,
-      currentPeopleAge:arr[index].age,
-      currentPeopleBE:arr[index].LPZE,
-      currentPeopleTB:arr[index].TB,
-      currentPeopleSum:arr[index].sum,
-      currentPeopleGG:(arr[index].LPZE / arr[index].sum).toFixed(2),
-      currentPeopleTBReport:((arr[index].TB - arr[index].sum) / arr[index].sum).toFixed(2),
+      bar: index,
+      currentPeopleAge: arr[index].age,
+      currentPeopleBE: arr[index].SJPZZE,
+      currentPeopleTB: arr[index].TB,
+      currentPeopleSum: arr[index].sum,
+      currentPeopleGG: (arr[index].SJPZZE / arr[index].sum).toFixed(2),
+      currentPeopleTBReport: ((arr[index].TBZ - arr[index].sum) / arr[index].sum * 100).toFixed(2),
+
+        currentPeopleChangeBE: parseFloat(arr[index].changeSJPZZE).toFixed(2),
+        currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+        currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
     })
   }
-  changeInsuranceAge(event){
-      let host = this.app.globalData.httpUrl;
-      let port = this.app.globalData.port;
-      // this.app.globalData.submitData.calYears = event.detail.value;
-      let arr = this.app.globalData.tableData.data;
-      let index = event.detail.value;
 
+  changeInsuranceAge(event) {
+    let host = this.app.globalData.httpUrl;
+    let port = this.app.globalData.port;
+    // this.app.globalData.submitData.calYears = event.detail.value;
+    let arr = this.app.globalData.tableData.data;
+    let index = event.detail.value;
+
+    this.setData({
+      bar: index,
+      currentPeopleAge: arr[index].age,
+      currentPeopleBE: arr[index].SJPZZE,
+      currentPeopleTB: arr[index].TBZ,
+      currentPeopleSum: arr[index].sum,
+      currentPeopleGG: (arr[index].SJPZZE / arr[index].sum).toFixed(2),
+      currentPeopleTBReport: (((arr[index].TBZ - arr[index].sum) / arr[index].sum) * 100).toFixed(2),
+
+      currentPeopleChangeBE: parseFloat(arr[index].changeSJPZZE).toFixed(2),
+      currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+      currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
+    })
+  }
+
+  debounce(fn, wait) {
+
+  }
+
+  moveTopTable(event) {
+
+    let timer = null;
+
+    this.setData({
+      timer:event
+    });
+
+    setTimeout(() => {
+      let top = 0;
+      if(this.data.timer == null){
+        top = this.data.topBarPos;
+      }else{
+        top = this.data.timer.detail.scrollTop;
+      }
       this.setData({
-        bar:index,
-        currentPeopleAge:arr[index].age,
-        currentPeopleBE:arr[index].LPZE,
-        currentPeopleTB:arr[index].TB,
-        currentPeopleSum:arr[index].sum,
-        currentPeopleGG:(arr[index].LPZE / arr[index].sum).toFixed(2),
-        currentPeopleTBReport:((arr[index].TB - arr[index].sum) / arr[index].sum).toFixed(2),
+        topBarPos:top,
+        timer:null
       })
+    } , 1000)
+    // this.debounce(this.setData({
+    //   ["topBarPos"]: event.detail.scrollTop
+    // }), 2000)
+
   }
 
-  moveTable(event){
+  scrollBottom(event){
+    // this.setData({
+    //   ["topBarPos"]: event.target.offsetTop
+    // })
+  }
 
+  showDiseaseListHandler(event){
+    let kind = event.target.dataset.type;
+    if(kind == 'zc'){
       this.setData({
-        topBarPos:event.detail.scrollTop
+        condition: {
+          ["showDiseaseList"]:true,
+          ["showZC"]:true,
+          ["showYZ"]:false
+        }
       })
+    }
+    if(kind == 'yz'){
+      this.setData({
+        condition: {
+          ["showDiseaseList"]:true,
+          ["showZC"]:false,
+          ["showYZ"]:true
+        }
+      })
+    }
   }
 
-  onShareAppMessage(res) {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
+  closeDiseaseList(){
+    this.setData({
+      condition: {
+        ["showDiseaseList"]:false,
+        ["showZC"]:false,
+        ["showYZ"]:false
+      }
+    })
+  }
+
+  goBack(){
+      this.router.reLaunch('/pages/index')
+  }
+
+  directDisease(event){
+    let kind = event.target.dataset.type;
+    if(kind == 'zc'){
+      wx.navigateTo({
+        url: '/pages/change/change?provision=0003'
+      })
     }
-    return {
-      title: '自定义转发标题',
-      path: '/page/user?id=123'
+    if(kind == 'yz'){
+      wx.navigateTo({
+        url: '/pages/change/change?provision=0004'
+      })
     }
   }
 
+  bindBDYearsChange(val){
+    let arr = this.app.globalData.tableData.data;
+    let index = val.detail.value;
 
+    this.setData({
+      bar: index,
+      currentPeopleAge: arr[index].age,
+      currentPeopleBE: arr[index].SJPZZE,
+      currentPeopleTB: arr[index].TBZ,
+      currentPeopleSum: arr[index].sum,
+      currentPeopleGG: (arr[index].SJPZZE / arr[index].sum).toFixed(2),
+      currentPeopleTBReport: (((arr[index].TBZ - arr[index].sum) / arr[index].sum) * 100).toFixed(2),
+
+      currentPeopleChangeBE: parseFloat(arr[index].changeSJPZZE).toFixed(2),
+      currentPeopleChangeTB: parseFloat(arr[index].changeTBZ).toFixed(2),
+      currentPeopleChangeSum: parseFloat(arr[index].changeSum).toFixed(2),
+    })
+  }
+
+  showUSDTable(){
+    this.setData({
+      condition: {
+        ["showUSDTable"]:true,
+        ["showCNYTable"]:false,
+      }
+    })
+  }
+
+  showCNYTable(){
+    this.setData({
+      condition: {
+        ["showUSDTable"]:false,
+        ["showCNYTable"]:true,
+      }
+    })
+  }
+
+  hideAllTable(){
+    this.setData({
+      condition: {
+        ["showUSDTable"]:false,
+        ["showCNYTable"]:false,
+      }
+    })
+  }
+
+  showProvision(){
+    this.setData({
+      condition:{
+        ["showPartProvision"]:true
+      }
+    })
+  }
+
+  hidePartProvision(){
+    this.setData({
+      condition:{
+        ["showPartProvision"]:false
+      }
+    })
+  }
+
+    /**
+     *
+     be:"10"
+     bf:3542
+     birth:""
+     calYears:"22"
+     giveMoneyYear :"10"
+     living:"0"
+     proId:""
+     sex:"0"
+     smoke:"0"
+     type:"usd"
+     */
+    onShareAppMessage(){
+        return {
+            title: '特级携升（EGS）计划书',
+            path: '/pages/result/firstPage?be=' +  this.app.globalData.submitData.be + '&bf='+this.app.globalData.submitData.bf + '&httpUrl=' + this.app.globalData.httpUrl + '&share=1' + '&birth=' + this.app.globalData.submitData.birth + '&calYears=' + this.app.globalData.submitData.calYears + '&giveMoneyYear=' + this.app.globalData.submitData.giveMoneyYear + '&living=' + this.app.globalData.submitData.living + '&proId=' + this.app.globalData.submitData.proId + '&sex=' + this.app.globalData.submitData.sex + '&smoke=' + this.app.globalData.submitData.smoke + '&type=' +this.app.globalData.submitData.type + '&username=' +this.app.globalData.submitData.username
+        }
+    }
 }
 
-wxa.launchPage(firstPage);
+wxa.launchPage(secondPage);
 </script>
 <config>
 {
-    "navigationTextTitle": "结果页"
+    "usingComponents": {
+        "CIECNDtable": "../table/CIECNDTable"
+    }
 }
 </config>
 <template>
 <view class="result">
-    <!--<view class="bg-wall"  style="display: {{ showBg ? 'block' : 'none'}} ">-->
+    <view class="wall-bg" wx:if="{{condition.showDiseaseList}}">
 
-    <!--</view>-->
+    </view>
+    <div class="disease" wx:if="{{condition.showDiseaseList}}">
+        <view style="padding: 20rpx 0 20rpx 0;text-align: center;">
+            病种详情
+            <image style="width: 35rpx;height: 35rpx;float: right;position: relative;left:-23rpx;" src="../../img/close.png" bindtap="closeDiseaseList"></image>
+        </view>
+        <view style="height: 1px;background-color: lightgray;">
+
+        </view>
+
+        <view wx:if="{{condition.showZC}}" style="line-height:2.3333;letter-spacing:2px;margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">
+            <text style="font-weight: bold;">第1类：与恶性肿瘤相关的疾病</text>
+            <text>{{"\n"}}</text>1.    原位癌（癌前病变）
+            <text>{{"\n"}}</text>2.    早期甲状腺或前列腺癌
+            <text>{{"\n"}}</text>3.    次级侵害性恶性肿瘤
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第2类：与心脏相关的疾病</text>
+            <text>{{"\n"}}</text>4.    主动脉瘤
+            <text>{{"\n"}}</text>5.    冠状动脉血管成形术
+            <text>{{"\n"}}</text>6.    植入心脏除纤颤器
+            <text>{{"\n"}}</text>7.    植入心脏起搏器
+            <text>{{"\n"}}</text>8.    胰岛素依赖型糖尿病 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>9.    川崎病 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>10. 次级严重心肌病
+            <text>{{"\n"}}</text>11. 次级严重感染性心内膜炎
+            <text>{{"\n"}}</text>12. 经皮穿刺心瓣膜手术
+            <text>{{"\n"}}</text>13. 心包切除手术
+            <text>{{"\n"}}</text>14. 风湿热合并心瓣膜损害 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>15. 激光心肌血运重建术
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第3类：与神经系统相关的疾病</text>
+            <text>{{"\n"}}</text>16. 自闭症 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>17. 于颈动脉进行内膜切除手术及血管成形术及植入支架
+            <text>{{"\n"}}</text>18. 脑动静脉畸形外科手术
+            <text>{{"\n"}}</text>19. 植入大脑内分流器
+            <text>{{"\n"}}</text>20. 早期脊髓肌肉萎缩症
+            <text>{{"\n"}}</text>21. 早期脑退化症（包括早期阿耳滋海默氏症）
+            <text>{{"\n"}}</text>22. 脑动脉瘤之血管介入治療
+            <text>{{"\n"}}</text>23. 儿童亨廷顿舞蹈症 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>24. 次级严重细菌感染脑膜炎
+            <text>{{"\n"}}</text>25. 次级严重昏迷
+            <text>{{"\n"}}</text>26. 次级严重病毒性脑炎
+            <text>{{"\n"}}</text>27. 中度严重肌肉营养不良症
+            <text>{{"\n"}}</text>28. 中度严重重症肌无力症
+            <text>{{"\n"}}</text>29. 严重精神病
+            <text>{{"\n"}}</text>30. 硬脑膜下血肿手术
+            <text>{{"\n"}}</text>31. 脑下垂体肿瘤切除手术
+            <text>{{"\n"}}</text>32. 第一型儿童脊髓肌萎缩 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第4类：与主要器官及功能相关的疾病</text>
+            <text>{{"\n"}}</text>33. 急性坏死性胰脏炎
+            <text>{{"\n"}}</text>34. 糖尿病并发症引致单足切除
+            <text>{{"\n"}}</text>35. 胆道重建手术
+            <text>{{"\n"}}</text>36. 慢性肺病
+            <text>{{"\n"}}</text>37. 出血性登革热 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>38. 周边动脉疾病之血管介入治療
+            <text>{{"\n"}}</text>39. 肝炎及肝硬化
+            <text>{{"\n"}}</text>40. 植入静脉过滤器
+            <text>{{"\n"}}</text>41. 次级严重肾病
+            <text>{{"\n"}}</text>42. 次级严重系统性红斑狼疮
+            <text>{{"\n"}}</text>43. 肝脏手术
+            <text>{{"\n"}}</text>44. 丧失单肢
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第5类：其他疾病</text>
+            <text>{{"\n"}}</text>45. 植入人工耳蜗手术
+            <text>{{"\n"}}</text>46. 糖尿病视网膜病变
+            <text>{{"\n"}}</text>47. 意外损伤及烧伤进行面部重建手术
+            <text>{{"\n"}}</text>48. 意外导致身体次级严重烧伤
+            <text>{{"\n"}}</text>49. 次级克罗恩氏病
+            <text>{{"\n"}}</text>50. 单耳失聪
+            <text>{{"\n"}}</text>51. 单眼失明
+            <text>{{"\n"}}</text>52. 大理石骨病 [保障期：1 - 18岁（翌年岁）]
+            <text>{{"\n"}}</text>53. 成骨不全症 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>54. 骨质疏松症連骨折 [保障期：1 – 70岁（翌年岁）]
+            <text>{{"\n"}}</text>55. 嗜铬细胞瘤
+            <text>{{"\n"}}</text>56. 严重哮喘 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>57. 严重中枢神经性睡眠窒息症或混合性睡眠窒息症
+            <text>{{"\n"}}</text>58. 严重脑痫症
+            <text>{{"\n"}}</text>59. 严重血友病 [保障期：1 – 18岁（翌年岁）]
+            <text>{{"\n"}}</text>60. 严重阻塞性睡眠窒息症
+            <text>{{"\n"}}</text>61. 系统性儿童类风湿关节炎 [保障期：1 – 18岁（翌年岁）]
+        </view>
+
+        <view wx:if="{{condition.showYZ}}" style="line-height:2.3333;letter-spacing:2px;margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">
+            <text style="font-weight: bold;">第1类：癌症</text>
+            <text>{{"\n"}}</text>1. 癌症
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第2类：与心脏相关的疾病</text>
+            <text>{{"\n"}}</text>2.   心肌病
+            <text>{{"\n"}}</text>3.   需要进行外科手术的冠状动脉病
+            <text>{{"\n"}}</text>4.   心脏病发作
+            <text>{{"\n"}}</text>5.   心瓣及结构性手术
+            <text>{{"\n"}}</text>6.   感染性心内膜炎
+            <text>{{"\n"}}</text>7.   原发性肺动脉高血压
+            <text>{{"\n"}}</text>8.   大动脉外科手术
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第3类：与神经系统相关的疾病</text>
+            <text>{{"\n"}}</text>9.   阿耳滋海默氏症
+            <text>{{"\n"}}</text>10. 肌萎缩性脊髓侧索硬化
+            <text>{{"\n"}}</text>11. 植物人
+            <text>{{"\n"}}</text>12. 细菌感染脑膜炎
+            <text>{{"\n"}}</text>13. 良性脑肿瘤
+            <text>{{"\n"}}</text>14. 脑部外科手术
+            <text>{{"\n"}}</text>15. 昏迷
+            <text>{{"\n"}}</text>16. 克雅二氏症
+            <text>{{"\n"}}</text>17. 脑炎
+            <text>{{"\n"}}</text>18. 严重头部创伤
+            <text>{{"\n"}}</text>19. 脑膜结核病
+            <text>{{"\n"}}</text>20. 运动神经元病
+            <text>{{"\n"}}</text>21. 多发性硬化症
+            <text>{{"\n"}}</text>22. 肌营养不良
+            <text>{{"\n"}}</text>23. 瘫痪
+            <text>{{"\n"}}</text>24. 柏金逊病
+            <text>{{"\n"}}</text>25. 脊髓灰质炎（小儿麻痹症）
+            <text>{{"\n"}}</text>26. 进行性延髓瘫痪
+            <text>{{"\n"}}</text>27. 进行性核上性麻痹
+            <text>{{"\n"}}</text>28. 严重重症肌无力症
+            <text>{{"\n"}}</text>29. 脊髓肌肉萎缩症
+            <text>{{"\n"}}</text>30. 中风
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第4类：与主要器官及功能相关的疾病</text>
+            <text>{{"\n"}}</text>31. 慢性肝病
+            <text>{{"\n"}}</text>32. 复发性慢性胰脏炎
+            <text>{{"\n"}}</text>33. 末期肺病
+            <text>{{"\n"}}</text>34. 肾衰竭
+            <text>{{"\n"}}</text>35. 主要器官移植
+            <text>{{"\n"}}</text>36. 坏死性筋膜炎
+            <text>{{"\n"}}</text>37. 肢体切断
+            <text>{{"\n"}}</text>38. 系统性红斑狼疮而并发狼疮性肾炎
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第5类：末期疾病及伤残</text>
+            <text>{{"\n"}}</text>39. 失去独立生活能力 [保障期：1 – 65岁（翌年岁）]
+            <text>{{"\n"}}</text>40. 末期疾病
+            <text>{{"\n"}}</text>41. 完全及永久伤残 [保障期：1 – 65岁（翌年岁）]
+            <text>{{"\n"}}</text><text style="font-weight: bold;">第6类：其他疾病</text>
+            <text>{{"\n"}}</text>42. 因输血引致的艾滋病
+            <text>{{"\n"}}</text>43. 障碍性贫血
+            <text>{{"\n"}}</text>44. 失明
+            <text>{{"\n"}}</text>45. 克罗恩氏病
+            <text>{{"\n"}}</text>46. 失聪
+            <text>{{"\n"}}</text>47. 伊波拉
+            <text>{{"\n"}}</text>48. 象皮病
+            <text>{{"\n"}}</text>49. 暴发性病毒肝炎
+            <text>{{"\n"}}</text>50. 丧失语言能力
+            <text>{{"\n"}}</text>51. 严重烧伤
+            <text>{{"\n"}}</text>52. 肾髓质囊肿病
+            <text>{{"\n"}}</text>53. 因职业感染人类免疫缺陷病毒
+            <text>{{"\n"}}</text>54. 严重类风湿关节炎
+            <text>{{"\n"}}</text>55. 严重溃疡性结肠炎
+            <text>{{"\n"}}</text>56. 系统性硬皮病
+        </view>
+
+        <view style="height: 1px;background-color: lightgray;">
+
+        </view>
+
+        <view style="display: flex;flex-direction:row;" wx:if="{{condition.showZC}}">
+            <view data-type="zc" style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;border-right: 1px solid lightgray;" bindtap="directDisease">查看疾病定义</view>
+            <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;" bindtap="closeDiseaseList">关闭</view>
+        </view>
+
+        <view style="display: flex;flex-direction:row;" wx:if="{{condition.showYZ}}">
+            <view data-type="yz" style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;border-right: 1px solid lightgray;" bindtap="directDisease">查看疾病定义</view>
+            <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;" bindtap="closeDiseaseList">关闭</view>
+        </view>
+    </div>
+
     <view class="part1">
-        <view style="padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe;font-size: 16px;font-weight: bold;">
-            保障计划: 男30岁 first page
+        <view style="padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid rgb(232 , 232 , 232);font-size: 16px;font-weight: bold;">
+            {{username}}  {{CIESex}},{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
         </view>
-        <view style="display: flex;flex-direction: row;justify-content: center;">
-            <view>
-                <view>交费期限</view>
-                <view><span>30</span> 年交</view>
+
+        <view style="margin-top: 10rpx;text-align: center;">
+            <view class="header-basic-info">
+                <view>每年保费</view>
+                <view><span>{{CIEBF}}</span>万美元</view>
+                <view>约<span>{{CIEchangeBF}}</span>万人民币</view>
             </view>
-            <view style="margin-left:282rpx;">
-                <view>首年保费</view>
-                <view><span>9981.18</span> 元</view>
+            <view class="header-basic-info" style="margin-left:98rpx;">
+                <view>总保费</view>
+                <view><span>{{EGSBFZE}}万美元</span></view>
+                <view>约<span>{{EGSChangeBFZE}}</span>万人民币</view>
             </view>
         </view>
 
-        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 35rpx;">
-            <view>
+        <view style="margin-top: 10rpx;text-align: center;">
+            <view class="header-basic-info">
                 <view>保障期限</view>
                 <view><span>终身</span></view>
             </view>
-            <view style="margin-left:282rpx;">
-                <view>保险金额</view>
-                <view><span>310000</span> 元</view>
+
+            <view class="header-basic-info" style="margin-left: 100rpx;">
+                <view>供款年期</view>
+                <view><span>{{giveMoneyYears}}</span>年</view>
             </view>
         </view>
 
-        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
-            <view wx:if="{{!condition.showPartOneTable}}" data-type="1" bindtap="showPartOneTable">
+        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;" data-type="1" bindtap="showPartOneTable">
+            <view wx:if="{{!condition.showPartOneTable}}">
                 <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
             </view>
         </view>
 
         <view wx:if="{{condition.showPartOneTable}}">
-            <view class="table">
-                <view class="tr bg-w">
-                    <view class="th">投保险种</view>
-                    <view class="th">投保金额</view>
-                    <view class="th ">保障期限</view>
-                    <view class="th ">交费期限</view>
-                    <view class="th ">首年保费</view>
+            <view style="width: 97%;margin: 0 auto;">
+                <view class="table" style="text-align: center;">
+                    <scroll-view scroll-x style="width: 100%;">
+                        <view class="tr-title bg-w">
+                            <view class="th-title">投保险种</view>
+                            <view class="th-title">投保金额</view>
+                            <view class="th-title ">保障期限</view>
+                            <view class="th-title ">交费期限</view>
+                            <view class="th-title ">首年保费</view>
+                        </view>
+                        <block wx:for="{{listData}}" wx:key="{{code}}">
+                            <view class="tr-title bg-w">
+                                <view class="td-title small">{{item.code}}</view>
+                                <view class="td-title small">{{item.money}}</view>
+                                <view class="td-title small">{{item.years}}</view>
+                                <view class="td-title small">{{item.money_years}}</view>
+                                <view class="td-title small">{{item.first_years}}</view>
+                            </view>
+                            <text>{{'\n'}}</text>
+                        </block>
+                    </scroll-view>
                 </view>
-                <block wx:for="{{listData}}" wx:key="{{code}}">
-                    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-                        <view class="td">{{item.code}}</view>
-                        <view class="td">{{item.money}}</view>
-                        <view class="td">{{item.years}}</view>
-                        <view class="td">{{item.money_years}}</view>
-                        <view class="td">{{item.first_years}}</view>
-                    </view>
-                    <view class="tr" wx:else>
-                        <view class="td">{{item.code}}</view>
-                        <view class="td">{{item.money}}</view>
-                        <view class="td">{{item.years}}</view>
-                        <view class="td">{{item.money_years}}</view>
-                        <view class="td">{{item.first_years}}</view>
-                    </view>
-                </block>
             </view>
+
             <view bindtap="hidePartOneTable" data-type="1" style="text-align: center;">
                 <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
             </view>
@@ -248,26 +988,66 @@ wxa.launchPage(firstPage);
 
     <view class="part2">
         <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
-            早期严重疾病
+            产品特点
         </view>
         <view style="margin-left: 30rpx;">
-            <view><span> • </span>保障61种早期疾病，可支付<span>3</span>次赔偿</view>
-            <view><span> • </span>每项赔偿额为当时保额的20%或 <span>25%</span></view>
-            <view><span> • </span>赔偿早期后，将 <span>豁免1年</span>的保费</view>
-            <view><span> • </span>每次赔偿上限为 <span>5万</span> 美元约32万人民币</view>
+            <view>
+                <span> • </span>短期供款 终身储蓄
+            </view>
+
+            <view style="width: 94%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
+                <text>只需要短期供款（可选5年、8年和12年）即可享受终身红利</text><text>{{"\n"}}</text>
+                <text>提供保证和非保证双重回报，在获取高收益的同时抵御经济波动的风险</text><text>{{"\n"}}</text>
+                <text>利用复利的时间价值助您实现长线的财务目标</text><text>{{"\n"}}</text>
+            </view>
+            <view><span> • </span>提取灵活 配合不同财务需要</view>
+
+            <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
+                <text>第3年起开始分红，可自由选择提取时间和金额，以配合自身的财务需要</text><text>{{"\n"}}</text>
+                <text>计划可作为退休养老、子女教育之储备，也可作为海外资产配置、隔离债务/婚姻等风险，实现财富传承、防止子女挥霍等用途</text><text>{{"\n"}}</text>
+                <text>可通过保单贷款，借出现金价值（保证+归原红利）80%的款项，而保单不受影响</text>
+            </view>
+
+            <view><span> • </span>专业稳健资管团队 实现全球资产配置</view>
+            <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
+                <text>最老牌保险公司之一，拥有一百多年的历史，经历二次世界大战和多次世界性经济危机而屹立不倒</text><text>{{"\n"}}</text>
+                <text>最稳健保险公司之一，拥有标普AA、惠誉AA和穆迪AA2等傲人信贷评级</text><text>{{"\n"}}</text>
+                <text>有丰厚的历史遗留资产作后盾，让保单分红更稳固</text><text>{{"\n"}}</text>
+                <text>90%分红机制保障，保单持有人将保证可获得不低于投资收益90%的可分配利润</text>
+            </view>
+
+            <view><span> • </span>代代传承 富过三代</view>
+            <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
+                <text>此计划可更换受保人，例如先由投保人做受保人，1年后改立孩子做受保人，以后甚至可以立孙子做受保人，实现代代传承，财富永续的目标 </text><text>{{"\n"}}</text>
+                <text>至可以立孙子做受保人，实现代代传承，财富永续的目标</text><text>{{"\n"}}</text>
+                <text>计划提供类信托功能，您可以选择一次性支付身故赔偿，也可以选择以分期形式支付身故赔偿，如让受益人每月获得定额的赔偿金额，防止受益人获得大笔赔偿金后挥霍财产</text>
+            </view>
+
+            <view><span> • </span>投保毋须提供健康信息</view>
+            <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
+                只要每年保费不超过一千万元，即无需提交健康信息，带病亦可投保
+            </view>
+
+            <view><span> • </span>多种身故保障</view>
+            <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
+                <text>身故可保证获得所缴保费总额加上每个保单周年日增加3.5%，直至高达已缴基本总保费的135%的赔偿</text><text>{{"\n"}}</text>
+                <text>意外身故可额外获得所缴保费总额100%的赔偿</text><text>{{"\n"}}</text>
+                <text>投保人意外保障：若保单持有人在缴费期间意外身故，可豁免余下的保费</text>
+            </view>
+
+            <view><span> • </span>子女学术优异奖</view>
+            <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
+                <text>若受保人是子女，计划提供额外学术优异奖，以表彰他们的优异成绩</text>
+            </view>
         </view>
 
-        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
-            <view wx:if="{{!condition.showPartTwoTable}}" data-type="2" bindtap="showPartOneTable">
+        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;" data-type="2" bindtap="showPartOneTable" >
+            <view wx:if="{{!condition.showPartTwoTable}}">
                 <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
             </view>
         </view>
 
         <view wx:if="{{condition.showPartTwoTable}}">
-            <view style="margin-left: 30rpx;color: #606266;">
-                注1支付早期疾病保障后，须从严重疾病赔偿、身故赔偿或退保时扣除相关赔偿额
-                注2：当时保额不计额外赠送的保额
-            </view>
             <view bindtap="hidePartOneTable" data-type="2" style="text-align: center;">
                 <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
             </view>
@@ -275,98 +1055,175 @@ wxa.launchPage(firstPage);
 
     </view>
 
-    <view class="part3">
-        <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
-            严重疾病
-        </view>
-        <view style="margin-left: 30rpx;">
-            <view style="display: flex;flex-direction: row;">
-                <view><span style="position: relative;top: -5rpx;"> • </span></view>
-                <view style="margin-left: 10rpx;">定期供款，保障终身涵盖重大疾病、严重意外和身故保障，保障人生大部分主要风险</view>
-            </view>
-            <view style="display: flex;flex-direction: row;">
-                <view><span style="position: relative;top: -5rpx;"> • </span></view>
-                <view style="margin-left: 10rpx;">定期供款，保障终身涵盖重大疾病、严重意外和身故保障，保障人生大部分主要风险</view>
-            </view>
+    <!--<view class="part3">-->
+        <!--<view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">-->
+            <!--严重疾病-->
+            <!--<span class="tags" bindtap="showDiseaseListHandler" data-type="yz">疾病列表</span>-->
+        <!--</view>-->
+        <!--<view style="margin-left: 30rpx;">-->
+            <!--<view>-->
+                <!--<span> • </span>定期供款，保障终身-->
+            <!--</view>-->
+            <!--<view wx:if="{{condition.showPartSixthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">-->
+                <!--涵盖重大疾病、严重意外和身故保障，保障人生大部分主要风险-->
+            <!--</view>-->
 
-        </view>
+            <!--<view>-->
+                <!--<span> • </span>-->
+                <!--集保障与储蓄于一身-->
+            <!--</view>-->
+            <!--<view wx:if="{{condition.showPartSeventhPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">-->
+                <!--真正做到有事赔钱，没事存钱-->
+            <!--</view>-->
+            <!--<view>-->
+                <!--<span> • </span>保障 <span>56</span> 种严重疾病-->
+            <!--</view>-->
+            <!--<view wx:if="{{condition.showPartEighthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">-->
+                <!--包括癌症、心脏病发作和中风等最常见的重大疾病-->
+            <!--</view>-->
 
-        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
-            <view wx:if="{{!condition.showPartThreeTable}}" data-type="3" bindtap="showPartOneTable">
-                <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
-            </view>
-        </view>
+            <!--<view>-->
+                <!--<span> • </span>-->
+                <!--癌症、心脏病发作和中风可以额外赔偿 <span>4</span>次-->
+            <!--</view>-->
+            <!--<view wx:if="{{condition.showPartNinthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">-->
+                <!--每次赔偿高达当时保额的80%<text>{{"\n"}}</text>-->
+                <!--癌症可以额外多赔偿2次，心脏病和中风合共可额外多赔2次<text>{{"\n"}}</text>-->
+                <!--癌症包括新症、转移或原有癌症的持续，须满足3年等候期；<text>{{"\n"}}</text>-->
+                <!--其他疾病多次赔偿须满足1年等候期-->
+            <!--</view>-->
+            <!--<view>-->
+                <!--<span> • </span>保障儿童先天性或发育异常疾病-->
+            <!--</view>-->
+            <!--<view wx:if="{{condition.showPartTenthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">-->
+                <!--先天性或发育异常疾病须在投保前或投保后90天内未被发现-->
+            <!--</view>-->
 
-        <view wx:if="{{condition.showPartThreeTable}}">
-            <view style="margin-left: 30rpx;color: #606266;">
-                轻症最高赔付包含前两次轻症之后增加的保障及24个月运动达标的增加的保障
-            </view>
-            <view bindtap="hidePartOneTable" data-type="3" style="text-align: center;">
-                <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
-            </view>
-        </view>
+            <!--<view>-->
+                <!--<span> • </span>-->
+                <!--最高可赔当时保额的 <span>420%</span>-->
+            <!--</view>-->
+            <!--<view wx:if="{{condition.showPartElevthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">-->
+                <!--56种严重疾病赔100%，癌症、心脏病和中风额外多赔320%-->
+            <!--</view>-->
 
-    </view>
+            <!--<view>-->
+                <!--<span> • </span>支付严重疾病赔偿后将 <span>豁免</span>往后所有保费-->
+            <!--</view>-->
+            <!--<view wx:if="{{condition.showPartTwelthPart}}">-->
+                <!--<view bindtap="hidePartOneTable" data-type="12" style="text-align: center;">-->
+                    <!--<image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>-->
+                <!--</view>-->
+            <!--</view>-->
 
-    <view class="part4">
-        <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
-            癌症无惧
-        </view>
-        <view style="margin-left: 30rpx;">
-            <view><span> • </span>第一次癌症保障 <span>30万</span>元</view>
-            <view><span> • </span>第二次癌症保障 <span>30万</span>元</view>
-            <view><span> • </span>第三次癌症保障 <span>30万</span>元</view>
-        </view>
+            <!--<view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;" data-type="6" bindtap="showPartOneTable">-->
+                <!--<view wx:if="{{!condition.showPartSixthPart}}">-->
+                    <!--<image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>-->
+                <!--</view>-->
+            <!--</view>-->
+        <!--</view>-->
 
-    </view>
+    <!--</view>-->
 
-    <view class="part4">
-        <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
-            豁免无忧
-        </view>
-        <view style="margin-left: 30rpx;">
-            <view><span> • </span>第一次癌症保障 <span>30万</span>元</view>
-            <view><span> • </span>第二次癌症保障 <span>30万</span>元</view>
-            <view><span> • </span>第三次癌症保障 <span>30万</span>元</view>
-        </view>
+    <!--<view class="part4">-->
+        <!--<view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">-->
+            <!--良性肿瘤保障-->
+        <!--</view>-->
+        <!--<view style="margin-left: 30rpx;">-->
+            <!--<view>-->
+                <!--<span> • </span>独有良性肿瘤额外保障 , 最高额外 <span>10%</span> 赔偿-->
+            <!--</view>-->
+            <!--<view wx:if="{{!condition.showPartThirtythPart}}" style="margin-top: 5px;text-align: center;" data-type="13" bindtap="showPartOneTable"> <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image></view>-->
+            <!--<view wx:if="{{condition.showPartThirtythPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">-->
+                <!--若通过手术切除肿瘤时确诊此肿瘤为良性，可获当时保额最高10%的额外赔偿 <text>{{"\n"}}</text>-->
+                <!--1. 乳房、卵巢和子宫（只保子宫内膜息肉）可额外赔偿当时保额的5%，上限1万美元 <text>{{"\n"}}</text>-->
+                <!--2. 肾上腺、骨、肾脏、肝脏、肺、颅内神经或脊神经、胰脏、脑垂体或睪丸可额外赔偿当时保额的10%，上限2万美元-->
+                <!--<view bindtap="hidePartOneTable" data-type="13" style="text-align: center;">-->
+                    <!--<image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>-->
+                <!--</view>-->
+            <!--</view>-->
+        <!--</view>-->
 
-    </view>
+    <!--</view>-->
+
 
     <view class="part4">
         <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
             保单利益演示
         </view>
         <view>
-            <view style="margin-bottom: 20rpx;">
-                <text style="margin-left: 30rpx;">拖动按钮查看不同年龄保单利益</text>
+            <view style="margin: 0 auto 20rpx auto;height: 1px;background-color: lightgray;width: 90%;">
+
             </view>
-            <view style='margin-top: 20rpx;border:1px solid black;width: 90%;margin: 0 auto;text-align: center;'>
-                <view>被保人 <span>{{currentPeopleAge}}</span> 岁时</view>
-                <view>重疾/身故赔偿金额: <span>{{currentPeopleBE}}美元</span></view>
+            <view style='margin-top: 20rpx;border:1px solid rgb(288,136,0);width: 90%;margin: 0 auto;text-align: center;'>
+                <view style="display: flex;flex-direction:row;justify-content:center;">
+                    <view>
+                        被保人
+                    </view>
+                    <span style="position: relative;top: -3rpx;">{{currentPeopleAge}}</span>
+                    <view style="position: relative;top: 3rpx;">
+                        <picker style="" mode="selector" bindchange="bindBDYearsChange" value="{{index}}" range="{{bd_years}}">
+                            <view class="picker">
+                                <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
+                            </view>
+                        </picker>
+                    </view>
+                    <view>
+                        岁时
+                    </view>
+                </view>
+                <view>身故赔偿金额: <span>{{currentPeopleBE}}美元</span></view>
+                <view>(约为 <span>{{currentPeopleChangeBE}}</span> 人民币)</view>
                 <view>退保价值: <span>{{currentPeopleTB}}美元</span></view>
+                <view>(约为 <span>{{currentPeopleChangeTB}}</span> 人民币)</view>
                 <view>所缴保费总额: <span>{{currentPeopleSum}}美元</span></view>
+                <view>(约为 <span>{{currentPeopleChangeSum}}</span> 人民币)</view>
                 <view>保障杠杆: <span>{{currentPeopleGG}}倍</span></view>
-                <view>预计退保汇报: <span>{{currentPeopleTBReport}}%</span></view>
+                <view>预计退保回报: <span>{{currentPeopleTBReport}}%</span></view>
+                <view>当前汇率:  <span> 1(美元): {{cnyUnit}}(人民币)</span></view>
             </view>
             <view class="section section_gap">
                 <view class="body-view" style="display: flex;flex-direction:row;justify-content:center;">
-                    <view><span bindtap="decreaseAge" style="font-size: 20px;position: relative;top: 6rpx;">-</span></view>
+                    <view><span bindtap="decreaseAge" style="font-size: 25px;position: relative;top: -6rpx;">-</span></view>
                     <view style="width: 90%;">
-                        <slider value="{{bar}}" bindchanging="changeInsuranceAge" min="0" max="29" />
+                        <slider block-color="#1EBB74" value="{{bar}}" bindchanging="changeInsuranceAge" bindchange="changeInsuranceAge" min="0" max="29" />
                     </view>
-                    <view><span bindtap="addAge" style="font-size: 20px;position: relative;top: 6rpx;">+</span></view>
+                    <view><span bindtap="addAge" style="font-size: 25px;position: relative;top: -6rpx;">+</span></view>
                 </view>
             </view>
-            <view class="table-box">
-                <view class="table" style="width: 20%;">
-                    <view class="tr bg-w">
-                        <view style="margin-top: 22rpx;">年龄</view>
+            <!--<view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">-->
+                <!--<view wx:if="{{!condition.showPartFourthTable}}" data-type="4" bindtap="showPartOneTable">-->
+                    <!--<image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>-->
+                <!--</view>-->
+            <!--</view>-->
+
+            <view class="part5">
+                <view>
+                    <button class="CNYButton" size="mini" bindtap="showUSDTable">利益演示表(美元)</button>
+                </view>
+                <view style="margin-left: 30rpx;">
+                    <button class="CNYButton" size="mini" bindtap="showCNYTable">利益演示表(人民币)</button>
+                </view>
+
+                <!--<view style="margin-left: 30rpx;">-->
+                    <!--<button class="USDButton" size="mini" bindtap="hideAllTable">收起</button>-->
+                <!--</view>-->
+            </view>
+
+            <!--美元表格-->
+            <view wx:if="{{condition.showUSDTable}}" style="text-align: center;margin-bottom: 20rpx;">
+                保险利益演示表(美元)
+            </view>
+            <view wx:if="{{condition.showUSDTable}}" class="table-box">
+                <view class="table" style="width: 30%;border-right: 1px solid darkgray;">
+                    <view class="tr bg-w" style="border:1px solid lightgray;height: 29px;">
+                        <view style="margin: 12rpx 0 0 12rpx;">年龄</view>
                     </view>
-                    <scroll-view bindscroll="moveTable" scroll-y style="height: 806rpx;white-space: nowrap;">
+                    <scroll-view upper-threshold="1" lower-threshold="1" bindscroll="moveTopTable" scroll-top="{{topBarPos}}" scroll-y style="height: 806rpx;white-space: nowrap;">
                         <view>
                             <block wx:for="{{tableData}}" wx:key="*">
-                                <view class="tr bg-g">
-                                    <view class="td" style="width: 2%;position: relative;top: 0;">{{item.age}}</view>
+                                <view class="tr bg-w">
+                                    <view class="td" style="width: 53%;position: relative;top: 0;border-bottom: 1px solid lightgray;">{{item.age}}</view>
                                 </view>
                                 <text>{{'\n'}}</text>
                             </block>
@@ -374,53 +1231,291 @@ wxa.launchPage(firstPage);
                     </scroll-view>
                 </view>
                 <view class="table">
-                    <scroll-view scroll-x scroll-y bindscroll="moveTable"  style="white-space: nowrap;width: 2000px;" class="bg-w">
+                    <scroll-view upper-threshold="1" lower-threshold="1" scroll-x scroll-left="{{leftBarPos}}" style="white-space: nowrap;" class="bg-w">
                         <!--<view class="th" style="width: 2%;position: relative;top:0;">年龄</view>-->
-                        <view class="th">所缴保费总额</view>
-                        <view class="th">保证退保金额</view>
+                        <view class="th">保费总额</view>
+                        <view class="th">保证退保价值</view>
                         <view class="th">非保证退保红利</view>
                         <view class="th">退保总额</view>
-                        <view class="th">非保证特别红利</view>
-                        <view class="th">保额</view>
-                        <view class="th">赠送保额</view>
-                        <view class="th">理赔总额</view>
+                        <view class="th">最低身故赔偿金</view>
+                        <view class="th">保证理赔金额</view>
+                        <view class="th">非保证理赔红利</view>
+                        <view class="th">赔偿总额</view>
+                        <view class="th">实际赔偿金额</view>
                     </scroll-view>
-                    <scroll-view scroll-top="{{topBarPos}}" bindscroll="moveTable" scroll-x scroll-y style="height: 800rpx;white-space: nowrap;">
+                    <scroll-view bindscrolltolower="scrollBottom" upper-threshold="4" lower-threshold="4" scroll-top="{{topBarPos}}" scroll-left="{{leftBarPos}}" bindscroll="moveTable" scroll-x scroll-y style="height: 806rpx;white-space: nowrap;">
 
                         <block wx:for="{{tableData}}" wx:key="*">
-                            <view class="tr bg-g">
-                                <view class="td" style="width: 9.3%;">{{item.sum}}</view>
-                                <view class="td" style="width: 10%;">{{item.TB}}</view>
-                                <view class="td" style="width: 11%;">{{item.FTB}}</view>
-                                <view class="td" style="width: 7.6%;">{{item.TBZ}}</view>
-                                <view class="td" style="width: 10%;">{{item.FBZTBH}}</view>
-                                <view class="td" style="width: 4.5%;">{{item.BE}}</view>
-                                <view class="td" style="width: 9.7%;">{{item.ZSBE}}</view>
-                                <view class="td">{{item.LPZE}}</view>
+                            <view class="tr bg-w">
+                                <view class="td" >{{item.sum}}</view>
+                                <view class="td">{{item.TB}}</view>
+                                <view class="td" >{{item.FTB}}</view>
+                                <view class="td" >{{item.TBZ}}</view>
+                                <view class="td" >{{item.ZDSGPZ}}</view>
+                                <view class="td" >{{item.BZLP}}</view>
+                                <view class="td" >{{item.FBZLPHL}}</view>
+                                <view class="td">{{item.PZZE}}</view>
+                                <view class="td">{{item.SJPZZE}}</view>
                             </view>
                             <text>{{'\n'}}</text>
                         </block>
                     </scroll-view>
                 </view>
+
+            </view>
+
+            <view wx:if="{{condition.showUSDTable}}" bindtap="hideAllTable" data-type="2" style="text-align: center;margin-top: 20rpx;">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
+            </view>
+
+
+            <!--人民币表格-->
+            <view wx:if="{{condition.showCNYTable}}" style="text-align: center;margin-bottom: 20rpx;">
+                保险利益演示表(人民币)
+            </view>
+            <view wx:if="{{condition.showCNYTable}}" class="table-box">
+                <view class="table" style="width: 30%;border-right: 1px solid darkgray;">
+                    <view class="tr bg-w" style="border:1px solid lightgray;height: 29px;">
+                        <view style="margin: 12rpx 0 0 12rpx;">年龄</view>
+                    </view>
+                    <scroll-view upper-threshold="1" lower-threshold="1" bindscroll="moveTopTable" scroll-top="{{topBarPos}}" scroll-y style="height: 806rpx;white-space: nowrap;">
+                        <view>
+                            <block wx:for="{{tableData}}" wx:key="*">
+                                <view class="tr bg-w">
+                                    <view class="td" style="width: 53%;position: relative;top: 0;border-bottom: 1px solid lightgray;">{{item.age}}</view>
+                                </view>
+                                <text>{{'\n'}}</text>
+                            </block>
+                        </view>
+                    </scroll-view>
+                </view>
+                <view class="table">
+                    <scroll-view upper-threshold="1" lower-threshold="1" scroll-x scroll-left="{{leftBarPos}}" style="white-space: nowrap;" class="bg-w">
+                        <!--<view class="th" style="width: 2%;position: relative;top:0;">年龄</view>-->
+                        <view class="th">保费总额</view>
+                        <view class="th">保证退保价值</view>
+                        <view class="th">非保证退保红利</view>
+                        <view class="th">退保总额</view>
+                        <view class="th">最低身故赔偿金</view>
+                        <view class="th">保证理赔金额</view>
+                        <view class="th">非保证理赔红利</view>
+                        <view class="th">赔偿总额</view>
+                        <view class="th">实际赔偿金额</view>
+                    </scroll-view>
+                    <scroll-view bindscrolltolower="scrollBottom" upper-threshold="4" lower-threshold="4" scroll-top="{{topBarPos}}" scroll-left="{{leftBarPos}}" bindscroll="moveTable" scroll-x scroll-y style="height: 806rpx;white-space: nowrap;">
+
+                        <block wx:for="{{cnyTable}}" wx:key="*">
+                            <view class="tr bg-w">
+                                <view class="td" >{{item.sum}}</view>
+                                <view class="td">{{item.TB}}</view>
+                                <view class="td" >{{item.FTB}}</view>
+                                <view class="td" >{{item.TBZ}}</view>
+                                <view class="td" >{{item.ZDSGPZ}}</view>
+                                <view class="td" >{{item.BZLP}}</view>
+                                <view class="td" >{{item.FBZLPHL}}</view>
+                                <view class="td">{{item.PZZE}}</view>
+                                <view class="td">{{item.SJPZZE}}</view>
+                            </view>
+                            <text>{{'\n'}}</text>
+                        </block>
+                    </scroll-view>
+                </view>
+
+            </view>
+
+            <view wx:if="{{condition.showCNYTable}}" bindtap="hideAllTable" data-type="2" style="text-align: center;margin-top: 20rpx;">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
+            </view>
+
+            <view wx:if="{{condition.showPartFourthTable}}" bindtap="hidePartOneTable" data-type="4" style="text-align: center;">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
             </view>
         </view>
 
     </view>
 
-    <view style="width: 95%;margin: 20rpx auto;">
-        <button type="primary" open-type="share">立即分享</button>
+
+    <view class="part4">
+        <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
+            不保事项
+        </view>
+        <view style="margin-left: 30rpx;">
+            <view><span> • </span>无不保事项</view>
+        </view>
+
+    </view>
+
+    <view class="part4">
+        <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
+            条款详情
+        </view>
+        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;">
+            <view wx:if="{{!condition.showPartProvision}}" bindtap="showProvision">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
+            </view>
+        </view>
+        <view wx:if="{{condition.showPartProvision}}">
+            <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
+
+            <navigator hover-class="none" url="/pages/change/change?provision=0001" hover-class="navigator-hover">
+                <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
+                    <view style="display: inline-block;">0001    一般条款</view>
+                    <view style="display: inline-block;float: right;"> > </view>
+                </view>
+            </navigator>
+
+            <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
+
+            <navigator hover-class="none" url="/pages/change/change?provision=0002" hover-class="navigator-hover">
+                <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
+                    <view style="display: inline-block;">0002    保障条款</view>
+                    <view style="display: inline-block;float: right;"> > </view>
+                </view>
+            </navigator>
+
+            <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
+
+            <!--<navigator hover-class="none" url="/pages/change/change?provision=0003" hover-class="navigator-hover">-->
+                <!--<view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">-->
+                    <!--<view style="display: inline-block;">0003    早期疾病定义</view>-->
+                    <!--<view style="display: inline-block;float: right;"> > </view>-->
+                <!--</view>-->
+            <!--</navigator>-->
+
+            <!--<view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>-->
+
+            <!--<navigator hover-class="none" url="/pages/change/change?provision=0004" hover-class="navigator-hover">-->
+                <!--<view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">-->
+                    <!--<view style="display: inline-block;">0004    严重疾病定义</view>-->
+                    <!--<view style="display: inline-block;float: right;"> > </view>-->
+                <!--</view>-->
+            <!--</navigator>-->
+
+            <!--<view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>-->
+
+            <!--<navigator hover-class="none" url="/pages/change/change?provision=0005" hover-class="navigator-hover">-->
+                <!--<view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">-->
+                    <!--<view style="display: inline-block;">0005  良性疾病定义</view>-->
+                    <!--<view style="display: inline-block;float: right;"> > </view>-->
+                <!--</view>-->
+            <!--</navigator>-->
+
+            <view bindtap="hidePartProvision" data-type="17" style="text-align: center;">
+                <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
+            </view>
+        </view>
+
+
+        <!--<view style="height: 1px;width: 100%;background-color: darkgray;"></view>-->
+    </view>
+
+    <view class="part4" style="margin-bottom: 120rpx;">
+        <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
+            风险提示
+        </view>
+        <view style="margin-left: 30rpx;">
+            <view style="margin: 0 auto;color: rgb(170,173,198);">
+                * 上述产品的回报率及红利除非已注明，否则并非保证，将来实际取得的金额可能比预期低或者高
+            </view>
+            <view style="margin: 15rpx auto;color: rgb(170,173,198);">
+                * 提前退保或提取保单款项可能会低于已缴的保费，甚至有可能为零
+            </view>
+            <view style="margin: 15rpx auto;color: rgb(170,173,198);">
+                * 本计划并非以人民币结算，可能会有汇率及外汇政策改变的风险
+            </view>
+            <view style="margin: 15rpx auto;color: rgb(170,173,198);">
+                * 本平台演示说明仅供参考，具体请以官方保单合同为准。
+            </view>
+        </view>
+
+    </view>
+
+    <view class="part4 floatButton" style="padding-bottom: 0;width: 100%;border-radius: 0;">
+        <view style="display: flex;flex-direction:row;">
+            <button class="shareFButton" open-type="share">发给朋友</button>
+            <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;" bindtap="goBack">重做计划书</view>
+        </view>
     </view>
 </view>
 </template>
 <style lang="scss">
+    .floatButton{
+        position: fixed;
+        bottom:0;
+        z-index: 1000;
+    }
+    button::after{ border: none; }
+    .shareFButton{
+        width: 50%;
+        font-size:14px;
+        padding:43rpx 0 0 0;
+        border-radius:0!important;
+        background-color: white;
+        line-height: 0;
+        border-right:1px solid lightgrey;
+
+    }
+    .CNYButton{
+        border-radius: 15px;
+        padding: 20rpx;
+        background-color: rgb(33 , 201 ,143);
+        box-shadow: #fefefe;
+        color: white;
+        border: 0;
+    }
+    .disease{
+        position:fixed;
+        top:60rpx;
+        z-index:101;
+        background-color:white;
+        width:94%;
+        left:24rpx;
+        border-radius: 8px;
+    }
+    .wall-bg{
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .small{
+        position: relative;
+        min-height: 76px;
+    }
+    .tags{
+        position: absolute;
+        right: 41rpx;
+        background-color: rgb(255 , 250 ,238);
+        color: rgb(232 , 135 , 100)!important;
+        font-size: 12px!important;
+        margin-top: 7rpx;
+    }
+    .table-box{
+        width: 90%;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid black;
+        display: flex;
+    }
 .result {
     padding-top: 30rpx;
     width: 100%;
     height: auto;
     font-family: "微软雅黑";
-    font-size: 12px;
+    font-size: 14px;
     background-color: rgb(42,38,63);
     padding-bottom: 30rpx;
+}
+.header-basic-info{
+    display: inline-block;
+    width: 40%;
+    padding-bottom: 20rpx;
+    border-bottom:1px solid rgb(232 , 232 , 232);
+    color: rgb(157,157,157);
 }
 .bg-wall{
     width: 100%;
@@ -440,69 +1535,91 @@ wxa.launchPage(firstPage);
     padding-bottom: 20rpx;
 }
 
+.part5{
+    margin-top: 20rpx;
+    padding-bottom: 20rpx;
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+}
+
 .part2 , .part3{
     margin-top: 20rpx;
 }
 .part1 span , .part2 span , .part3 span , .part4 span{
-    color:#67C23A;
-    font-size: 16px
+    color:rgb(234 , 27 , 43);
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .table {
-    border: 0px solid darkgray;
-    width: 170%;
-    height: 868rpx;
-    white-space: nowrap;
-    overflow:scroll;//超出内容滚动
-    overflow-x:hidden;//隐藏x方向滚动条
-    overflow-y:hidden;//隐藏y方向滚动条
-}
-.table-box{
-    width: 90%;
     margin: 0 auto;
     overflow: hidden;
-    border: 1px solid black;
-    display: flex;
-}
-.table-th{
-    width: 10%;
-    height: 22rpx;
-    align-items: center;
-    display: inline-block;
-    white-space: nowrap;
+    border: 0px solid darkgray;
+    font-size: 12px;
 }
 .tr {
-    /*display: flex;*/
     width: 200%;
-    height: 62rpx;
+    height: auto;
     align-items: center;
     display: inline-block;
-    white-space: nowrap;
+}
+
+.tr-title{
+    width: 350px;
+    height: auto;
+    display: inline-block;
 }
 .td {
-    width:7.6%;
+    width:93px;
     text-align:center;
-    height:49rpx;
+    height:auto;
+    border:1px solid lightgray;
+    padding-top:11rpx;
+    display: inline-block;
+
+}
+
+.td-title{
+    width:67px;
+    text-align:center;
+    height:auto;
     border-bottom:1px solid lightgray;
     padding-top:11rpx;
     display: inline-block;
-    white-space: nowrap;
-
+    vertical-align: top;
+    border-left:1px solid lightgray;
+    border-right:1px solid lightgray;
 }
 .bg-w{
-    background: snow;
+    background: white;
 }
 .bg-g{
     background: #E6F3F9;
 }
 .th {
-    width:200px;
+    width:83px;
     background:#fefefe;
     color:black;
     display:inline-block;
-    height:23rpx;
+    height:auto;
     border:1px solid lightgray;
-    padding:10px;
-    white-space: nowrap;
+    padding:5px;
+    text-align: center;
 }
+.th-title{
+    width:49px;
+    background:#fefefe;
+    color:black;
+    display:inline-block;
+    height:auto;
+    border:1px solid lightgray;
+    padding:9px;
+    text-align: center;
+}
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        color: transparent;
+    }
 </style>

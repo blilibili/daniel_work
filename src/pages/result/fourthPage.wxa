@@ -97,6 +97,7 @@
                     living:option.living,
                     sex:option.sex,
                     smoke:option.smoke,
+                    username:option.username
                 }
                 this.app.globalData.submitData = option;
 
@@ -114,6 +115,7 @@
                             tmp[k] = v.age;
                         })
                         this.setData({
+                            username:this.app.globalData.submitData.username || '',
                             CIESex:option.sex == 0 ? '男':'女',
                             bd_years:tmp,
                             CIEAge: option.calYears,
@@ -139,6 +141,7 @@
                             currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
                             currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum).toFixed(2),
                             tableData: this.app.globalData.tableData.data,
+                            cnyTable:this.app.globalData.tableData.cnyTable,
                             age: option.calYears,
                             currentPeopleAge: option.calYears,
                             currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
@@ -168,6 +171,7 @@
                             tmp[k] = v.age;
                         })
                         this.setData({
+                            username:this.app.globalData.submitData.username || '',
                             CIESex:this.app.globalData.submitData.sex == 0 ? '男':'女',
                             bd_years:tmp,
                             CIEAge: this.app.globalData.submitData.calYears,
@@ -193,6 +197,7 @@
                             currentPeopleGG: (this.app.globalData.tableData.data[0].LPZE / this.app.globalData.tableData.data[0].sum).toFixed(2),
                             currentPeopleTBReport: ((this.app.globalData.tableData.data[0].TBZ - this.app.globalData.tableData.data[0].sum) / this.app.globalData.tableData.data[0].sum * 100).toFixed(2),
                             tableData: this.app.globalData.tableData.data,
+                            cnyTable:this.app.globalData.tableData.cnyTable,
                             age: this.app.globalData.submitData.calYears,
                             currentPeopleAge: this.app.globalData.submitData.calYears,
                             currentPeopleChangeBE: parseFloat(this.app.globalData.tableData.data[0].changeLPZE).toFixed(2),
@@ -731,8 +736,8 @@
          */
         onShareAppMessage(){
             return {
-                title: 'CIR2保险',
-                path: '/pages/result/fourthPage?be=' +  this.app.globalData.submitData.be + '&bf='+this.app.globalData.submitData.bf + '&httpUrl=' + this.app.globalData.httpUrl + '&share=1' + '&birth=' + this.app.globalData.submitData.birth + '&calYears=' + this.app.globalData.submitData.calYears + '&giveMoneyYear=' + this.app.globalData.submitData.giveMoneyYear + '&living=' + this.app.globalData.submitData.living + '&proId=' + this.app.globalData.submitData.proId + '&sex=' + this.app.globalData.submitData.sex + '&smoke=' + this.app.globalData.submitData.smoke + '&type=' +this.app.globalData.submitData.type
+                title: '危疾终身全护保（CIR）计划书',
+                path: '/pages/result/fourthPage?be=' +  this.app.globalData.submitData.be + '&bf='+this.app.globalData.submitData.bf + '&httpUrl=' + this.app.globalData.httpUrl + '&share=1' + '&birth=' + this.app.globalData.submitData.birth + '&calYears=' + this.app.globalData.submitData.calYears + '&giveMoneyYear=' + this.app.globalData.submitData.giveMoneyYear + '&living=' + this.app.globalData.submitData.living + '&proId=' + this.app.globalData.submitData.proId + '&sex=' + this.app.globalData.submitData.sex + '&smoke=' + this.app.globalData.submitData.smoke + '&type=' +this.app.globalData.submitData.type + '&username=' +this.app.globalData.submitData.username
             }
         }
 
@@ -908,7 +913,7 @@
 
         <view class="part1">
             <view style="padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid rgb(232 , 232 , 232);font-size: 16px;font-weight: bold;">
-                {{CIESex}},{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
+                {{username}}  {{CIESex}},{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
             </view>
             <view style="text-align: center;margin-top: 10rpx;">
                 <view class="header-basic-info">
@@ -1260,7 +1265,7 @@
                         </scroll-view>
                         <scroll-view bindscrolltolower="scrollBottom" upper-threshold="4" lower-threshold="4" scroll-top="{{topBarPos}}" scroll-left="{{leftBarPos}}" bindscroll="moveTable" scroll-x scroll-y style="height: 806rpx;white-space: nowrap;">
 
-                            <block wx:for="{{tableData}}" wx:key="*">
+                            <block wx:for="{{cnyTable}}" wx:key="*">
                                 <view class="tr bg-w">
                                     <view class="td" >{{item.changeSum}}</view>
                                     <view class="td">{{item.changeTB}}</view>
@@ -1504,7 +1509,7 @@
     }
     .header-basic-info{
         display: inline-block;
-        width: 37%;
+        width: 40%;
         padding-bottom: 20rpx;
         border-bottom:1px solid rgb(232 , 232 , 232);
         color: rgb(157,157,157);

@@ -45,6 +45,9 @@
         if(this.app.globalData.proName == 'fourthPage'){
             proTK = 'cir'
         }
+        if(this.app.globalData.proName == 'firstPage'){
+            proTK = 'egs'
+        }
         let submitData = this.app.globalData.submitData;
       switch (option.provision){
           case '0001':

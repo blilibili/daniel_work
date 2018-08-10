@@ -8,18 +8,61 @@
         <meta name="description" content="Pushy is an off-canvas navigation menu for your website.">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-        <link rel="stylesheet" href="https://chrisyee.ca/pushy/css/normalize.css">
-        <link rel="stylesheet" href="https://chrisyee.ca/pushy/css/site.css?v=1.1.0">
+        <link rel="stylesheet" href="../css/normalize.css">
+        <link rel="stylesheet" href="../css/site.css">
         <!-- Pushy CSS -->
-        <link rel="stylesheet" href="https://chrisyee.ca/pushy/css/pushy.css?v=1.1.0">
-     <style>
-html, body {
-  color: #3f3f3f;
-  
-}
-    </style> 
+        <link rel="stylesheet" href="../css/pushy.css">
+        <link href="../css/style.css" rel="stylesheet" />
+        <style>
+            ul, menu, dir {
+                display: block;
+                list-style-type: disc;
+                -webkit-margin-before: 1em;
+                -webkit-margin-after: 1em;
+                -webkit-margin-start: 0px;
+                -webkit-margin-end: 0px;
+                -webkit-padding-start: 40px;
+            }
+            html, body {
+                color: #3f3f3f;
+                font-size: 14px;
+            }
+            .main-title{
+                position: relative;
+                top: 8px;
+            }
+            .header-section-li{
+                width: 100%;
+                height: 2.6rem;
+                background-size: 100% 100%;
+                background-color: #000;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 1000;
+                text-align: center;
+                color: white;
+            }
+            #container{
+                margin-top: 20px;
+            }
+            .menu-btn{
+                width: 73px;
+                float: left;
+            }
+            .back-btn{
+                padding: 10px;
+                margin-bottom: 30px;
+                background: #000;
+                color: #FFF;
+                text-align: center;
+                border: 0;
+                float: right;
+            }
+        </style>
         <!-- jQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="../js/jquery.min.js"></script>
+
     </head>
     <body>
         <!-- Pushy Menu -->
@@ -94,11 +137,15 @@ html, body {
 
         <!-- Site Overlay -->
         <div class="site-overlay"></div>
-
-        <!-- Your Content -->
-        <div id="container">
+        <div class="header-section-li">
             <!-- Menu Button -->
             <button class="menu-btn">&#9776; 菜单</button>
+            <span class="main-title">富足三代 - 一般条款</span>
+            <button class="back-btn">返回小程序</button>
+        </div>
+        <!-- Your Content -->
+        <div id="container">
+
 <h1>一般条款</h1>
    <h2>1.	双方的协议 </h2>    
    <h3 id="1.1">1.1	定义</h3>
@@ -349,9 +396,30 @@ html, body {
 (本条款仅供参考，实际条款以官方发布为准)</P>
 
 </div>
-                   
+
         <!-- Pushy JS -->
-        <script src="https://chrisyee.ca/pushy/js/pushy.min.js?v=1.1.0"></script>
+        <script src="../js/pushy.js?v=1.1.0"></script>
+        <script type="text/javascript" src="../js/jwexin.js"></script>
+
+        <script>
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
+                var context = "";
+
+                if (r != null)
+                    context = r[2];
+                reg = null;
+                r = null;
+                return context == null || context == "" || context == "undefined" ? "" : context;
+            }
+            //?&proName= ' + submitData.proName + 'be=' + submitData.be + 'be=' + submitData.be + 'bf=' + submitData.bf + 'birth=' + submitData.birth + 'calYears=' + submitData.calYears + 'giveMoneyYear=' + submitData.giveMoneyYear + 'living=' + submitData.living + 'sex=' + submitData.sex + 'smoke=' +submitData.smoke
+            $('.back-btn').on('click' , function(){
+                let redirectUrl = '/pages/result/'+GetQueryString('proName')+'?be=' + GetQueryString('be') + '&bf=' + GetQueryString('bf') + '&birth=' +GetQueryString('birth') + '&calYears=' + GetQueryString('calYears') + '&giveMoneyYear=' + GetQueryString('giveMoneyYear') + '&living=' + GetQueryString('living') + '&sex=' + GetQueryString('sex') + '&smoke=' + GetQueryString('smoke');
+
+                wx.miniProgram.redirectTo({url: redirectUrl})
+            })
+        </script>
 
         
 

@@ -24,7 +24,8 @@ wxa.launchApp(Main);
         "pages/result/fourthPage",
         "pages/change/change",
         "pages/form/cirForm",
-        "pages/form/cimForm"
+        "pages/form/cimForm",
+        "pages/form/egsForm"
     ]
 }
 </config>
