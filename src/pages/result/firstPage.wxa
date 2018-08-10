@@ -111,7 +111,7 @@ class secondPage {
                 this.app.globalData.tableData.data.forEach((v , k) => {
                     tmp[k] = v.age;
                 })
-                console.log(submitData);
+
                 let giveMoneyYears = '';
                 //转换供款年期
                 if(submitData.giveMoneyYear == '1'){
@@ -135,10 +135,10 @@ class secondPage {
                     CIEChangeZSBE: parseFloat(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
                     CIECSBE: parseFloat(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
                     CIEChangeCSBE: parseFloat(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
-                    CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
-                    CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
-                    EGSBFZE: parseFloat(plainTable[plainTable.length - 1].BE / 1000).toFixed(2),
-                    EGSChangeBFZE: parseFloat(plainTable[plainTable.length - 1].changeBe / 1000).toFixed(2),
+                    CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF / 10000).toFixed(2),
+                    CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF / 10000).toFixed(2),
+                    EGSBFZE: parseFloat(plainTable[plainTable.length - 1].BE / 10000).toFixed(2),
+                    EGSChangeBFZE: parseFloat(plainTable[plainTable.length - 1].changeBe / 10000).toFixed(2),
                     changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
                     currentRate:this.app.globalData.tableData.rate,
                     cnyUnit:(1 * this.app.globalData.tableData.rate).toFixed(2),
@@ -205,8 +205,8 @@ class secondPage {
                     CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF / 10000).toFixed(2),
                     CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF / 10000).toFixed(2),
                     changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
-                    EGSBFZE: parseFloat(plainTable[plainTable.length - 1].BE / 1000).toFixed(2),
-                    EGSChangeBFZE: parseFloat(plainTable[plainTable.length - 1].changeBe / 1000).toFixed(2),
+                    EGSBFZE: parseFloat(plainTable[plainTable.length - 1].BE / 10000).toFixed(2),
+                    EGSChangeBFZE: parseFloat(plainTable[plainTable.length - 1].changeBe / 10000).toFixed(2),
                     currentRate:this.app.globalData.tableData.rate,
                     cnyUnit:(1 * this.app.globalData.tableData.rate).toFixed(2),
 

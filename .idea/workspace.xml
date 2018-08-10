@@ -2,35 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b01063f-3e73-4b92-b699-fe5b452b8d4c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/route/calculateEgsBe.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/route/calculateEgsBf.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/route/makeEgsPlain.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/util/egs/egs2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/util/egs/js/Non-Guaranteed Bonus.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/util/egs/js/Non-Guaranteed_Bonus.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/util/egs/js/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/form/egsForm.wxa" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/route/makeCimPlain.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/route/makeCimPlain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/route/makeCirPlain.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/route/makeCirPlain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/route/makePlain.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/route/makePlain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/util/cir2/cir2.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/util/cir2/cir2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/util/exchangeRate.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/util/exchangeRate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/views/egs/EGS-一般条款.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views/egs/yb.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/views/egs/EGS_保障条款.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views/egs/bz.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.wxa" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/change/change.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/change/change.wxa" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/form/cimForm.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/form/cimForm.wxa" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/form/cirForm.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/form/cirForm.wxa" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/form/form.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/form/form.wxa" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.wxa" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/result/firstPage.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/firstPage.wxa" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/result/fourthPage.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/fourthPage.wxa" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/result/secondPage.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/secondPage.wxa" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -86,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="firstPage.wxa" pinned="false" current-in-tab="false">
+      <file leaf-file-name="firstPage.wxa" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/result/firstPage.wxa">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="674" column="37" selection-start-line="674" selection-start-column="34" selection-end-line="674" selection-end-column="37" />
+            <state relative-caret-position="320">
+              <caret line="138" column="98" selection-start-line="138" selection-start-column="98" selection-end-line="138" selection-end-column="98" />
               <folding>
                 <element signature="n#style#0;n#view#1;n#view#2;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#view#1;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
@@ -104,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="makeEgsPlain.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="makeEgsPlain.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/route/makeEgsPlain.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="99" column="44" lean-forward="true" selection-start-line="99" selection-start-column="44" selection-end-line="99" selection-end-column="44" />
+            <state relative-caret-position="49">
+              <caret line="107" column="36" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -117,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/backend/util/egs/egs2.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="348">
-              <caret line="271" column="189" lean-forward="true" selection-start-line="271" selection-start-column="189" selection-end-line="271" selection-end-column="189" />
+              <caret line="271" column="189" selection-start-line="271" selection-start-column="189" selection-end-line="271" selection-end-column="189" />
             </state>
           </provider>
         </entry>
@@ -158,7 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>insurance_money</find>
       <find>createInsurance</find>
       <find>makeplain</find>
       <find>makeE</find>
@@ -172,8 +144,6 @@
       <find>share</find>
       <find>CIEBE</find>
       <find>CIECSBE</find>
-      <find>CIEBF</find>
-      <find>EGSBFZE</find>
       <find>保额</find>
       <find>requestGetInsuranceCredit</find>
       <find>终身红利</find>
@@ -187,7 +157,10 @@
       <find>PZZE</find>
       <find>currentPeopleBE</find>
       <find>changeTBZ</find>
+      <find>TBZ</find>
       <find>currentPeopleTB</find>
+      <find>EGSBFZE</find>
+      <find>CIEBF</find>
     </findStrings>
     <dirStrings>
       <dir>E:\my-work\daniel_work\src\pages</dir>
@@ -266,8 +239,6 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1608" />
-    <option name="y" value="-8" />
     <option name="width" value="1616" />
     <option name="height" value="916" />
   </component>
@@ -551,18 +522,18 @@
       <workItem from="1533632853227" duration="1909000" />
       <workItem from="1533694978796" duration="6266000" />
       <workItem from="1533803847013" duration="10052000" />
-      <workItem from="1533868857160" duration="15236000" />
+      <workItem from="1533868857160" duration="16989000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="330860000" />
+    <option name="totallyTimeSpent" value="332613000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1608" y="-8" width="1616" height="916" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.23875" />
+      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.19895834" />
       <window_info anchor="bottom" id="TODO" order="9" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
@@ -819,13 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/result/fourthPage.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="1511" column="19" lean-forward="true" selection-start-line="1511" selection-start-column="19" selection-end-line="1511" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/util/cir2/js/Non-Guaranteed_Bonus.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="316">
@@ -946,14 +910,28 @@
     <entry file="file://$PROJECT_DIR$/backend/util/egs/egs2.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="348">
-          <caret line="271" column="189" lean-forward="true" selection-start-line="271" selection-start-column="189" selection-end-line="271" selection-end-column="189" />
+          <caret line="271" column="189" selection-start-line="271" selection-start-column="189" selection-end-line="271" selection-end-column="189" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/route/makeEgsPlain.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="49">
+          <caret line="107" column="36" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/result/fourthPage.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-381">
+          <caret line="192" column="36" selection-start-line="192" selection-start-column="36" selection-end-line="192" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/result/firstPage.wxa">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="674" column="37" selection-start-line="674" selection-start-column="34" selection-end-line="674" selection-end-column="37" />
+        <state relative-caret-position="320">
+          <caret line="138" column="98" selection-start-line="138" selection-start-column="98" selection-end-line="138" selection-end-column="98" />
           <folding>
             <element signature="n#style#0;n#view#1;n#view#2;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#view#1;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
@@ -963,13 +941,6 @@
             <element signature="n#style#0;n#view#11;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#view#13;n#view#1;n#view#2;n#view#0;n#template#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/route/makeEgsPlain.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="99" column="44" lean-forward="true" selection-start-line="99" selection-start-column="44" selection-end-line="99" selection-end-column="44" />
         </state>
       </provider>
     </entry>
