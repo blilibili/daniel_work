@@ -144,5 +144,9 @@ app.use('/getEgsBe' , require('./route/calculateEgsBe'));
 app.use('/makeCimPlain' , require('./route/makeCimPlain'));
 app.use('/makeCirPlain' , require('./route/makeCirPlain'));
 app.use('/makeEgsPlain' , require('./route/makeEgsPlain'));
+app.use('/upload' , require('./route/uploadImg'));
+app.use('/saveFeedback' , require('./route/saveFeedback'));
+//获取系统公告
+app.use('/getNotice' , require('./route/getNotice'));
 
 app.listen(3006);

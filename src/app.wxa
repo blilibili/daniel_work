@@ -25,7 +25,8 @@ wxa.launchApp(Main);
         "pages/change/change",
         "pages/form/cirForm",
         "pages/form/cimForm",
-        "pages/form/egsForm"
+        "pages/form/egsForm",
+        "pages/feedback/index"
     ]
 }
 </config>

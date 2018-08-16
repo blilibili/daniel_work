@@ -2,11 +2,13 @@
     /* eslint-disable linebreak-style */
     import {wxa, Page , Mixins} from '@wxa/core';
     import common from '../../util/start'
+    import config from '../../util/config'
 @Page
 @Mixins(common)
 class secondPage {
   constructor() {
     this.data = {
+      cieProBg:config.cieBg,
       interestTableCNY:[],
       bd_years:[],
       redirectUrl:'',
@@ -727,6 +729,13 @@ class secondPage {
             path: '/pages/result/secondPage?be=' +  this.app.globalData.submitData.be + '&bf='+this.app.globalData.submitData.bf + '&httpUrl=' + this.app.globalData.httpUrl + '&share=1' + '&birth=' + this.app.globalData.submitData.birth + '&calYears=' + this.app.globalData.submitData.calYears + '&giveMoneyYear=' + this.app.globalData.submitData.giveMoneyYear + '&living=' + this.app.globalData.submitData.living + '&proId=' + this.app.globalData.submitData.proId + '&sex=' + this.app.globalData.submitData.sex + '&smoke=' + this.app.globalData.submitData.smoke + '&type=' +this.app.globalData.submitData.type + '&username=' +this.app.globalData.submitData.username
         }
     }
+
+    feedBack(){
+        this.app.globalData.insuranceProId = 'cie';
+        this.app.globalData.insuranceProText = '守护健康危疾加护保';
+        let url = '/pages/feedback/index';
+        this.router.push(url);
+    }
 }
 
 wxa.launchPage(secondPage);
@@ -739,6 +748,9 @@ wxa.launchPage(secondPage);
 }
 </config>
 <template>
+    <view>
+        <image style="width: 100%;height: 212px;" src="{{cieProBg}}"></image>
+    </view>
 <view class="result">
     <view class="wall-bg" wx:if="{{condition.showDiseaseList}}">
 
@@ -901,7 +913,7 @@ wxa.launchPage(secondPage);
         </view>
     </div>
 
-    <view class="part1">
+    <view class="part1" style="margin-top: -30px;">
         <view style="padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid rgb(232 , 232 , 232);font-size: 16px;font-weight: bold;">
             {{username}}  {{CIESex}},{{CIEAge}}岁,{{CIESmoke}},{{CIELiving}}
         </view>
@@ -1431,6 +1443,7 @@ wxa.launchPage(secondPage);
         <view style="display: flex;flex-direction:row;">
             <button class="shareFButton" open-type="share">发给朋友</button>
             <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;" bindtap="goBack">重做计划书</view>
+            <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;border-left:1px solid lightgrey;" bindtap="feedBack">问题反馈</view>
         </view>
     </view>
 </view>
@@ -1504,8 +1517,10 @@ wxa.launchPage(secondPage);
     height: auto;
     font-family: "微软雅黑";
     font-size: 14px;
-    background-color: rgb(42,38,63);
+    background-color: rgb(238,238,238);
     padding-bottom: 30rpx;
+    position: relative;
+    top: -20px;
 }
 .header-basic-info{
     display: inline-block;
