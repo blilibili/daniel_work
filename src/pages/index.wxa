@@ -24,14 +24,18 @@ class Index {
             //动画间隔时长
             duration: 1000,
             //是否采用衔接滑动
-            circular:true
+            circular:true,
+            //是否纵向滑动
+            isVertical:true,
+            condition:{
+                showNotice:false
+            }
         }
     }
     onLoad() {
         let host = this.app.globalData.httpUrl;
         this.fetch(host+'/getNotice', {}, {}, 'get')
             .then((res)=>{
-                // handle response here
                 if(res.data.code == 0){
                     this.setData({
                         notice:res.data.data
@@ -55,6 +59,24 @@ class Index {
             showPicker:true
         })
     }
+
+    redirectHttpNotice(e){
+        // let redirectUrl = e.currentTarget.dataset.url;
+        // if(redirectUrl){
+        //     this.router.replace('/pages/change/noticeRedirect?url=' + redirectUrl);
+        // }
+        this.setData({
+            ['condition.showNotice']:true
+        })
+    }
+
+    closeDiseaseList(){
+        this.setData({
+            condition: {
+                ["showDiseaseList"]:false
+            }
+        })
+    }
 }
 
 wxa.launchPage(Index);
@@ -66,12 +88,34 @@ wxa.launchPage(Index);
 </config>
 <template>
 <view class="page">
-    <!--<view class="bg-wall"  style="display: {{ showBg ? 'block' : 'none'}} ">-->
+    <view class="bg-wall"  wx:if="{{condition.showNotice}}">
 
-    <!--</view>-->
+    </view>
+
+    <div class="disease" wx:if="{{condition.showNotice}}">
+        <view style="padding: 20rpx 0 20rpx 0;text-align: center;">
+            公告标题
+            <image style="width: 35rpx;height: 35rpx;float: right;position: relative;left:-23rpx;" src="../../img/close.png" bindtap="closeDiseaseList"></image>
+        </view>
+        <view style="height: 1px;background-color: lightgray;">
+
+        </view>
+        <view class="content">
+            我是公告内容
+        </view>
+    </div>
+
     <view class="header">
         <view class="banner-header">
-            <image src="{{indexBanner}}"></image>
+            <swiper indicator-dots="{{indicatorDots}}"
+                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" vertical="{{false}}"
+            >
+                <block wx:for="{{indexBanner}}" wx:key="{{item.id}}">
+                    <swiper-item>
+                        <image src="{{item}}"></image>
+                    </swiper-item>
+                </block>
+            </swiper>
         </view>
         <view class="index-header">
             <!--<picker bindchange="bindPickerChange" value="{{index}}" range="{{multiArray}}">-->
@@ -81,13 +125,13 @@ wxa.launchPage(Index);
             <!--</picker>-->
 
             <swiper indicator-dots="{{indicatorDots}}"
-                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}"
+                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" vertical="{{isVertical}}"
                     style="height: 50rpx;"
             >
                 <block wx:for="{{notice}}" wx:key="{{item.id}}">
                     <swiper-item>
                         <span style="display:inline-block;border:2rpx solid #D4BBBE;height:30rpx;width:74rpx;padding: 0 10rpx 4rpx 10rpx;color: #E88658;margin-right: 20rpx;">朋友圈</span>
-                        <text class="notice-text">{{item.content}}</text>
+                        <text class="notice-text" bindtap="redirectHttpNotice" data-url="{{item.url}}">{{item.content}}</text>
                     </swiper-item>
                 </block>
             </swiper>
@@ -99,10 +143,12 @@ wxa.launchPage(Index);
         <view class="productor-intro">
             <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="{{egsImg}}"></image>
             <view class="productor-intro-words">
-                <view class="productor-intro-words-header">特级携升2</view>
-                <view>短期供款终身储蓄,提取灵活配合不同财务需要,多种身故保障</view>
+                <view class="productor-intro-words-header">[富足三代]保障计划 <span class="common-type-style">储蓄险</span> </view>
+                <view>短期供款终身储蓄，配合不同的财务需要，轻松实现退休、教育或财富传承等目标</view>
             </view>
-            <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+            <view class="right">
+                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+            </view>
         </view>
         </navigator>
 
@@ -110,10 +156,12 @@ wxa.launchPage(Index);
         <view class="productor-intro">
             <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="{{cieImg}}"></image>
             <view class="productor-intro-words">
-                <view class="productor-intro-words-header">守护健康危疾加护保</view>
-                <view>113种病况享有终身一次性现金赔偿,并获得多次索偿保障</view>
+                <view class="productor-intro-words-header">危疾终身加护保 <span class="common-type-style">性价比最高</span></view>
+                <view>涵盖113种病况，减轻危疾持续带来的财务负担。就癌症、心脏病发作及中风提供多重保障</view>
             </view>
-            <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+            <view class="right">
+                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+            </view>
         </view>
         </navigator>
 
@@ -121,10 +169,12 @@ wxa.launchPage(Index);
         <view class="productor-intro">
             <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="{{cimImg}}"></image>
             <view class="productor-intro-words">
-                <view class="productor-intro-words-header">守护健康危疾加倍保</view>
-                <view>保障59种早期疾病，无总赔偿次数限制。</view>
+                <view class="productor-intro-words-header">危疾终身加倍保 <span class="common-type-style">保障最全面</span></view>
+                <view>涵盖126种病况，可多次索偿，其后仍可享有人寿保障，并提供子女三重保障及家居康复支援</view>
             </view>
-            <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+            <view class="right">
+                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+            </view>
         </view>
         </navigator>
 
@@ -132,10 +182,12 @@ wxa.launchPage(Index);
             <view class="productor-intro">
                 <image style="width: 250rpx;height: 150rpx;border-radius: 8px;" src="{{cirImg}}"></image>
                 <view class="productor-intro-words">
-                    <view class="productor-intro-words-header">守护健康危疾全护保</view>
-                    <view>保障人生大部分主要风险，真正做到有事赔钱，没事存钱</view>
+                    <view class="productor-intro-words-header">危疾终身全护保 <span class="common-type-style">保费最便宜</span></view>
+                    <view>涵盖75种早期致末期病况，索償早期嚴重疾病後 仍然享有百分百危疾保障</view>
                 </view>
-                <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+                <view class="right">
+                    <image src="../img/add.png" class="productor-intro-words-add-image"></image>
+                </view>
             </view>
         </navigator>
 
@@ -148,7 +200,8 @@ wxa.launchPage(Index);
     height: auto;
     font-family: "微软雅黑";
     font-size: 12px;
-    background-color: rgb(244,244,244);
+    /*background-color: rgb(244,244,244);*/
+    background-color: white;
     padding-bottom: 20rpx;
     overflow-x: hidden;
 }
@@ -158,34 +211,49 @@ wxa.launchPage(Index);
     position: fixed;
     top: 0;
     background-color: rgba(0,0,0,0.6);
+    z-index: 100;
 }
 .header{
     width: 100%;
 }
 .banner-header{
     width: 100%;
+    swiper{
+        height: 360rpx;
+    }
 }
 .banner-header image {
     width: 100%;
 }
 .index-header{
     padding:15rpx;
-    margin-top:-5rpx;
     background-color: white;
 }
 .container-content{
-    width: 100%;
-    padding: 30rpx;
+    width: 96%;
     background-color: white;
-    margin-top: 20rpx;
+    margin: 0 auto;
 }
 .productor-intro{
     display: flex;
     flex-direction: row;
     margin-top: 25rpx;
+    align-items: center;
+    .common-type-style{
+        font-size: 12px;
+        background-color: red;
+        color: white;
+    }
+    .add-btn-png{
+        width: 100%;
+        margin-top: 20rpx;
+    }
+    .right{
+        align-items: center;
+    }
 }
 .productor-intro-words{
-    width:340rpx;
+    width:380rpx;
     margin-left:27rpx;
     color: rgb(189 , 189 , 189);
 }
@@ -195,14 +263,26 @@ wxa.launchPage(Index);
     font-weight: bold;
 }
 .productor-intro-words-add-image{
-    width:30px;
-    height:30px;
-    float:right;
+    width:60rpx;
+    height:60rpx;
+    /*float:right;*/
     position:relative;
-    top:38rpx;
-    left:22rpx;
+    /*top:38rpx;*/
+    /*left:22rpx;*/
 }
     .notice-text{
 
     }
+.disease{
+    position:fixed;
+    top:60rpx;
+    z-index:101;
+    background-color:white;
+    width:94%;
+    left:24rpx;
+    border-radius: 8px;
+    .content{
+        padding: 20rpx;
+    }
+}
 </style>

@@ -9,6 +9,7 @@
     class secondPage {
         constructor() {
             this.data = {
+                isShowRebuildPlain:config.isShowRebuildPlain,
                 cirBg:config.cirBg,
                 bd_years:[],
                 redirectUrl:'',
@@ -125,13 +126,13 @@
                             CIESmoke: option.smoke == 0 ? '非吸烟' : '吸烟',
                             CIELiving: option.living == 0 ? '其他地区' : '大陆',
                             giveMoneyYears: option.giveMoneyYear,
-                            CIEBE: parseFloat(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
+                            CIEBE: parseFloat(this.app.globalData.be).toFixed(2),
                             CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
                             CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
                             CIEChangeZSBE: parseFloat(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
                             CIECSBE: parseFloat(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
                             CIEChangeCSBE: parseFloat(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
-                            CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
+                            CIEBF: parseFloat(this.app.globalData.bf).toFixed(2),
                             CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
                             changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
                             currentRate:this.app.globalData.tableData.rate,
@@ -181,13 +182,13 @@
                             CIESmoke: this.app.globalData.submitData.smoke == 0 ? '非吸烟' : '吸烟',
                             CIELiving: this.app.globalData.submitData.living == 0 ? '其他地区' : '大陆',
                             giveMoneyYears: this.app.globalData.submitData.giveMoneyYear,
-                            CIEBE: parseFloat(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
+                            CIEBE: parseFloat(this.app.globalData.be).toFixed(2),
                             CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
                             CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
                             CIEChangeZSBE: parseFloat(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
                             CIECSBE: parseFloat(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
                             CIEChangeCSBE: parseFloat(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
-                            CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
+                            CIEBF: parseFloat(this.app.globalData.bf).toFixed(2),
                             CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
                             changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
                             currentRate:this.app.globalData.tableData.rate,
@@ -739,7 +740,7 @@
          */
         onShareAppMessage(){
             return {
-                title: '危疾终身全护保（CIR）计划书',
+                title: config['proTitle'][this.app.globalData.proTitle] + '计划书',
                 path: '/pages/result/fourthPage?be=' +  this.app.globalData.submitData.be + '&bf='+this.app.globalData.submitData.bf + '&httpUrl=' + this.app.globalData.httpUrl + '&share=1' + '&birth=' + this.app.globalData.submitData.birth + '&calYears=' + this.app.globalData.submitData.calYears + '&giveMoneyYear=' + this.app.globalData.submitData.giveMoneyYear + '&living=' + this.app.globalData.submitData.living + '&proId=' + this.app.globalData.submitData.proId + '&sex=' + this.app.globalData.submitData.sex + '&smoke=' + this.app.globalData.submitData.smoke + '&type=' +this.app.globalData.submitData.type + '&username=' +this.app.globalData.submitData.username
             }
         }
@@ -768,9 +769,10 @@
 </script>
 <config>
     {
-    "usingComponents": {
-    "CIECNDtable": "../table/CIECNDTable"
-    }
+        "usingComponents": {
+            "CIECNDtable": "../table/CIECNDTable"
+        },
+        "navigationBarTitleText": "危疾终身全护保计划书"
     }
 </config>
 <template>
@@ -1015,13 +1017,13 @@
                 </view>
 
                 <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
-                    原位癌（癌前病变）、冠状动脉血管成形术可分别获2次赔偿，每次赔当时保额的25%  <text>{{'\n'}}</text>
-                    早期甲状腺或前列腺癌可获1次赔偿，赔偿为当时保额的25% <text>{{'\n'}}</text>
-                    其余15种早期疾病每种可获1次赔偿，赔偿为当时保额的20%
+                    <text>原位癌（癌前病变）、冠状动脉血管成形术可分别获2次赔偿，每次赔当时保额的25%</text>
+                    <text>早期甲状腺或前列腺癌可获1次赔偿，赔偿为当时保额的25%</text>
+                    <text>其余15种早期疾病每种可获1次赔偿，赔偿为当时保额的20%</text>
                 </view>
                 <view><span> • </span>赔偿早期后，保额将维持不变</view>
                 <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
-                    75岁前赔了早期严重疾病一年后再赔严重疾病或身故，严重疾病或身故赔偿额不用减去早期疾病赔付的金额
+                    <text>75岁前赔了早期严重疾病一年后再赔严重疾病或身故，严重疾病或身故赔偿额不用减去早期疾病赔付的金额</text>
                 </view>
                 <view><span> • </span>每次赔偿上限为 <span>5万</span>美元约{{changeUpperlimitMoney}}万人民币</view>
                 <!--<view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">-->
@@ -1053,38 +1055,36 @@
                     <span> • </span>定期供款，保障终身
                 </view>
                 <view wx:if="{{condition.showPartSixthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    涵盖重大疾病、严重意外和身故保障，保障人生大部分主要风险
+                    <text>涵盖重大疾病、严重意外和身故保障，保障人生大部分主要风险</text>
                 </view>
 
                 <view>
-                    <span> • </span>
-                    集保障与储蓄于一身
+                    <span> • </span>集保障与储蓄于一身
                 </view>
                 <view wx:if="{{condition.showPartSeventhPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    真正做到有事赔钱，没事存钱
+                    <text>真正做到有事赔钱，没事存钱</text>
                 </view>
                 <view>
                     <span> • </span>保障 <span>57</span> 种严重疾病
                 </view>
                 <view wx:if="{{condition.showPartEighthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    包括癌症、心脏病发作和中风等最常见的重大疾病
+                    <text>包括癌症、心脏病发作和中风等最常见的重大疾病</text>
                 </view>
 
                 <view>
-                    <span> • </span>
-                    首10年最高赠送70%的额外保额
+                    <span> • </span>首10年最高赠送70%的额外保额
                 </view>
                 <view wx:if="{{condition.showPartNinthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    投保年龄1-18岁额外赠送70%的保额<text>{{"\n"}}</text>
-                    投保年龄19-65岁额外赠送55%的保额
+                    <text>投保年龄1-18岁额外赠送70%的保额</text>
+                    <text>投保年龄19-65岁额外赠送55%的保额</text>
                 </view>
                 <view>
                     <span> • </span>最高可赔当时保额的 <span>195%</span>
                 </view>
                 <view wx:if="{{condition.showPartTenthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    57种严重疾病可赔1次，赔偿额为当时保额的100%<text>{{"\n"}}</text>
-                    早期严重病况可赔3次，最多为当时保额的75%<text>{{"\n"}}</text>
-                    末期疾病可赔1次，赔偿额为当时保额的20%
+                    <text>57种严重疾病可赔1次，赔偿额为当时保额的100%</text>
+                    <text>早期严重病况可赔3次，最多为当时保额的75%</text>
+                    <text>末期疾病可赔1次，赔偿额为当时保额的20%</text>
                 </view>
 
                 <view wx:if="{{condition.showPartTwelthPart}}">
@@ -1114,7 +1114,7 @@
                 </view>
                 <view wx:if="{{!condition.showPartThirtythPart}}" style="margin-top: 5px;text-align: center;" data-type="13" bindtap="showPartOneTable"> <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image></view>
                 <view wx:if="{{condition.showPartThirtythPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    如果不幸确诊或已严重病况发展为末期严重疾病，将在严重疾病赔偿的基础上再额外赔当时保额的20%
+                    <text>如果不幸确诊或已严重病况发展为末期严重疾病，将在严重疾病赔偿的基础上再额外赔当时保额的20%</text>
                     <view bindtap="hidePartOneTable" data-type="13" style="text-align: center;">
                         <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
                     </view>
@@ -1329,16 +1329,17 @@
                     因输血或职业感染则除外
                 </view>
                 <view>
-                    <span> • </span>
-                    滥用麻醉剂、药物或酗酒引致的严重疾病不保
+                    <span> • </span>滥用麻醉剂、药物或酗酒引致的严重疾病不保
                 </view>
                 <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartSixteenthPart}}">
                     由注册医生处方使用的麻醉剂或药物除外
                 </view>
                 <view><span> • </span>因战争、叛乱、暴动或骚乱引致的伤残不保</view>
                 <view>
-                    <span> • </span>
-                    不保因空中航行引致的完全及永久伤残
+                    <span> • </span>不保因空中航行引致的完全及永久伤残
+                </view>
+                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartSixteenthPart}}">
+                    若付费乘坐固定航线的空中交通工具引致的伤残则除外
                 </view>
                 <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;" data-type="14" bindtap="showPartOneTable">
                     <view wx:if="{{!condition.showPartFourteenthPart}}" >
@@ -1346,7 +1347,6 @@
                     </view>
                 </view>
                 <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartSeventeenthPart}}">
-                    若付费乘坐固定航线的空中交通工具引致的伤残则除外
                     <view bindtap="hidePartOneTable" data-type="17" style="text-align: center;">
                         <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
                     </view>
@@ -1443,7 +1443,7 @@
         <view class="part4 floatButton" style="padding-bottom: 0;width: 100%;border-radius: 0;">
             <view style="display: flex;flex-direction:row;">
                 <button class="shareFButton" open-type="share">发给朋友</button>
-                <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;" bindtap="goBack">重做计划书</view>
+                <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;" bindtap="goBack" wx:if="{{isShowRebuildPlain}}">重做计划书</view>
                 <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;border-left:1px solid lightgrey;" bindtap="feedBack">问题反馈</view>
             </view>
         </view>

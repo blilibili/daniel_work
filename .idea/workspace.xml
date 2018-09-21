@@ -2,25 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b01063f-3e73-4b92-b699-fe5b452b8d4c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/route/getNotice.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/route/saveFeedback.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/route/uploadImg.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/banner-1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/cieIcon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/cieProBg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/cimIcon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/cimProBg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/cirIcon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/cirProBg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/egsIcon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/egsProBg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/formBg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/upload.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/feedback/index.wxa" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/util/Non-Guaranteed Bonus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/change/noticeRedirect.wxa" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/route/calculateCimBe.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/route/calculateCimBe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/route/calculateCimBf.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/route/calculateCimBf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/route/makeCimPlain.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/route/makeCimPlain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/util/cim/cim.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/util/cim/cim.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/util/cim/cim2.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/util/cim/cim2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/util/cim/js/Non-Guaranteed_Bonus.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/util/cim/js/Non-Guaranteed_Bonus.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/util/sqlConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/util/sqlConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/cim/bz.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views/cim/bz.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/cim/fz.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views/cim/fz.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/cim/lx.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views/cim/lx.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/cim/yb.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views/cim/yb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/cim/yz.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views/cim/yz.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/cim/zq.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views/cim/zq.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/change/change.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/change/change.wxa" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/form/cimForm.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/form/cimForm.wxa" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/form/cirForm.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/form/cirForm.wxa" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/form/egsForm.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/form/egsForm.wxa" afterDir="false" />
@@ -30,6 +29,7 @@
       <change beforePath="$PROJECT_DIR$/src/pages/result/fourthPage.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/fourthPage.wxa" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/result/secondPage.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/secondPage.wxa" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/config.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -52,30 +52,38 @@
       <file leaf-file-name="index.wxa" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/index.wxa">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="88" column="105" selection-start-line="88" selection-start-column="105" selection-end-line="88" selection-end-column="105" />
+            <state relative-caret-position="393">
+              <caret line="212" column="38" lean-forward="true" selection-start-line="212" selection-start-column="38" selection-end-line="212" selection-end-column="38" />
               <folding>
-                <element signature="e#54#90#0" expanded="true" />
-                <element signature="n#style#0;n#swiper#0;n#view#1;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#image#0;n#view#0;n#navigator#0;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="form.wxa" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/form/form.wxa">
+      <file leaf-file-name="firstPage.wxa" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/result/firstPage.wxa">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3552">
-              <caret line="111" column="21" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="21" />
-              <folding>
-                <element signature="e#54#109#0" expanded="true" />
-                <element signature="n#style#0;n#image#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#picker#0;n#view#3;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#view#0;n#picker#0;n#view#3;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#view#2;n#view#0;n#view#2;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#view#0;n#view#4;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#view#0;n#view#0;n#view#4;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="233">
+              <caret line="642" column="2" lean-forward="true" selection-start-line="642" selection-start-column="2" selection-end-line="650" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="noticeRedirect.wxa" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/change/noticeRedirect.wxa">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="928">
+              <caret line="29" column="10" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="change.wxa" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/change/change.wxa">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="691">
+              <caret line="82" column="16" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -83,8 +91,26 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4768">
-              <caret line="149" column="24" selection-start-line="149" selection-start-column="24" selection-end-line="149" selection-end-column="24" />
+            <state relative-caret-position="4192">
+              <caret line="131" column="2" selection-start-line="131" selection-start-column="2" selection-end-line="131" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/util/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="15" column="12" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sqlConfig.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/util/sqlConfig.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -92,8 +118,26 @@
       <file leaf-file-name="getNotice.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/route/getNotice.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
+            <state relative-caret-position="1280">
               <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="getRate.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/route/getRate.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="exchangeRate.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/util/exchangeRate.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2304">
+              <caret line="72" selection-start-line="72" selection-end-line="72" />
             </state>
           </provider>
         </entry>
@@ -111,36 +155,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>PZZE</find>
-      <find>currentPeopleBE</find>
-      <find>changeTBZ</find>
-      <find>TBZ</find>
-      <find>currentPeopleTB</find>
-      <find>EGSBFZE</find>
-      <find>CIEBF</find>
-      <find>form</find>
-      <find>男</find>
-      <find>margin-top:</find>
-      <find>生日</find>
-      <find>submit-btn</find>
-      <find>header</find>
-      <find>radio</find>
-      <find>EF7402</find>
-      <find>date-btn</find>
-      <find>formBg</find>
-      <find>cirBg</find>
-      <find>shareFButton</find>
-      <find>result</find>
-      <find>host</find>
-      <find>part1</find>
-      <find>insurance_pro</find>
+      <find>滥用</find>
+      <find>集保障</find>
       <find>submitData</find>
-      <find>saveFeedback</find>
-      <find>feedBackContent</find>
-      <find>checkedFeedBackType</find>
-      <find>wxCode</find>
-      <find>feedBack</find>
-      <find>form-calculate-age</find>
+      <find>current_time</find>
+      <find>debounce</find>
+      <find>deb</find>
+      <find>multiArray</find>
+      <find>insurance_product</find>
+      <find>bindAgeChange</find>
+      <find>banner-header</find>
+      <find>isVertical</find>
+      <find>productor-intro-words-add-image</find>
+      <find>notice</find>
+      <find>title</find>
+      <find>cr</find>
+      <find>CIEBE</find>
+      <find>config</find>
+      <find>confi</find>
+      <find>onLoad</find>
+      <find>create</find>
+      <find>share</find>
+      <find>right</find>
+      <find>add-btn-png</find>
+      <find>common-type-style</find>
+      <find>.container-content</find>
+      <find>productor-intro-words</find>
+      <find>productor-intro</find>
+      <find>disease</find>
+      <find>closeDiseaseList</find>
+      <find>bg-wall</find>
     </findStrings>
     <dirStrings>
       <dir>E:\my-work\daniel_work\src\pages</dir>
@@ -153,56 +197,56 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/backend/util/cir2/js/Non-Guaranteed_Bonus.js" />
-        <option value="$PROJECT_DIR$/backend/views/yz.html" />
-        <option value="$PROJECT_DIR$/backend/views/bz.html" />
-        <option value="$PROJECT_DIR$/backend/views/zq.html" />
-        <option value="$PROJECT_DIR$/backend/views/cie/bz.html" />
-        <option value="$PROJECT_DIR$/backend/views/cie/yz.html" />
-        <option value="$PROJECT_DIR$/backend/views/cie/zq.html" />
-        <option value="$PROJECT_DIR$/backend/views/cim/bz.html" />
         <option value="$PROJECT_DIR$/backend/views/cir/zq.html" />
         <option value="$PROJECT_DIR$/backend/views/cir/mq.html" />
         <option value="$PROJECT_DIR$/backend/views/cir/yb.html" />
         <option value="$PROJECT_DIR$/backend/views/cir/yz.html" />
         <option value="$PROJECT_DIR$/backend/views/cir/bz.html" />
         <option value="$PROJECT_DIR$/backend/views/cim/mq.html" />
-        <option value="$PROJECT_DIR$/backend/views/cim/yb.html" />
-        <option value="$PROJECT_DIR$/backend/views/cim/yz.html" />
-        <option value="$PROJECT_DIR$/backend/views/cim/zq.html" />
         <option value="$PROJECT_DIR$/backend/views/cie/lx.html" />
         <option value="$PROJECT_DIR$/backend/views/cie/yb.html" />
-        <option value="$PROJECT_DIR$/backend/util/cim/cim.html" />
         <option value="$PROJECT_DIR$/backend/route/getRate.js" />
         <option value="$PROJECT_DIR$/backend/util/cir2/cir2.html" />
         <option value="$PROJECT_DIR$/backend/util/exchangeRate.js" />
         <option value="$PROJECT_DIR$/backend/route/makePlain.js" />
-        <option value="$PROJECT_DIR$/backend/route/makeCimPlain.js" />
         <option value="$PROJECT_DIR$/backend/route/makeCirPlain.js" />
-        <option value="$PROJECT_DIR$/backend/route/calculateCimBf.js" />
         <option value="$PROJECT_DIR$/backend/util/egs/egs2.html" />
         <option value="$PROJECT_DIR$/backend/route/calculateEgsBf.js" />
         <option value="$PROJECT_DIR$/backend/route/calculateEgsBe.js" />
         <option value="$PROJECT_DIR$/backend/util/egs/js/Non-Guaranteed_Bonus.js" />
-        <option value="$PROJECT_DIR$/src/pages/change/change.wxa" />
         <option value="$PROJECT_DIR$/backend/views/egs/yb.html" />
         <option value="$PROJECT_DIR$/backend/views/egs/bz.html" />
         <option value="$PROJECT_DIR$/backend/route/makeEgsPlain.js" />
-        <option value="$PROJECT_DIR$/src/pages/form/form.wxa" />
-        <option value="$PROJECT_DIR$/src/pages/form/egsForm.wxa" />
-        <option value="$PROJECT_DIR$/src/pages/form/cimForm.wxa" />
-        <option value="$PROJECT_DIR$/src/pages/form/cirForm.wxa" />
-        <option value="$PROJECT_DIR$/src/app.wxa" />
-        <option value="$PROJECT_DIR$/src/util/config.js" />
-        <option value="$PROJECT_DIR$/src/pages/result/firstPage.wxa" />
         <option value="$PROJECT_DIR$/backend/route/uploadImg.js" />
-        <option value="$PROJECT_DIR$/src/pages/result/fourthPage.wxa" />
-        <option value="$PROJECT_DIR$/src/pages/result/secondPage.wxa" />
-        <option value="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" />
         <option value="$PROJECT_DIR$/backend/route/saveFeedback.js" />
         <option value="$PROJECT_DIR$/src/pages/feedback/index.wxa" />
         <option value="$PROJECT_DIR$/backend/main.js" />
         <option value="$PROJECT_DIR$/backend/route/getNotice.js" />
+        <option value="$PROJECT_DIR$/backend/views/cim/yb.html" />
+        <option value="$PROJECT_DIR$/backend/views/cim/zq.html" />
+        <option value="$PROJECT_DIR$/backend/views/cim/yz.html" />
+        <option value="$PROJECT_DIR$/backend/views/cim/bz.html" />
+        <option value="$PROJECT_DIR$/backend/views/cim/lx.html" />
+        <option value="$PROJECT_DIR$/src/pages/change/change.wxa" />
+        <option value="$PROJECT_DIR$/backend/views/cim/fz.html" />
+        <option value="$PROJECT_DIR$/backend/util/cim/js/Non-Guaranteed_Bonus.js" />
+        <option value="$PROJECT_DIR$/backend/util/cim/cim2.html" />
+        <option value="$PROJECT_DIR$/backend/route/calculateCimBf.js" />
+        <option value="$PROJECT_DIR$/backend/route/calculateCimBe.js" />
+        <option value="$PROJECT_DIR$/backend/route/makeCimPlain.js" />
+        <option value="$PROJECT_DIR$/src/app.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/change/noticeRedirect.wxa" />
+        <option value="$PROJECT_DIR$/backend/util/cim/cim.html" />
+        <option value="$PROJECT_DIR$/src/util/config.js" />
+        <option value="$PROJECT_DIR$/src/pages/form/cimForm.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/form/cirForm.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/form/egsForm.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/form/form.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/result/secondPage.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/result/thirdPage.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/result/fourthPage.wxa" />
+        <option value="$PROJECT_DIR$/src/pages/result/firstPage.wxa" />
+        <option value="$PROJECT_DIR$/backend/util/sqlConfig.js" />
         <option value="$PROJECT_DIR$/src/pages/index.wxa" />
       </list>
     </option>
@@ -220,8 +264,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-1608" />
-    <option name="y" value="-8" />
-    <option name="width" value="1616" />
+    <option name="width" value="1606" />
     <option name="height" value="916" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -230,6 +273,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -237,106 +281,10 @@
               <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
               <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-              <item name="egs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="egs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="change" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="feedback" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="form" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="result" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daniel_work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daniel_work" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -344,7 +292,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="E:/test" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.prettier" value="true" />
@@ -361,18 +309,18 @@
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\my-work\daniel_work\backend\util" />
+      <recent name="E:\my-work\daniel_work\src\pages\change" />
+      <recent name="E:\my-work\daniel_work\backend\util\cim\js" />
+      <recent name="E:\my-work\daniel_work\backend\util\cim" />
+      <recent name="E:\my-work\daniel_work\backend\views\cim" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\my-work\daniel_work\backend\util\cir2\js" />
       <recent name="E:\my-work\daniel_work\backend\views" />
       <recent name="E:\my-work\daniel_work\backend" />
       <recent name="E:\my-work\daniel_work\backend\util" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\my-work\daniel_work\backend\route" />
-      <recent name="E:\my-work\daniel_work\src\img" />
-      <recent name="E:\my-work\daniel_work\src\pages\feedback" />
-      <recent name="E:\my-work\daniel_work\src\pages\result" />
-      <recent name="E:\my-work\daniel_work\backend\util\egs\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -525,16 +473,33 @@
       <workItem from="1534404717363" duration="3083000" />
       <workItem from="1534413208826" duration="736000" />
       <workItem from="1534416457584" duration="1171000" />
+      <workItem from="1534417775744" duration="24000" />
+      <workItem from="1534474384233" duration="614000" />
+      <workItem from="1536810871857" duration="11263000" />
+      <workItem from="1536890532326" duration="8026000" />
+      <workItem from="1537172573630" duration="2101000" />
+      <workItem from="1537184650283" duration="1000000" />
+      <workItem from="1537236103080" duration="10571000" />
+      <workItem from="1537270300291" duration="1945000" />
+      <workItem from="1537272319058" duration="57000" />
+      <workItem from="1537324441361" duration="2033000" />
+      <workItem from="1537327774816" duration="8000" />
+      <workItem from="1537349217917" duration="1100000" />
+      <workItem from="1537415217814" duration="3538000" />
+      <workItem from="1537439204121" duration="671000" />
+      <workItem from="1537493204178" duration="932000" />
+      <workItem from="1537501625158" duration="1205000" />
+      <workItem from="1537511978588" duration="3110000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="365079000" />
+    <option name="totallyTimeSpent" value="413277000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1608" y="-8" width="1616" height="916" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.19875" />
+      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.19835235" />
       <window_info anchor="bottom" id="TODO" order="9" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
@@ -566,110 +531,10 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/backend/views/cir/mq.html">
+    <entry file="file://$PROJECT_DIR$/src/util/config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="101" column="53" selection-start-line="101" selection-start-column="53" selection-end-line="101" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cir/bz.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="91" column="51" selection-start-line="91" selection-start-column="51" selection-end-line="91" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cim/bz.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2976">
-          <caret line="93" column="14" selection-start-line="93" selection-start-column="14" selection-end-line="93" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cim/mq.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3200">
-          <caret line="100" column="53" selection-start-line="100" selection-start-column="53" selection-end-line="100" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cim/yb.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cim/yz.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5120">
-          <caret line="160" column="53" selection-start-line="160" selection-start-column="53" selection-end-line="160" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cim/zq.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5248">
-          <caret line="164" column="43" selection-start-line="164" selection-start-column="43" selection-end-line="164" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cie/bz.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cie/lx.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2560">
-          <caret line="80" column="53" selection-start-line="80" selection-start-column="53" selection-end-line="80" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cie/yb.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3625">
-          <caret line="145" column="51" selection-start-line="145" selection-start-column="51" selection-end-line="145" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cie/yz.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cie/zq.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11850">
-          <caret line="474" column="17" selection-start-line="474" selection-start-column="17" selection-end-line="474" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/cim/js/jquery.min.js" />
-    <entry file="file://$PROJECT_DIR$/backend/util/cim/cim.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/cir2/js/jquery.min.js" />
-    <entry file="file://$PROJECT_DIR$/backend/util/cir2/cir2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2784">
-          <caret line="87" selection-start-line="87" selection-end-line="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/route/makeCimPlain.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1924">
-          <caret line="176" column="27" selection-start-line="176" selection-start-column="27" selection-end-line="176" selection-end-column="27" />
+        <state relative-caret-position="480">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -677,27 +542,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
           <caret line="139" column="25" lean-forward="true" selection-start-line="139" selection-start-column="25" selection-end-line="139" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/cir2/js/Non-Guaranteed_Bonus.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="259" selection-start-line="259" selection-end-line="267" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/route/calculateCimBe.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/route/calculateCimBf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -736,31 +580,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/change/change.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1760">
-          <caret line="55" column="12" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/route/makeEgsPlain.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3424">
           <caret line="107" column="36" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/start.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="2" selection-start-line="2" selection-end-line="17" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/util.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -771,45 +594,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/form/egsForm.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/form/cimForm.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="960" column="10" selection-start-line="960" selection-start-column="10" selection-end-line="960" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/form/cirForm.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="715" column="30" lean-forward="true" selection-start-line="715" selection-start-column="30" selection-end-line="715" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/route/makePlain.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="548">
           <caret line="191" selection-start-line="191" selection-end-line="191" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="896">
-          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -827,34 +615,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/result/fourthPage.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="760" column="61" selection-start-line="760" selection-start-column="61" selection-end-line="760" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/result/secondPage.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="733" column="49" selection-start-line="733" selection-start-column="49" selection-end-line="733" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/result/thirdPage.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="756" column="53" selection-start-line="756" selection-start-column="53" selection-end-line="756" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/result/firstPage.wxa">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23968">
-          <caret line="751" column="42" selection-start-line="751" selection-start-column="28" selection-end-line="751" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/route/saveFeedback.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1152">
@@ -862,64 +622,267 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cim/zq.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="164" column="60" lean-forward="true" selection-start-line="164" selection-start-column="60" selection-end-line="164" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cim/yb.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13">
+          <caret line="364" column="6" lean-forward="true" selection-start-line="364" selection-start-column="6" selection-end-line="364" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cim/mq.html" />
+    <entry file="file://$PROJECT_DIR$/backend/views/cim/yz.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11011">
+          <caret line="470" column="17" lean-forward="true" selection-start-line="448" selection-start-column="7" selection-end-line="470" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cim/bz.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="390" column="7" selection-start-line="390" selection-start-column="7" selection-end-line="412" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cim/lx.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cim/fz.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="80" column="37" selection-start-line="80" selection-start-column="37" selection-end-line="80" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/cim/js/bfl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5921" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/cir2/js/Non-Guaranteed_Bonus.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/route/calculateCimBf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="30" column="77" selection-start-line="30" selection-start-column="77" selection-end-line="30" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/util.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="736">
+          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/start.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/feedback/index.wxa">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2259">
+        <state relative-caret-position="7936">
           <caret line="249" column="17" lean-forward="true" selection-start-line="249" selection-start-column="17" selection-end-line="249" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/util/exchangeRate.js">
+    <entry file="file://$PROJECT_DIR$/src/app.wxa">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="80" column="48" selection-start-line="80" selection-start-column="33" selection-end-line="80" selection-end-column="48" />
+        <state relative-caret-position="315">
+          <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/route/makeCimPlain.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="132" column="32" lean-forward="true" selection-start-line="132" selection-start-column="32" selection-end-line="132" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/cim/js/Non-Guaranteed_Bonus.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="676" column="34" selection-start-line="676" selection-start-column="34" selection-end-line="676" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/cim/js/Non-Guaranteed Bonus.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1893">
+          <caret line="595" column="55" selection-start-line="595" selection-start-column="55" selection-end-line="595" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/cim/cim.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2673">
+          <caret line="204" column="18" selection-start-line="204" selection-start-column="18" selection-end-line="204" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/cim/cim2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="126" column="7" lean-forward="true" selection-start-line="126" selection-start-column="7" selection-end-line="126" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/form/cirForm.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2656">
+          <caret line="84" column="50" selection-start-line="84" selection-start-column="50" selection-end-line="84" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/form/egsForm.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2688">
+          <caret line="85" column="50" selection-start-line="85" selection-start-column="50" selection-end-line="85" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/form/form.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2688">
+          <caret line="85" column="36" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/result/secondPage.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23232">
+          <caret line="728" column="74" selection-start-line="728" selection-start-column="74" selection-end-line="728" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/result/thirdPage.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24544">
+          <caret line="769" column="78" selection-start-line="769" selection-start-column="78" selection-end-line="769" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/result/fourthPage.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23680">
+          <caret line="742" column="78" selection-start-line="742" selection-start-column="78" selection-end-line="742" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/route/calculateCimBe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/form/cimForm.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5088">
+          <caret line="159" column="25" selection-start-line="159" selection-start-column="25" selection-end-line="159" selection-end-column="25" />
+          <folding>
+            <element signature="e#54#101#0" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#view#2;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/util/Non-Guaranteed_Bonus.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4192">
+          <caret line="131" column="2" selection-start-line="131" selection-start-column="2" selection-end-line="131" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/route/getNotice.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1280">
+          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/route/getRate.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/main.js">
+    <entry file="file://$PROJECT_DIR$/backend/util/exchangeRate.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4768">
-          <caret line="149" column="24" selection-start-line="149" selection-start-column="24" selection-end-line="149" selection-end-column="24" />
+        <state relative-caret-position="2304">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/form/form.wxa">
+    <entry file="file://$PROJECT_DIR$/backend/util/sqlConfig.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3552">
-          <caret line="111" column="21" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="21" />
-          <folding>
-            <element signature="e#54#109#0" expanded="true" />
-            <element signature="n#style#0;n#image#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#picker#0;n#view#3;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#view#0;n#picker#0;n#view#3;n#form#0;n#view#1;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#view#2;n#view#0;n#view#2;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#view#0;n#view#4;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#view#0;n#view#0;n#view#4;n#form#0;n#view#3;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="256">
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/route/getNotice.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/change/change.wxa">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+        <state relative-caret-position="691">
+          <caret line="82" column="16" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/change/noticeRedirect.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="928">
+          <caret line="29" column="10" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/result/firstPage.wxa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="642" column="2" lean-forward="true" selection-start-line="642" selection-start-column="2" selection-end-line="650" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/index.wxa">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="88" column="105" selection-start-line="88" selection-start-column="105" selection-end-line="88" selection-end-column="105" />
+        <state relative-caret-position="393">
+          <caret line="212" column="38" lean-forward="true" selection-start-line="212" selection-start-column="38" selection-end-line="212" selection-end-column="38" />
           <folding>
-            <element signature="e#54#90#0" expanded="true" />
-            <element signature="n#style#0;n#swiper#0;n#view#1;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#image#0;n#view#0;n#navigator#0;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

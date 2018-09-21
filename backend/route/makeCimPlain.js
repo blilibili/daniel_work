@@ -16,13 +16,24 @@ app.post('/' , (req , res) => {
     var x , tmp_bf = 0,arr_bf  = new Array();//记录保费数据
     let trHTML ="";
     let Payment_Item;
-
+    var A_rate,B_rate,bf_rate = 1
 
 
 
 //basic_bf = chk_bfl(bx_sex,bx_smoke,bx_nian,bx_age)*10; //chk_bfl(bx_sex,bx_smoke,bx_nian,bx_age);
 
 //arr_bf[i][j],j-0保单年度,1所缴保费总额,2保证退保金额,3非保证退保红利,4-退保总额,5-非保证特别红利,6-保额,7-赠送保额,8-理赔总额
+
+    if (bx_area ==1){ //如果是地区B,要计算保费调整因子
+        var A_bfl = tool.chk_bfl(0,bx_sex,bx_smoke,bx_nian,bx_age); //获取对应保费率
+        A_rage = tool.dis_bf(A_bfl,bx_be,bx_nian);
+        B_rage = bx_bf;
+        bf_rate = A_rage/B_rage ;
+
+    }
+//basic_bf = chk_bfl(bx_sex,bx_smoke,bx_nian,bx_age)*10; //chk_bfl(bx_sex,bx_smoke,bx_nian,bx_age);
+
+//arr_bf[i][j],j-0保单年度,1所缴保费总额,2保证退保金额,3非保证退保红利,4-退保总额,5-非+保证理赔特别红利,6-保额,7-赠送保额,8-理赔总额
 
     for (var i=1; i<=20; i++) //计算保费
     {
@@ -62,13 +73,12 @@ app.post('/' , (req , res) => {
 
     trHTML =""
     var k=0;
-    var jj;
-    if(bx_age>40){jj=10;}else{jj=15;} //如果大于40岁，额外赠送10年保费，否则赠送15年
+    var jj=10; //首10年额外赠送50%
 
     var arr_bonus = new Array();
     var arr_bonus2 = new Array();
-//arr_bonus = GetBasic(bx_age,1); //求基础非保证退保红利
-    arr_bonus = tool.GetBasic_Bonus(bx_age,0); //求基础非保证退保红
+    arr_bonus = tool.GetBasic_Bonus(bx_nian,bx_age,0); //求基础非保证退保红利
+    arr_bonus2 = tool.GetBasic_Bonus(bx_nian,bx_age,1); //求基础非保证理赔金额
     var tmp_years;
     for (var x in arr_bf)
     {
@@ -76,30 +86,24 @@ app.post('/' , (req , res) => {
         if ( arr_bf[x][0] > 85 ){  //如果到了85岁,那么保证退保价值=保额
             arr_bf[x][2] = bx_be*10000;
         }else { //否则保证退保价值 ＝ 保证退保率*保费
-
-
-            arr_bf[x][2] = Math.round(tool.TuibaoRate(bx_nian,tmp_years,bx_area)* arr_bf[x][1]);
-
-
+            arr_bf[x][2] = Math.round(tool.TuibaoRate(bx_nian,tmp_years)* arr_bf[x][1]* bf_rate);
         }
-//计算非保证退保红利
+        //计算非保证退保红利
         k++
         arr_bf[x][3] = Math.round(arr_bonus[k]*bx_be);  //求非保证退保红利
         arr_bf[x][4] = Math.round(arr_bf[x][2]) + Math.round(arr_bf[x][3]); //退保总额
 
-//计算非保证理赔红利
-//arr_bonus2 = GetBasic(bx_age,2);
-        arr_bonus2 = tool.GetBasic_Bonus(bx_age,1); //求基础非保证理赔金额
+        //计算非保证理赔红利
         arr_bf[x][5] = Math.round(arr_bonus2[k]*bx_be);
         arr_bf[x][6] = Math.round(bx_be)*10000;//基本保额
-//计算赠送保
-//计算赠送保额前10年赠送10年50%保额)
+        //计算赠送保
+        //计算赠送保额前10年赠送10年50%保额)
         if(tmp_years<=jj){
             arr_bf[x][7] = Math.round(bx_be)*10000/2;
         }else{
             arr_bf[x][7] = 0;
         }
-//理赔总额
+        //理赔总额
         arr_bf[x][8] = arr_bf[x][5]+arr_bf[x][6]+arr_bf[x][7];
 
     }

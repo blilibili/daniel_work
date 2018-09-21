@@ -1,0 +1,38 @@
+<script>
+  /* eslint-disable linebreak-style */
+  import {wxa, Page} from '@wxa/core';
+
+  @Page
+  class noticeRedirect {
+    constructor(){
+      this.data = {
+        redirectUrl:''
+      }
+    }
+    onLoad(e){
+        let url = e.url;
+        this.setData({
+            redirectUrl:url
+        })
+    }
+
+
+  }
+
+  wxa.launchPage(noticeRedirect);
+</script>
+<config>
+    {
+    "navigationTextTitle": "表单页"
+    }
+</config>
+<template>
+    <view>
+        <web-view src="{{redirectUrl}}">
+
+        </web-view>
+    </view>
+</template>
+<style lang="scss">
+
+</style>

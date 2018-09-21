@@ -6,7 +6,7 @@ let connection = mysql.createPool({
   user: 'xiaobo',     //数据库用户名
   password: 'xiaobo',     //数据库密码
   port: '3306',
-  database: 'house_lianjia', //数据库名称
+  database: 'daniel_insurance', //数据库名称
   charset: 'UTF8_GENERAL_CI' //数据库编码
 });
 

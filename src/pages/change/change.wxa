@@ -71,7 +71,7 @@
           })
           break;
           case '0005':
-          if(proTK == 'cim' || proTK == 'cir'){
+          if(proTK == 'cir'){
               this.setData({
                   redirectUrl:'https://dan.samxiao.cn/'+proTK+'/mq.html?proName=' + this.app.globalData.proName + '&be=' + submitData.be + '&bf=' + submitData.bf + '&birth=' + submitData.birth + '&calYears=' + submitData.calYears + '&giveMoneyYear=' + submitData.giveMoneyYear + '&living=' + submitData.living + '&sex=' + submitData.sex + '&smoke=' +submitData.smoke
               })
@@ -81,6 +81,12 @@
               })
           }
           break;
+
+          case '0006':
+              this.setData({
+                  redirectUrl:'https://dan.samxiao.cn/'+proTK+'/fz.html?proName=' + this.app.globalData.proName + '&be=' + submitData.be + '&bf=' + submitData.bf + '&birth=' + submitData.birth + '&calYears=' + submitData.calYears + '&giveMoneyYear=' + submitData.giveMoneyYear + '&living=' + submitData.living + '&sex=' + submitData.sex + '&smoke=' +submitData.smoke
+              })
+              break;
       }
     }
 

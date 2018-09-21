@@ -8,6 +8,7 @@
     class secondPage {
         constructor() {
             this.data = {
+                isShowRebuildPlain:config.isShowRebuildPlain,
                 cimBg:config.cimBg,
                 bd_years:[],
                 redirectUrl:'',
@@ -56,12 +57,14 @@
                     showPartFifteenthPart:false,
                     showPartSixteenthPart:false,
                     showPartSeventeenthPart:false,
+                    showPartFeature:false,
                     showDiseaseList:false,
                     showZC:false,
                     showYZ:false,
                     showUSDTable:false,
                     showCNYTable:false,
-                    showMQ:false
+                    showMQ:false,
+                    showLxPart:false
                 },
                 listData: [
                     {"code": "守护健康危疾加护保（CIE）", "money": "100,000", "years": "终身", "money_years": "20年交", "first_years": "1231.00"},
@@ -125,13 +128,13 @@
                             CIESmoke: option.smoke == 0 ? '非吸烟' : '吸烟',
                             CIELiving: option.living == 0 ? '其他地区' : '大陆',
                             giveMoneyYears: option.giveMoneyYear,
-                            CIEBE: parseFloat(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
+                            CIEBE: parseFloat(this.app.globalData.be).toFixed(2),
                             CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
                             CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
                             CIEChangeZSBE: parseFloat(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
                             CIECSBE: parseFloat(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
                             CIEChangeCSBE: parseFloat(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
-                            CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
+                            CIEBF: parseFloat(this.app.globalData.bf).toFixed(2),
                             CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
                             changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
                             currentRate:this.app.globalData.tableData.rate,
@@ -153,7 +156,7 @@
 
                             listData: [
                                 {"code": "守护健康危疾加倍保（CIM）", "money": Math.round(this.app.globalData.tableData.data[0].BE / 10000)+"万", "years": "终身", "money_years": option.giveMoneyYear+"年", "first_years": this.app.globalData.tableData.data[0].BF},
-                                {"code": this.app.globalData.submitData.living == 0 ? "危疾终身加倍保(CME)\n国籍:地区A" : "危疾终身加倍保(CME)\n国籍:地区B" , "money": parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2) + '万', "years": parseInt(this.app.globalData.submitData.calYears) < 40 ? "15":"10", "money_years": "-", "first_years": "-"},
+                                {"code": this.app.globalData.submitData.living == 0 ? "危疾终身加倍保(CME)\n国籍:地区A" : "危疾终身加倍保(CME)\n国籍:地区B" , "money": parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2) + '万', "years": parseInt(this.app.globalData.submitData.calYears) < 40 ? "10":"10", "money_years": "-", "first_years": "-"},
 
                             ]
                         })
@@ -182,13 +185,13 @@
                             CIESmoke: this.app.globalData.submitData.smoke == 0 ? '非吸烟' : '吸烟',
                             CIELiving: this.app.globalData.submitData.living == 0 ? '其他地区' : '大陆',
                             giveMoneyYears: this.app.globalData.submitData.giveMoneyYear,
-                            CIEBE: parseFloat(this.app.globalData.tableData.data[0].BE / 10000).toFixed(2),
+                            CIEBE: parseFloat(this.app.globalData.be).toFixed(2),
                             CIEChangeBe: (this.app.globalData.tableData.data[0].changeBe / 10000).toFixed(2),
                             CIEZSBE: parseFloat(this.app.globalData.tableData.data[0].ZSBE / 10000).toFixed(2),
                             CIEChangeZSBE: parseFloat(this.app.globalData.tableData.data[0].changeZSBE / 10000).toFixed(2),
                             CIECSBE: parseFloat(this.app.globalData.tableData.data[0].CSBE / 10000).toFixed(2),
                             CIEChangeCSBE: parseFloat(this.app.globalData.tableData.data[0].changeCSBE / 10000).toFixed(2),
-                            CIEBF: parseFloat(this.app.globalData.tableData.data[0].BF).toFixed(2),
+                            CIEBF: parseFloat(this.app.globalData.bf).toFixed(2),
                             CIEchangeBF: parseFloat(this.app.globalData.tableData.data[0].changeBF).toFixed(2),
                             changeUpperlimitMoney:(parseFloat(this.app.globalData.tableData.rate) * 5).toFixed(2),
                             currentRate:this.app.globalData.tableData.rate,
@@ -358,6 +361,20 @@
                         }
                     });
                     break;
+                case '18':
+                    this.setData({
+                        condition:{
+                            ['showPartFeature']:true
+                        }
+                    })
+                    break;
+                case '19':
+                    this.setData({
+                        condition:{
+                            ['showLxPart']:true
+                        }
+                    })
+                    break;
                 default:
                     console.log('发送错误, 请检查');
                     break;
@@ -497,6 +514,20 @@
                             showPartSeventeenthPart: false
                         }
                     });
+                    break;
+                case '18':
+                    this.setData({
+                        condition:{
+                            ['showPartFeature']:false
+                        }
+                    })
+                    break;
+                case '19':
+                    this.setData({
+                        condition:{
+                            ['showLxPart']:false
+                        }
+                    })
                     break;
                 default:
                     console.log('发送错误, 请检查');
@@ -736,7 +767,7 @@
          */
         onShareAppMessage(){
             return {
-                title: '危疾终身加倍保（CIM）计划书',
+                title: config['proTitle'][this.app.globalData.proTitle] + '计划书',
                 path: '/pages/result/thirdPage?be=' +  this.app.globalData.submitData.be + '&bf='+this.app.globalData.submitData.bf + '&httpUrl=' + this.app.globalData.httpUrl + '&share=1' + '&birth=' + this.app.globalData.submitData.birth + '&calYears=' + this.app.globalData.submitData.calYears + '&giveMoneyYear=' + this.app.globalData.submitData.giveMoneyYear + '&living=' + this.app.globalData.submitData.living + '&proId=' + this.app.globalData.submitData.proId + '&sex=' + this.app.globalData.submitData.sex + '&smoke=' + this.app.globalData.submitData.smoke + '&type=' +this.app.globalData.submitData.type + '&username=' +this.app.globalData.submitData.username
             }
         }
@@ -765,9 +796,10 @@
 </script>
 <config>
     {
-    "usingComponents": {
-    "CIECNDtable": "../table/CIECNDTable"
-    }
+        "usingComponents": {
+            "CIECNDtable": "../table/CIECNDTable"
+        },
+        "navigationBarTitleText": "危疾终身加倍保计划书"
     }
 </config>
 <template>
@@ -788,46 +820,46 @@
             </view>
 
             <view wx:if="{{condition.showZC}}" style="line-height:2.3333;letter-spacing:2px;margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">
-                <text style="font-weight: bold;">第1类：与恶性肿瘤相关的疾病</text>
+                <text style="font-weight: bold;">第1类：癌症</text>
                 <text>{{"\n"}}</text>1.    原位癌（癌前病变）
                 <text>{{"\n"}}</text>2.    早期甲状腺或前列腺癌
                 <text>{{"\n"}}</text>3.    次级侵害性恶性肿瘤
-                <text>{{"\n"}}</text>第2类：与心脏相关的疾病
-                <text>{{"\n"}}</text>4.    主动脉瘤
-                <text>{{"\n"}}</text>5.    冠状动脉血管成形术
-                <text>{{"\n"}}</text>6.    植入心脏除纤颤器
-                <text>{{"\n"}}</text>7.    植入心脏起搏器
-                <text>{{"\n"}}</text>8.    胰岛素依赖型糖尿病 [保障期：1 – 18岁（翌年岁）]
-                <text>{{"\n"}}</text>9.    川崎病 [保障期：1 – 18岁（翌年岁）]
+                <text>{{"\n"}}</text> <span style="font-weight: bold;">第2类：与心脏相关的疾病</span>
+                <text>{{"\n"}}</text>4.   主动脉瘤
+                <text>{{"\n"}}</text>5.   冠状动脉血管成形术
+                <text>{{"\n"}}</text>6.   植入心脏除纤颤器
+                <text>{{"\n"}}</text>7.   植入心脏起搏器
+                <text>{{"\n"}}</text>8.   胰岛素依赖型糖尿病[保障期：1 – 18岁（翌年岁）]
+                <text>{{"\n"}}</text>9.   川崎病[保障期：1 – 18岁（翌年岁）]
                 <text>{{"\n"}}</text>10. 次级严重心肌病
                 <text>{{"\n"}}</text>11. 次级严重感染性心内膜炎
                 <text>{{"\n"}}</text>12. 经皮穿刺心瓣膜手术
                 <text>{{"\n"}}</text>13. 心包切除手术
-                <text>{{"\n"}}</text>14. 风湿热合并心瓣膜损害 [保障期：1 – 18岁（翌年岁）]
+                <text>{{"\n"}}</text>14. 风湿热合并心瓣膜损害[保障期：1 – 18岁（翌年岁）]
                 <text>{{"\n"}}</text>15. 激光心肌血运重建术
-                <text>{{"\n"}}</text>第3类：与神经系统相关的疾病
-                <text>{{"\n"}}</text>16. 自闭症 [保障期：1 - 18岁（翌年岁）]
-                <text>{{"\n"}}</text>17. 于颈动脉进行内膜切除手术及血管成形术及植入支架
-                <text>{{"\n"}}</text>18. 脑动静脉畸形外科手术
-                <text>{{"\n"}}</text>19. 植入大脑内分流器
-                <text>{{"\n"}}</text>20. 早期脊髓肌肉萎缩症
-                <text>{{"\n"}}</text>21. 早期脑退化症（包括早期阿耳滋海默氏症）
-                <text>{{"\n"}}</text>22. 脑动脉瘤之血管介入治療
-                <text>{{"\n"}}</text>23. 儿童亨廷顿舞蹈症 [保障期：1 - 18岁（翌年岁）]
-                <text>{{"\n"}}</text>24. 次级严重细菌感染脑膜炎
-                <text>{{"\n"}}</text>25. 次级严重昏迷
-                <text>{{"\n"}}</text>26. 次级严重病毒性脑炎
-                <text>{{"\n"}}</text>27. 中度严重肌肉营养不良症
-                <text>{{"\n"}}</text>28. 中度严重重症肌无力症
-                <text>{{"\n"}}</text>29. 严重精神病
-                <text>{{"\n"}}</text>30. 硬脑膜下血肿手术
-                <text>{{"\n"}}</text>31. 脑下垂体肿瘤切除手术
-                <text>{{"\n"}}</text>32. 第一型儿童脊髓肌萎缩 [保障期：1 - 18岁（翌年岁）]
-                <text>{{"\n"}}</text>第4类：与主要器官及功能相关的疾病
+                <text style="font-weight: bold;">{{"\n"}}</text><span style="font-weight: bold;">第3类：与神经系统相关的疾病</span>
+                <text>{{"\n"}}</text>16. 于颈动脉进行内膜切除手术及血管成形术及植入支架
+                <text>{{"\n"}}</text>17. 脑动静脉畸形外科手术
+                <text>{{"\n"}}</text>18. 植入大脑内分流器
+                <text>{{"\n"}}</text>19. 早期脊髓肌肉萎缩症
+                <text>{{"\n"}}</text>20. 早期脑退化症（包括早期阿耳滋海默氏症）
+                <text>{{"\n"}}</text>21. 脑动脉瘤之血管介入治療
+                <text>{{"\n"}}</text>22. 儿童亨廷顿舞蹈症[保障期：1 – 18岁（翌年岁）]
+                <text>{{"\n"}}</text>23. 次级严重细菌感染脑膜炎
+                <text>{{"\n"}}</text>24. 次级严重昏迷
+                <text>{{"\n"}}</text>25. 次级严重病毒性脑炎
+                <text>{{"\n"}}</text>26. 中度严重肌肉营养不良症
+                <text>{{"\n"}}</text>27. 中度严重重症肌无力症
+                <text>{{"\n"}}</text>28. 严重精神病
+                <text>{{"\n"}}</text>29. 硬脑膜下血肿手术
+                <text>{{"\n"}}</text>30. 脑下垂体肿瘤切除手术
+                <text>{{"\n"}}</text>31. 第一型儿童脊髓肌萎缩[保障期：1 – 18岁（翌年岁）]
+                <text>{{"\n"}}</text><span style="font-weight: bold;">第4类：与主要器官及功能相关的疾病</span>
+                <text>{{"\n"}}</text>32. 急性坏死性胰脏炎
                 <text>{{"\n"}}</text>33. 糖尿病并发症引致单足切除
                 <text>{{"\n"}}</text>34. 胆道重建手术
                 <text>{{"\n"}}</text>35. 慢性肺病
-                <text>{{"\n"}}</text>36. 出血性登革热 [保障期：1 - 18岁（翌年岁）]
+                <text>{{"\n"}}</text>36. 出血性登革热[保障期：1 – 18岁（翌年岁）]
                 <text>{{"\n"}}</text>37. 周边动脉疾病之血管介入治療
                 <text>{{"\n"}}</text>38. 肝炎及肝硬化
                 <text>{{"\n"}}</text>39. 植入静脉过滤器
@@ -835,104 +867,119 @@
                 <text>{{"\n"}}</text>41. 次级严重系统性红斑狼疮
                 <text>{{"\n"}}</text>42. 肝脏手术
                 <text>{{"\n"}}</text>43. 丧失单肢
-                <text>{{"\n"}}</text>第5类：其他疾病
+                <text>{{"\n"}}</text>32. 急性坏死性胰脏炎
+                <text>{{"\n"}}</text>33. 糖尿病并发症引致单足切除
+                <text>{{"\n"}}</text>34. 胆道重建手术
+                <text>{{"\n"}}</text>35. 慢性肺病
+                <text>{{"\n"}}</text>36. 出血性登革热
+                <text>{{"\n"}}</text>37. 周边动脉疾病之血管介入治療
+                <text>{{"\n"}}</text>38. 肝炎及肝硬化
+                <text>{{"\n"}}</text>39. 植入静脉过滤器
+                <text>{{"\n"}}</text>40. 次级严重肾病
+                <text>{{"\n"}}</text>41. 次级严重系统性红斑狼疮
+                <text>{{"\n"}}</text>42. 肝脏手术
+                <text>{{"\n"}}</text>43. 丧失单肢
+                <text>{{"\n"}}</text><span style="font-weight: bold;">第5类：其他疾病</span>
                 <text>{{"\n"}}</text>44. 植入人工耳蜗手术
                 <text>{{"\n"}}</text>45. 糖尿病视网膜病变
                 <text>{{"\n"}}</text>46. 意外损伤及烧伤进行面部重建手术
                 <text>{{"\n"}}</text>47. 意外导致身体次级严重烧伤
-                <text>{{"\n"}}</text>48. 单耳失聪
-                <text>{{"\n"}}</text>49. 单眼失明
-                <text>{{"\n"}}</text>50. 大理石骨病 [保障期：1 - 18岁（翌年岁）]
-                <text>{{"\n"}}</text>51. 成骨不全症 [保障期：1 - 18岁（翌年岁）]
-                <text>{{"\n"}}</text>52. 骨质疏松症连骨折 [保障期：1 - 70岁（翌年岁）]
-                <text>{{"\n"}}</text>53. 嗜铬细胞瘤
-                <text>{{"\n"}}</text>54. 严重哮喘 [保障期：1 - 18岁（翌年岁）]
-                <text>{{"\n"}}</text>55. 严重中枢神经性睡眠窒息症或混合性睡眠窒息症
-                <text>{{"\n"}}</text>56. 严重脑痫症
-                <text>{{"\n"}}</text>57. 严重血友病 [保障期：1 - 18岁（翌年岁）]
-                <text>{{"\n"}}</text>58. 严重阻塞性睡眠窒息症
-                <text>{{"\n"}}</text>59. 系统性儿童类风湿关节炎 [保障期：1 - 18岁（翌年岁）]
+                <text>{{"\n"}}</text>48. 次级克罗恩氏病
+                <text>{{"\n"}}</text>49. 单耳失聪
+                <text>{{"\n"}}</text>50. 单眼失明
+                <text>{{"\n"}}</text>51. 大理石骨病[保障期：1 - 18岁（翌年岁）]
+                <text>{{"\n"}}</text>52. 成骨不全症[保障期：1 - 18岁（翌年岁）]
+                <text>{{"\n"}}</text>53. 骨质疏松症連骨折[保障期：1 – 70岁（翌年岁）]
+                <text>{{"\n"}}</text>54. 嗜铬细胞瘤
+                <text>{{"\n"}}</text>55. 严重哮喘[保障期：1 – 18岁（翌年岁）]
+                <text>{{"\n"}}</text>56. 严重中枢神经性睡眠窒息症或混合性睡眠窒息症
+                <text>{{"\n"}}</text>57. 严重脑痫症
+                <text>{{"\n"}}</text>58. 严重血友病[保障期：1 – 18岁（翌年岁）]
+                <text>{{"\n"}}</text>59. 严重阻塞性睡眠窒息症
+                <text>{{"\n"}}</text>60. 系统性儿童类风湿关节炎[保障期：1 – 18岁（翌年岁）]
+
             </view>
 
             <view wx:if="{{condition.showYZ}}" style="line-height:2.3333;letter-spacing:2px;margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">
                 <text style="font-weight: bold;">二、严重疾病</text>
-                <text>{{"\n"}}</text>第1类：癌症
+                <text>{{"\n"}}</text><span style="font-weight: bold;">第1类：癌症</span>
                 <text>{{"\n"}}</text>1. 	癌症
-                <text>{{"\n"}}</text>2. 	脑肿瘤扩散
+                <text>{{"\n"}}</text><span style="font-weight: bold;">第2类：与心脏相关的疾病</span>
+                <text>{{"\n"}}</text>2.   心肌病
+                <text>{{"\n"}}</text>3.   需要进行外科手术的冠状动脉病
+                <text>{{"\n"}}</text>4.   心脏病发作
+                <text>{{"\n"}}</text>5.   心瓣及结构性手术
+                <text>{{"\n"}}</text>6.   感染性心内膜炎
+                <text>{{"\n"}}</text>7.   原发性肺动脉高血压
+                <text>{{"\n"}}</text>8.   大动脉外科手术
+                <text>{{"\n"}}</text><span style="font-weight: bold;">第3类：与神经系统相关的疾病</span>
+                <text>{{"\n"}}</text>9.   阿耳滋海默氏症
+                <text>{{"\n"}}</text>10. 肌萎缩性脊髓侧索硬化
+                <text>{{"\n"}}</text>11. 植物人
+                <text>{{"\n"}}</text>12. 细菌感染脑膜炎
+                <text>{{"\n"}}</text>13. 良性脑肿瘤
+                <text>{{"\n"}}</text>14. 脑部外科手术
+                <text>{{"\n"}}</text>15. 昏迷
+                <text>{{"\n"}}</text>16. 克雅二氏症
+                <text>{{"\n"}}</text>17. 脑炎
+                <text>{{"\n"}}</text>18. 严重头部创伤
+                <text>{{"\n"}}</text>19. 脑膜结核病
+                <text>{{"\n"}}</text>20. 运动神经元病
+                <text>{{"\n"}}</text>21. 多发性硬化症
+                <text>{{"\n"}}</text>22. 肌营养不良
+                <text>{{"\n"}}</text>23. 瘫痪
+                <text>{{"\n"}}</text>24. 柏金逊病
+                <text>{{"\n"}}</text>25. 脊髓灰质炎（小儿麻痹症）
+                <text>{{"\n"}}</text>26. 进行性延髓瘫痪
+                <text>{{"\n"}}</text>27. 进行性核上性麻痹
+                <text>{{"\n"}}</text>28. 严重重症肌无力症
+                <text>{{"\n"}}</text>29. 脊髓肌肉萎缩症
+                <text>{{"\n"}}</text>30. 中风
+                <text>{{"\n"}}</text><span style="font-weight: bold;">第4类：与主要器官及功能相关的疾病</span>
+                <text>{{"\n"}}</text>31. 慢性肝病
+                <text>{{"\n"}}</text>32. 复发性慢性胰脏炎
+                <text>{{"\n"}}</text>33. 末期肺病
+                <text>{{"\n"}}</text>34. 肾衰竭
+                <text>{{"\n"}}</text>35. 主要器官移植
+                <text>{{"\n"}}</text>36. 坏死性筋膜炎
+                <text>{{"\n"}}</text>37. 肢体切断
+                <text>{{"\n"}}</text>38. 系统性红斑狼疮而并发狼疮性肾炎
+                <text>{{"\n"}}</text><span style="font-weight: bold;">第5类：末期疾病及伤残</span>
+                <text>{{"\n"}}</text>39. 失去独立生活能力[保障期：1 – 65岁（翌年岁）]
+                <text>{{"\n"}}</text>40. 末期疾病
+                <text>{{"\n"}}</text>41. 完全及永久伤残[保障期：1 – 65岁（翌年岁）]
+                <text>{{"\n"}}</text><span style="font-weight: bold;">第6类：其他疾病</span>
+                <text>{{"\n"}}</text>42. 因输血引致的艾滋病
+                <text>{{"\n"}}</text>43. 障碍性贫血
+                <text>{{"\n"}}</text>44. 失明
+                <text>{{"\n"}}</text>45. 克罗恩氏病
+                <text>{{"\n"}}</text>46. 失聪
+                <text>{{"\n"}}</text>47. 伊波拉
+                <text>{{"\n"}}</text>48. 象皮病
+                <text>{{"\n"}}</text>49. 暴发性病毒肝炎
+                <text>{{"\n"}}</text>50. 丧失语言能力
+                <text>{{"\n"}}</text>51. 严重烧伤
+                <text>{{"\n"}}</text>52. 肾髓质囊肿病
+                <text>{{"\n"}}</text>53. 因职业感染人类免疫缺陷病毒
+                <text>{{"\n"}}</text>54. 严重类风湿关节炎
+                <text>{{"\n"}}</text>55. 严重溃疡性结肠炎
+                <text>{{"\n"}}</text>56. 系统性硬皮病
 
-                <text>{{"\n"}}</text>第2类：与心脏相关的疾病
-                <text>{{"\n"}}</text>3. 	心肌病
-                <text>{{"\n"}}</text>4. 	需要进行外科手术的冠状动脉病
-                <text>{{"\n"}}</text>5. 	心脏病发作
-                <text>{{"\n"}}</text>6. 	心瓣及结构性手术
-                <text>{{"\n"}}</text>7.    感染性心内膜炎
-                <text>{{"\n"}}</text>8.    原发性肺动脉高血压
-                <text>{{"\n"}}</text>9. 	大动脉外科手术
-
-
-                <text>{{"\n"}}</text>第3类：与神经系统相关的疾病
-                <text>{{"\n"}}</text>10. 阿耳滋海默氏症
-                <text>{{"\n"}}</text>11. 肌萎缩性脊髓侧索硬化
-                <text>{{"\n"}}</text>12. 植物人
-                <text>{{"\n"}}</text>13. 细菌感染脑膜炎
-                <text>{{"\n"}}</text>14. 良性脑肿瘤
-                <text>{{"\n"}}</text>15. 脑部外科手术
-                <text>{{"\n"}}</text>16. 昏迷
-                <text>{{"\n"}}</text>17. 克雅二氏症
-                <text>{{"\n"}}</text>18. 脑炎
-                <text>{{"\n"}}</text>19. 严重头部创伤
-                <text>{{"\n"}}</text>20. 脑膜结核病
-                <text>{{"\n"}}</text>21. 运动神经元病
-                <text>{{"\n"}}</text>22. 多发性硬化症
-                <text>{{"\n"}}</text>23. 肌营养不良
-                <text>{{"\n"}}</text>24. 瘫痪
-                <text>{{"\n"}}</text>25. 柏金逊病
-                <text>{{"\n"}}</text>26. 脊髓灰质炎（小儿麻痹症）
-                <text>{{"\n"}}</text>27. 进行性延髓瘫痪
-                <text>{{"\n"}}</text>28. 进行性核上性麻痹
-                <text>{{"\n"}}</text>29. 严重重症肌无力症
-                <text>{{"\n"}}</text>30. 脊髓肌肉萎缩症
-                <text>{{"\n"}}</text>31. 中风
-                <text>{{"\n"}}</text>第4类：与主要器官及功能相关的疾病
-                <text>{{"\n"}}</text>32. 慢性肝病
-                <text>{{"\n"}}</text>33. 复发性慢性胰脏炎
-                <text>{{"\n"}}</text>34. 末期肺病
-                <text>{{"\n"}}</text>35. 肾衰竭
-                <text>{{"\n"}}</text>36. 主要器官移植
-                <text>{{"\n"}}</text>37. 坏死性筋膜炎
-                <text>{{"\n"}}</text>38. 肢体切断
-                <text>{{"\n"}}</text>39. 系统性红斑狼疮而并发狼疮性肾炎
-                <text>{{"\n"}}</text>第5类：其他疾病
-                <text>{{"\n"}}</text>40. 因输血引致的艾滋病
-                <text>{{"\n"}}</text>41. 障碍性贫血
-                <text>{{"\n"}}</text>42. 失明
-                <text>{{"\n"}}</text>43. 克罗恩氏病
-                <text>{{"\n"}}</text>44. 失聪
-                <text>{{"\n"}}</text>45. 伊波拉
-                <text>{{"\n"}}</text>46. 象皮病
-                <text>{{"\n"}}</text>47. 暴发性病毒肝炎
-                <text>{{"\n"}}</text>48. 丧失语言能力
-                <text>{{"\n"}}</text>49. 严重烧伤
-                <text>{{"\n"}}</text>50. 肾髓质囊肿病
-                <text>{{"\n"}}</text>51. 因职业感染人类免疫缺陷病毒
-                <text>{{"\n"}}</text>52. 严重类风湿关节炎
-                <text>{{"\n"}}</text>53. 严重溃疡性结肠炎
-                <text>{{"\n"}}</text>54. 系统性硬皮病
 
             </view>
 
-            <view wx:if="{{condition.showMQ}}" style="line-height:2.3333;letter-spacing:2px;margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">
-                <text>{{"\n"}}</text>末期严重病况疾病列表：
-                <text>{{"\n"}}</text><text style="font-weight: bold;">第1类：癌症</text>
-                <text>{{"\n"}}</text>1. 	癌症
-                <text>{{"\n"}}</text><text style="font-weight: bold;">第2类：与心脏相关的疾病</text>
-                <text>{{"\n"}}</text>2. 	心脏病发作
-                <text>{{"\n"}}</text><text style="font-weight: bold;">第3类：与神经系统相关的疾病</text>
-                <text>{{"\n"}}</text> 3.	阿耳滋海默氏症	 [保障期：1 - 61岁（翌年岁）]
-                <text>{{"\n"}}</text> 4.	多发性硬化症	[保障期：1 - 61岁（翌年岁）]
-                <text>{{"\n"}}</text> 5.	柏金逊病	[保障期：1 - 61岁（翌年岁）]
-                <text>{{"\n"}}</text>6.	中风
-            </view>
+            <!--<view wx:if="{{condition.showMQ}}" style="line-height:2.3333;letter-spacing:2px;margin-top: 20rpx;word-break: break-all;height: 750rpx;overflow: auto;padding: 20rpx;-webkit-overflow-scrolling: touch">-->
+                <!--<text>{{"\n"}}</text>末期严重病况疾病列表：-->
+                <!--<text>{{"\n"}}</text><text style="font-weight: bold;">第1类：癌症</text>-->
+                <!--<text>{{"\n"}}</text>1. 	癌症-->
+                <!--<text>{{"\n"}}</text><text style="font-weight: bold;">第2类：与心脏相关的疾病</text>-->
+                <!--<text>{{"\n"}}</text>2. 	心脏病发作-->
+                <!--<text>{{"\n"}}</text><text style="font-weight: bold;">第3类：与神经系统相关的疾病</text>-->
+                <!--<text>{{"\n"}}</text> 3.	阿耳滋海默氏症	 [保障期：1 - 61岁（翌年岁）]-->
+                <!--<text>{{"\n"}}</text> 4.	多发性硬化症	[保障期：1 - 61岁（翌年岁）]-->
+                <!--<text>{{"\n"}}</text> 5.	柏金逊病	[保障期：1 - 61岁（翌年岁）]-->
+                <!--<text>{{"\n"}}</text>6.	中风-->
+            <!--</view>-->
 
             <view style="height: 1px;background-color: lightgray;">
 
@@ -1035,23 +1082,100 @@
 
         <view class="part2">
             <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
+                产品特点
+            </view>
+            <view style="margin-left: 30rpx;">
+                <view>
+                    <span> • </span>定期供款，保障终身
+                </view>
+
+                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFeature}}">
+                    <text>涵盖重大疾病、严重意外和身故保障，保障人生大部分主要风险</text>
+                    <text>集保障及长期储蓄于一身，真正做到有病赔钱，没病储蓄</text>
+                </view>
+
+                <view><span> • </span>首10年额外赠送50%的保额</view>
+                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFeature}}">
+                    <text>在计划生效首10年内首次索偿严重疾病保障或身故赔偿，将获额外50%的赔偿</text>
+                    <text>假如在赠送期间没有作出任何索偿，您可于赠送保障期满前或期满后的1个月内，选择将赠送的保额换为一份具备现金价值的全新寿险计划而毋须提供任何健康资料。</text>
+                </view>
+
+                <view><span> • </span>就126种病况提供一笔过的危疾保障</view>
+                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFeature}}">
+                    <text>计划包括60种早期严重病况、56种严重病况、9种发展障碍病况及1种良性病况</text>
+                </view>
+
+                <view><span> • </span>高达1000%的多重危疾保障</view>
+                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFeature}}">
+                    <text>分癌症、心脏相关、神经系统相关、主要器官及功能相关、末期疾病及伤残和其他疾病等六个疾病组别</text>
+                    <text>其中：癌症可以赔3次，心脏发作可赔2次，中风可以赔2次，其他组别可分别赔1次，一共10次的重疾保障</text>
+                </view>
+
+
+                <view><span> • </span>重疾后延续人寿保障</view>
+                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFeature}}">
+                    <text>受保人若在86岁前索偿严重疾病保障1年后身故，本计划仍然会支付当时保额的100%作为赔偿。</text>
+                </view>
+
+                <view><span> • </span>良性肿瘤保障</view>
+                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFeature}}">
+                    <text>就手术切除良性肿瘤提供高达10%的额外保障</text>
+                </view>
+
+                <view><span> • </span>保费豁免</view>
+                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFeature}}">
+                    <text>当支付早期严重疾病保障或严重发展障碍病况赔偿后，将豁免往后12个月之到期保费。</text>
+                    <text>当早期严重疾病保障及／或严重疾病保障之已赔偿总额达到当时保额的100%后，将随即豁免之后所有保费，并继续提供保障直至受保人86岁（翌年岁）</text>
+                </view>
+
+                <view><span> • </span>儿童三重保障</view>
+                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFeature}}">
+                    <text>就特定发展障碍病况提供高达20%额外赔偿</text>
+                    <text>保障涵盖先天性疾病或发育异常相关病况</text>
+                    <text>若投保人不幸身故，子女的保单可获豁免往后所有保费</text>
+                </view>
+
+                <view><span> • </span>居家康复支援</view>
+                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFeature}}">
+                    <text>若保额达5万美元或以上，在支付严重疾病保障赔偿时，还会提供高达2万港元的居家康复护理服务。</text>
+                    <text>此服务是为您度身订造一份护理计划，包括家中看护及一系列在家进行的复康治疗，如物理治疗、言语治疗及职业治疗等服务</text>
+                </view>
+            </view>
+
+            <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;" data-type="18" bindtap="showPartOneTable" >
+                <view wx:if="{{!condition.showPartFeature}}">
+                    <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image>
+                </view>
+            </view>
+
+            <view wx:if="{{condition.showPartFeature}}">
+                <view bindtap="hidePartOneTable" data-type="2" style="text-align: center;">
+                    <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
+                </view>
+            </view>
+
+        </view>
+
+
+        <view class="part2">
+            <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
                 早期严重疾病
                 <span class="tags" bindtap="showDiseaseListHandler" data-type="zc">疾病列表</span>
             </view>
             <view style="margin-left: 30rpx;">
-                <view><span> • </span>保障 <span>59种</span>早期疾病，无总赔偿次数限制</view>
+                <view><span> • </span>保障 <span>60种</span>早期疾病（包括癌前病變），并可多次索偿</view>
                 <view>
                     <span> • </span>每项赔偿额为当时保额的 <span>20%</span>或<span>25%</span>
                 </view>
 
                 <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
-                    原位癌（癌前病变）、冠状动脉血管成形术可分别获2次赔偿，每次赔当时保额的25%  <text>{{'\n'}}</text>
-                    早期甲状腺或前列腺癌、次级侵害性恶性肿瘤则可各获1次赔偿，赔偿为当时保额的25% <text>{{'\n'}}</text>
-                    其余55种早期疾病每种可获1次赔偿，赔偿为当时保额的20%
+                    <text>原位癌（癌前病变）、冠状动脉血管成形术可分别获2次赔偿，每次赔当时保额的25%</text>
+                    <text>早期甲状腺或前列腺癌、次级侵害性恶性肿瘤则可各获1次赔偿，赔偿为当时保额的25%</text>
+                    <text>其余56种早期疾病每种可获1次赔偿，赔偿为当时保额的20%</text>
                 </view>
                 <view><span> • </span>赔偿额达到基础保额的<span>100%</span>后 ， 将<span>豁免往后所有保费</span></view>
                 <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">
-                    豁免保费后可以继续享有保障直至86岁
+                    <text>豁免保费后可以继续享有保障直至86岁</text>
                 </view>
                 <view><span> • </span>每次赔偿上限为 <span>5万</span>美元约{{changeUpperlimitMoney}}万人民币</view>
                 <!--<view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartFifthPart}}">-->
@@ -1080,62 +1204,38 @@
             </view>
             <view style="margin-left: 30rpx;">
                 <view>
-                    <span> • </span>定期供款，保障终身
+                    <span> • </span>保障56种严重疾病
                 </view>
                 <view wx:if="{{condition.showPartSixthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    涵盖重大疾病、严重意外和身故保障，保障人生大部分主要风险
+                    <text>包括癌症、心脏病发作和中风等最常见的重大疾病</text>
                 </view>
 
                 <view>
                     <span> • </span>
-                    集保障与储蓄于一身
+                    真正多重保障，最多可以赔10次重大疾病
                 </view>
                 <view wx:if="{{condition.showPartSeventhPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    真正做到有事赔钱，没事存钱
+                    <text>分六个疾病组别独立赔付，其中癌症可以赔3次，心脏相关疾病可赔2次，神经系统疾病可以赔2次，其他组别可分别赔1次</text>
                 </view>
                 <view>
-                    <span> • </span>保障 <span>54</span> 种严重疾病
+                    <span> • </span>等候期
                 </view>
                 <view wx:if="{{condition.showPartEighthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    包括癌症、心脏病发作和中风等最常见的重大疾病
+                    <text>前后2次严重病况之诊断日期必须相隔最少1年；假如前后2次索偿之病况均属癌症，有关诊断日期则必须相隔最少3年；癌症包括新症、转移或原有癌症的持续</text>
                 </view>
 
                 <view>
                     <span> • </span>
-                    真正多重保障，最多可以赔 <span>7</span> 次重疾
+                    最高可赔当时保额的 <span>1000%</span>
                 </view>
                 <view wx:if="{{condition.showPartNinthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    分五个疾病组别独立赔付，其中癌症组可以赔三次，其他四组独立赔一次
-                </view>
-                <view>
-                    <span> • </span>300%癌症保障
-                </view>
-                <view wx:if="{{condition.showPartTenthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    在受保人86岁前提供高达3次癌症保障。癌症包括新症、转移或原有癌症的持续，须满足3年等候期；
-                </view>
-
-                <view>
-                    <span> • </span>
-                    长达15年额外赠送50%保额
-                </view>
-                <view wx:if="{{condition.showPartElevthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    投保年龄1-40岁首15年额外赠送50%的保额 <text>{{"\n"}}</text>
-                    投保年龄40岁以上首10年额外赠送50%的保额
-                </view>
-
-                <view>
-                    <span> • </span>最高可赔当时保额的 <span>720%</span>
-                </view>
-                <view wx:if="{{condition.showPartElevthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    54种严重疾病最多可赔7次，最高赔付当时保额的700%；<text>{{"\n"}}</text>
-                    末期疾病可赔1次，赔偿额为当时保额的20%
-
+                    <text>即最高可以保障10次重大疾病</text>
                 </view>
                 <view>
                     <span> • </span>独家赠送健康或筛检计划
                 </view>
-                <view wx:if="{{condition.showPartElevthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    投保后第2年可获赠系列健康检查套餐
+                <view wx:if="{{condition.showPartTenthPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
+                    <text>投保后第2年可获赠系列健康检查套餐</text>
                 </view>
                 <view wx:if="{{condition.showPartTwelthPart}}">
                     <view bindtap="hidePartOneTable" data-type="12" style="text-align: center;">
@@ -1154,19 +1254,65 @@
 
         <view class="part4">
             <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
-                末期严重病况保障
-                <span class="tags" bindtap="showDiseaseListHandler" data-type="mq">疾病列表</span>
+                良性肿瘤保障
             </view>
             <view style="margin-left: 30rpx;">
                 <view>
-                    <span> • </span>独有末期疾病额外<span>20%</span>保障
+                    <span> • </span>独有良性肿瘤额外保障 , 最高额外 <span>10%</span> 赔偿
                 </view>
-                <view wx:if="{{!condition.showPartThirtythPart}}" style="margin-top: 5px;text-align: center;" data-type="13" bindtap="showPartOneTable"> <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image></view>
-                <view wx:if="{{condition.showPartThirtythPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
-                    如果不幸确诊或已严重病况发展为末期严重疾病，将在严重疾病赔偿的基础上再额外赔当时保额的20%
-                    <view bindtap="hidePartOneTable" data-type="13" style="text-align: center;">
+                <view wx:if="{{!condition.showLxPart}}" style="margin-top: 5px;text-align: center;" data-type="19" bindtap="showPartOneTable"> <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image></view>
+                <view wx:if="{{condition.showLxPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
+                    若通过手术切除肿瘤时确诊此肿瘤为良性，可获当时保额最高10%的额外赔偿 <text>{{"\n"}}</text>
+                    1. 乳房、卵巢和子宫（只保子宫内膜息肉）可额外赔偿当时保额的5%，上限1万美元 <text>{{"\n"}}</text>
+                    2. 肾上腺、骨、肾脏、肝脏、肺、颅内神经或脊神经、胰脏、脑垂体或睪丸可额外赔偿当时保额的10%，上限2万美元
+                    <view bindtap="hidePartOneTable" data-type="19" style="text-align: center;">
                         <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
                     </view>
+                </view>
+            </view>
+
+        </view>
+
+        <view class="part4">
+            <view style="font-size: 16px;font-weight: bold;padding: 20rpx;text-align: center;width: 95%;margin: 0 auto;border-bottom:1px solid #fefefe">
+                儿童三重保障
+                <!--<span class="tags" bindtap="showDiseaseListHandler" data-type="mq">疾病列表</span>-->
+            </view>
+            <view style="margin-left: 30rpx;">
+                <view>
+                    <span> • </span>就特定发展障碍病况提供高达 <span>20%</span> 额外赔偿
+                </view>
+                <view wx:if="{{condition.showPartThirtythPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
+                    <text>保障儿童成长和发展的过程中面临专注力不足、过度活跃症、自闭症或其他发展障碍，分次级发展障碍和严重发展障碍二个组别</text>
+                    <text>次级发展障碍提供当时保额的5%，上限为1万美元的额外赔偿</text>
+                    <text>严重发展障碍提供当时保额的20%，上限为5万美元的额外赔偿</text>
+                </view>
+
+                <view>
+                    <span> • </span>保障儿童先天性或发育异常疾病
+                </view>
+
+                <view wx:if="{{condition.showPartThirtythPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
+                    <text>先天性或发育异常疾病须在投保前或投保后90天内未被发现，若该病况为次级发展障碍，则该病况要在投保前或投保后180天内未被发现</text>
+                </view>
+
+                <view>
+                    <span> • </span>若投保人不幸身故，子女的保单可获豁免往后所有保费
+                </view>
+
+                <view wx:if="{{condition.showPartThirtythPart}}" style="width: 93%;margin: 0 auto;color: rgb(170,173,198);">
+                    <text>此保障适用于19-51岁（翌年岁）的投保人为其1-18岁（翌年岁）的子女投保</text>
+                    <text>投保人无须就此保障提供任何健康资料或体检，但保单必须在保单持有人身故时已生效最少2年（因意外身故除外）方能获得赔偿</text>
+                </view>
+
+                <view>
+                    <span> • </span>儿童保障至受保人年满19岁（翌年岁）时终止
+                </view>
+
+                <view wx:if="{{!condition.showPartThirtythPart}}" style="margin-top: 5px;text-align: center;" data-type="13" bindtap="showPartOneTable"> <image style="width: 35rpx;height: 35rpx;" src="../../img/more_info.png"></image></view>
+
+                <view wx:if="{{condition.showPartThirtythPart}}" bindtap="hidePartOneTable" data-type="13" style="text-align: center;">
+                    <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
                 </view>
             </view>
 
@@ -1378,16 +1524,17 @@
                     因输血或职业感染则除外
                 </view>
                 <view>
-                    <span> • </span>
-                    滥用麻醉剂、药物或酗酒引致的严重疾病不保
+                    <span> • </span>滥用麻醉剂、药物或酗酒引致的严重疾病不保
                 </view>
                 <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartSixteenthPart}}">
                     由注册医生处方使用的麻醉剂或药物除外
                 </view>
                 <view><span> • </span>因战争、叛乱、暴动或骚乱引致的伤残不保</view>
                 <view>
-                    <span> • </span>
-                    不保因空中航行引致的完全及永久伤残
+                    <span> • </span>不保因空中航行引致的完全及永久伤残
+                </view>
+                <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartSixteenthPart}}">
+                    若付费乘坐固定航线的空中交通工具引致的伤残则除外
                 </view>
                 <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 15rpx;" data-type="14" bindtap="showPartOneTable">
                     <view wx:if="{{!condition.showPartFourteenthPart}}" >
@@ -1395,7 +1542,6 @@
                     </view>
                 </view>
                 <view style="width: 93%;margin: 0 auto;color: rgb(170,173,198);" wx:if="{{condition.showPartSeventeenthPart}}">
-                    若付费乘坐固定航线的空中交通工具引致的伤残则除外
                     <view bindtap="hidePartOneTable" data-type="17" style="text-align: center;">
                         <image style="width: 35rpx;height: 35rpx;" src="../../img/less.png"></image>
                     </view>
@@ -1454,7 +1600,16 @@
 
                 <navigator hover-class="none" url="/pages/change/change?provision=0005" hover-class="navigator-hover">
                     <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
-                        <view style="display: inline-block;">0005  末期疾病定义</view>
+                        <view style="display: inline-block;">0005  良性疾病定义</view>
+                        <view style="display: inline-block;float: right;"> > </view>
+                    </view>
+                </navigator>
+
+                <view style="height: 1px;width: 100%;background-color: #E4E7ED;"></view>
+
+                <navigator hover-class="none" url="/pages/change/change?provision=0006" hover-class="navigator-hover">
+                    <view bindtap="changePage" style="padding: 20rpx 0 20rpx 0rpx;width: 80%;margin: 0 auto;">
+                        <view style="display: inline-block;">0006  发展障碍病况定义</view>
                         <view style="display: inline-block;float: right;"> > </view>
                     </view>
                 </navigator>
@@ -1492,7 +1647,7 @@
         <view class="part4 floatButton" style="padding-bottom: 0;width: 100%;border-radius: 0;">
             <view style="display: flex;flex-direction:row;">
                 <button class="shareFButton" open-type="share">发给朋友</button>
-                <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;" bindtap="goBack">重做计划书</view>
+                <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;" bindtap="goBack" wx:if="{{isShowRebuildPlain}}">重做计划书</view>
                 <view style="width: 50%;text-align: center;padding: 20rpx 0 20rpx 0;border-left:1px solid lightgrey;" bindtap="feedBack">问题反馈</view>
             </view>
         </view>

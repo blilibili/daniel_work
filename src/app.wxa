@@ -26,8 +26,12 @@ wxa.launchApp(Main);
         "pages/form/cirForm",
         "pages/form/cimForm",
         "pages/form/egsForm",
-        "pages/feedback/index"
-    ]
+        "pages/feedback/index",
+        "pages/change/noticeRedirect"
+    ],
+    "window": {
+        "navigationBarTitleText": "A+计划书"
+    }
 }
 </config>
 <style lang="scss">

@@ -83,26 +83,10 @@ class Form {
         this.clearInsuranceValue();
         let title = '';
         this.proId = option.pro;
-        switch (option.pro){
-          case 'EGS':
-            title = '特级携升2';
-            break;
-          case 'CIE':
-            title = '守护健康危疾加护保';
-            break;
-          case 'CIM':
-            title = '守护健康危疾加倍保';
-            break;
-          case 'CIR':
-            title = '守护健康危疾全护保';
-            break;
-          default:
-            console.log('url没有相应的数据请检查');
-            break;
-        }
+        this.app.globalData.proTitle = option.pro;
         this.setData({
-          proId:option.pro,
-          title:title
+            proId:option.pro,
+            title:config['proTitle'][this.proId]
         })
     }
     //获取汇率
@@ -226,6 +210,7 @@ class Form {
       }
 
       this.data.submitData.be = this.data.insurance_item.insurance_credit;
+      this.app.globalData.be = this.data.insurance_item.insurance_credit;
       this.data.submitData.bf = this.data.insurance_item.insurance_money;
       this.app.globalData.submitData = this.data.submitData;
 
@@ -687,7 +672,7 @@ wxa.launchPage(Form);
 </script>
 <config>
 {
-    "navigationTextTitle": "表单页"
+    "navigationBarTitleText": "A+计划书输入客户信"
 }
 </config>
 <template>

@@ -141,7 +141,7 @@ if (bx_be==''){
   $("#be").focus();
   return false;	
 }
-
+console.log(bx_area,bx_sex,bx_smoke,bx_nian,bx_age)
 var bfl = chk_bfl(bx_area,bx_sex,bx_smoke,bx_nian,bx_age); //获取对应保费率
 //alert(bfl);
 var dis_be = dis_bf(bfl,bx_be,bx_nian); //计算保费（考虑折扣因素）

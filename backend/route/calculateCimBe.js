@@ -31,7 +31,7 @@ app.post('/' , (req , res) => {
 
         exchangeRateMethods.getMoneyRate(1).then((result) => {
             //人民币保费转换成保额
-            let changeBf = Math.round(parseFloat(bf / parseFloat(result)));
+            let changeBf = parseFloat(parseFloat(bf / parseFloat(result))).toFixed(2);
             let calBe = tool.dis_be(bx_area,bx_sex,bx_age,bx_nian,bx_smoke,changeBf)
 
             let returnObj = {
@@ -39,7 +39,7 @@ app.post('/' , (req , res) => {
                 data:{
                     be:calBe,
                     insurance_money:changeBf,
-                    changeBaofei:changeBf * parseFloat(result),
+                    changeBaofei:changeBf * parseFloat(result).toFixed(2),
                     changeBaoe:calBe * parseFloat(result)
                 }
             }
